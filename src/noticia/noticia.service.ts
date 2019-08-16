@@ -11,13 +11,6 @@ export class NoticiaService {
     private readonly noticiaRepository: Repository<Noticia>,
   ) {}
 
-  async findAll() {
-    return await this.noticiaRepository.find({
-      // relations: ['fonte', 'grupoAcesso', 'descritores', 'midias'],
-      cache: false, // 60000 == 1 min
-    });
-  }
-
   async searchNoticias(query: NoticiaInterface) {
     let id: string;
     let titulo: string;
@@ -29,13 +22,17 @@ export class NoticiaService {
 
     query.id ? (id = query.id) : (id = '%');
     query.titulo ? (titulo = `%${query.titulo}%`) : (titulo = '%');
+    titulo = titulo.replace(' ', '%');
     query.conteudo ? (conteudo = `%${query.conteudo}%`) : (conteudo = '%');
+    conteudo = conteudo.replace(' ', '%');
     query.fonte ? (fonte = `${query.fonte}`) : (fonte = '%');
+    fonte = fonte.replace(' ', '%');
     query.grupoAcesso
       ? (grupoAcesso = `${query.grupoAcesso}`)
       : (grupoAcesso = '%');
     query.qtdNoticias ? (qtdNoticias = query.qtdNoticias) : (qtdNoticias = 10);
     query.pagina ? (pagina = query.pagina - 1) : (pagina = 0);
+    console.log(query);
 
     const noticias: Noticia[] = await this.noticiaRepository
       .createQueryBuilder('noticia')
@@ -45,20 +42,21 @@ export class NoticiaService {
       .leftJoinAndSelect('noticia.grupoAcesso', 'grupoacesso')
       .leftJoinAndSelect('noticia.midias', 'midia')
       .where('noticia.id::TEXT LIKE :id', { id })
-      .andWhere('LOWER(noticia.titulo) LIKE LOWER(:titulo)', {
+      .andWhere('noticia.titulo ILIKE :titulo', {
         titulo,
       })
-      .andWhere('LOWER(noticia.conteudo) LIKE LOWER(:conteudo)', {
+      .andWhere('noticia.conteudo ILIKE :conteudo', {
         conteudo,
       })
-      .andWhere('LOWER(fonte.nome) LIKE LOWER(:fonte)', {
+      .andWhere('fonte.nome ILIKE :fonte', {
         fonte,
       })
-      .andWhere('LOWER(grupoAcesso.nome) LIKE LOWER(:grupoAcesso)', {
+      .andWhere('grupoAcesso.nome ILIKE :grupoAcesso', {
         grupoAcesso,
       })
       .take(qtdNoticias)
       .skip(pagina)
+      .cache('noticias', 60000)
       .getMany();
     return noticias;
   }
