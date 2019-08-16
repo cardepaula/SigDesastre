@@ -11,4 +11,9 @@ export class NoticiaController {
   public findAll() {
     return this.noticiaService.findAll();
   }
+
+  @Get('/search')
+  public search() {
+    return this.noticiaService.searchNoticias();
+  }
 }

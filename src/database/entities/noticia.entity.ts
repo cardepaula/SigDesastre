@@ -65,13 +65,14 @@ export class Noticia {
 
   @ManyToOne(() => GrupoAcesso, grupoAcesso => grupoAcesso.noticias, {
     nullable: false,
+    eager: true,
   })
   @JoinColumn({ name: 'fk_grupo_acesso' })
   grupoAcesso: GrupoAcesso | null;
 
-  @OneToMany(() => Midia, midia => midia.noticia)
+  @OneToMany(() => Midia, midia => midia.noticia, { eager: true })
   midias: Midia[];
 
-  @ManyToMany(() => Descritor, descritor => descritor.noticias)
+  @ManyToMany(() => Descritor, descritor => descritor.noticias, { eager: true })
   descritores: Descritor[];
 }

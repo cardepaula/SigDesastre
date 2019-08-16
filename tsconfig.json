@@ -2,15 +2,15 @@
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
-    // "declaration": true,
+    "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es6",
     "sourceMap": true,
     "outDir": "./dist",
-    // "baseUrl": "./",
-    // "incremental": true,
+    "baseUrl": "./",
+    "incremental": true,
     "resolveJsonModule": true,
     "lib": ["es5", "es6"]
   }

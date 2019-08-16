@@ -28,7 +28,9 @@ export class Midia {
   })
   link: string | null;
 
-  @ManyToOne(() => Noticia, noticia => noticia.midias, { nullable: false })
+  @ManyToOne(() => Noticia, noticia => noticia.midias, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'fk_noticia' })
   noticia: Noticia | null;
 
