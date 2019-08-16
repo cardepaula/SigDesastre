@@ -21,18 +21,23 @@ export class NoticiaService {
     let pagina: number;
 
     query.id ? (id = query.id) : (id = '%');
+
     query.titulo ? (titulo = `%${query.titulo}%`) : (titulo = '%');
     titulo = titulo.replace(' ', '%');
+
     query.conteudo ? (conteudo = `%${query.conteudo}%`) : (conteudo = '%');
     conteudo = conteudo.replace(' ', '%');
+
     query.fonte ? (fonte = `${query.fonte}`) : (fonte = '%');
     fonte = fonte.replace(' ', '%');
+
     query.grupoAcesso
       ? (grupoAcesso = `${query.grupoAcesso}`)
       : (grupoAcesso = '%');
+
     query.qtdNoticias ? (qtdNoticias = query.qtdNoticias) : (qtdNoticias = 10);
+
     query.pagina ? (pagina = query.pagina - 1) : (pagina = 0);
-    console.log(query);
 
     const noticias: Noticia[] = await this.noticiaRepository
       .createQueryBuilder('noticia')
@@ -41,7 +46,7 @@ export class NoticiaService {
       .leftJoinAndSelect('noticia.fonte', 'fonte')
       .leftJoinAndSelect('noticia.grupoAcesso', 'grupoacesso')
       .leftJoinAndSelect('noticia.midias', 'midia')
-      .where('noticia.id::TEXT LIKE :id', { id })
+      .where('noticia.id::TEXT ILIKE :id', { id })
       .andWhere('noticia.titulo ILIKE :titulo', {
         titulo,
       })
@@ -56,7 +61,7 @@ export class NoticiaService {
       })
       .take(qtdNoticias)
       .skip(pagina)
-      .cache('noticias', 60000)
+      .cache(false)
       .getMany();
     return noticias;
   }
