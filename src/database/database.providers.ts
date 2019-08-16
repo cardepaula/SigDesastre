@@ -1,7 +1,7 @@
 import { createConnection, Connection } from 'typeorm';
 import { dbConfig } from '../common/config/database.config';
 import { Noticia } from './entities/noticia.entity';
-import { repositoryConfig } from 'src/common/config/repositories.config';
+import { repositoryConfig } from '../common/config/repositories.config';
 
 export const databaseProviders = [
   {

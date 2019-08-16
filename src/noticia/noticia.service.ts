@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Noticia } from '../database/entities/noticia.entity';
 import { Repository } from 'typeorm';
-import { repositoryConfig } from 'src/common/config/repositories.config';
+import { repositoryConfig } from '../common/config/repositories.config';
 
 @Injectable()
 export class NoticiaService {
