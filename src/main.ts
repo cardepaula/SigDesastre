@@ -21,9 +21,8 @@ async function bootstrap() {
   }
   const document = SwaggerModule.createDocument(app, options.build());
   SwaggerModule.setup('', app, document);
-  console.log('Porta: ' + appConfig.port);
 
-  await app.listen(appConfig.port);
+  await app.listen(appConfig.port || 5000);
 }
 
 bootstrap();
