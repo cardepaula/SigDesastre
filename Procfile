@@ -1,1 +1,1 @@
-web: node ./dist/main.js
+web: cd dist/ ; node main.js
