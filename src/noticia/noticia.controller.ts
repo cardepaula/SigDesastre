@@ -32,6 +32,14 @@ export class NoticiaController {
     collectionFormat: 'multi',
   })
   @ApiImplicitQuery({
+    name: 'tipoFonte',
+    description: 'filtra as notícias pelo tipo da fonte',
+    required: false,
+    type: String,
+    isArray: false,
+    collectionFormat: 'multi',
+  })
+  @ApiImplicitQuery({
     name: 'fonte',
     description: 'filtre noticias pela fonte (informe o nome da fonte)',
     required: false,
@@ -46,6 +54,16 @@ export class NoticiaController {
     required: false,
     type: String,
     isArray: false,
+    collectionFormat: 'multi',
+  })
+  @ApiImplicitQuery({
+    name: 'periodo',
+    description: `Data inicial e data final (YYYY-mm-dd)
+      Padrão:
+      INICIAL 2015-11-5
+      FINAL ${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`,
+    required: false,
+    isArray: true,
     collectionFormat: 'multi',
   })
   @ApiImplicitQuery({

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Noticia } from '../database/entities/noticia.entity';
 import { Repository } from 'typeorm';
 import { repositoryConfig } from '../common/config/repositories.config';
-import { NoticiaInterface } from './noticia.interface';
+import { NoticiaParams } from './noticiaParams';
 
 @Injectable()
 export class NoticiaService {
@@ -11,33 +11,10 @@ export class NoticiaService {
     private readonly noticiaRepository: Repository<Noticia>,
   ) {}
 
-  async searchNoticias(query: NoticiaInterface) {
-    let id: string;
-    let titulo: string;
-    let conteudo: string;
-    let fonte: string;
-    let grupoAcesso: string;
-    let qtdNoticias: number;
-    let pagina: number;
+  async searchNoticias(query: NoticiaParams) {
+    const params: NoticiaParams = new NoticiaParams(query);
 
-    query.id ? (id = query.id) : (id = '%');
-
-    query.titulo ? (titulo = `%${query.titulo}%`) : (titulo = '%');
-    titulo = titulo.replace(' ', '%');
-
-    query.conteudo ? (conteudo = `%${query.conteudo}%`) : (conteudo = '%');
-    conteudo = conteudo.replace(' ', '%');
-
-    query.fonte ? (fonte = `${query.fonte}`) : (fonte = '%');
-    fonte = fonte.replace(' ', '%');
-
-    query.grupoAcesso
-      ? (grupoAcesso = `${query.grupoAcesso}`)
-      : (grupoAcesso = '%');
-
-    query.qtdNoticias ? (qtdNoticias = query.qtdNoticias) : (qtdNoticias = 10);
-
-    query.pagina ? (pagina = query.pagina - 1) : (pagina = 0);
+    console.log(params);
 
     const noticias: Noticia[] = await this.noticiaRepository
       .createQueryBuilder('noticia')
@@ -46,23 +23,35 @@ export class NoticiaService {
       .leftJoinAndSelect('noticia.fonte', 'fonte')
       .leftJoinAndSelect('noticia.grupoAcesso', 'grupoacesso')
       .leftJoinAndSelect('noticia.midias', 'midia')
-      .where('noticia.id::TEXT ILIKE :id', { id })
+      .leftJoinAndSelect('fonte.tipoFonte', 'tipoFonte')
+      .where('noticia.id::TEXT ILIKE :id', { id: params.id })
       .andWhere('noticia.titulo ILIKE :titulo', {
-        titulo,
+        titulo: params.titulo,
       })
       .andWhere('noticia.conteudo ILIKE :conteudo', {
-        conteudo,
+        conteudo: params.conteudo,
       })
       .andWhere('fonte.nome ILIKE :fonte', {
-        fonte,
+        fonte: params.fonte,
       })
       .andWhere('grupoAcesso.nome ILIKE :grupoAcesso', {
-        grupoAcesso,
+        grupoAcesso: params.grupoAcesso,
       })
-      .take(qtdNoticias)
-      .skip(pagina)
+      .andWhere('tipoFonte.nome ILIKE :tipoFonte', {
+        tipoFonte: params.tipoFonte,
+      })
+      .andWhere(
+        'noticia.dataPublicacao BETWEEN :dataInicio::DATE AND :dataFim::DATE',
+        {
+          dataInicio: params.periodo[0],
+          dataFim: params.periodo[1],
+        },
+      )
+      .take(params.qtdNoticias)
+      .skip(params.pagina)
       .cache(false)
       .getMany();
+    // .getQueryAndParameters();
     return noticias;
   }
 }

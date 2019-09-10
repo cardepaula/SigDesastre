@@ -7,7 +7,8 @@ import { appConfig } from './common/config/app.config';
 import * as pacote from '../package.json';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: false });
+  // app.enableCors({ origin: '*' });
 
   const options = new DocumentBuilder();
   options.setTitle(pacote.name);
@@ -22,7 +23,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options.build());
   SwaggerModule.setup('', app, document);
 
-  await app.listen(appConfig.port || 5000);
+  await app.listen(appConfig.port);
+  console.log('app listening on port', appConfig.port);
 }
 
 bootstrap();
