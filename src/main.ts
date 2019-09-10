@@ -7,8 +7,8 @@ import { appConfig } from './common/config/app.config';
 import * as pacote from '../package.json';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: false });
-  // app.enableCors({ origin: '*' });
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({ origin: '*' });
 
   const options = new DocumentBuilder();
   options.setTitle(pacote.name);
