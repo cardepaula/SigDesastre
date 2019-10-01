@@ -1,11 +1,22 @@
-import { Controller, Get, Body, Post, Query, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Post,
+  Query,
+  Param,
+  HttpStatus,
+  Res,
+} from '@nestjs/common';
 import {
   ApiUseTags,
   ApiResponse,
   ApiImplicitQuery,
   ApiImplicitParam,
+  ApiImplicitBody,
 } from '@nestjs/swagger';
 import { NoticiaService } from './noticia.service';
+import { Noticia } from '../database/entities/noticia.entity';
 
 @ApiUseTags('Noticias')
 @Controller('noticias')
@@ -89,7 +100,7 @@ export class NoticiaController {
     collectionFormat: 'multi',
   })
   @ApiResponse({
-    status: 201,
+    status: HttpStatus.OK,
     description: 'Noticias Filtradas',
   })
   @Get()
@@ -104,7 +115,7 @@ export class NoticiaController {
     type: Number,
   })
   @ApiResponse({
-    status: 201,
+    status: HttpStatus.OK,
     description: 'Noticias paginadas',
   })
   @Get('/pagina/:pagina')
@@ -119,11 +130,33 @@ export class NoticiaController {
     type: Number,
   })
   @ApiResponse({
-    status: 201,
+    status: HttpStatus.OK,
     description: 'Noticia',
   })
   @Get('/id/:id')
   public getNewsById(@Query() query, @Param() param: { id: number }) {
     return this.noticiaService.getNewsById(param.id);
+  }
+
+  @ApiImplicitBody({
+    name: 'noticia',
+    description: 'Objeto do tipo noticia',
+    required: true,
+    type: Noticia,
+  })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Noticia',
+  })
+  @Post()
+  public async postNews(@Body() body: Noticia) {
+    try {
+      return await this.noticiaService.saveOrUpdateNews(body);
+    } catch (e) {
+      return {
+        statusCode: HttpStatus.BAD_REQUEST,
+        message: `Erro: ${e.message}`,
+      };
+    }
   }
 }

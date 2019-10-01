@@ -75,4 +75,8 @@ export class NoticiaService {
     const noticia: Noticia = await this.noticiaRepository.findOne(id);
     return noticia;
   }
+
+  async saveOrUpdateNews(noticia: Noticia) {
+    return await this.noticiaRepository.save<Noticia>(noticia);
+  }
 }
