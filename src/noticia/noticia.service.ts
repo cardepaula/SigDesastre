@@ -57,7 +57,11 @@ export class NoticiaService {
       .getMany();
     // .getQueryAndParameters();
     noticias.forEach(noticia => {
-      noticia.conteudo = `${appConfig.uri}:${appConfig.port}/noticias/id/${noticia.id}`;
+      // DEV
+      // noticia.conteudo = `${appConfig.uri}:${appConfig.port}/noticias/id/${noticia.id}`;
+
+      // PROD
+      noticia.conteudo = `${appConfig.uri}/noticias/id/${noticia.id}`;
     });
     return noticias;
   }
