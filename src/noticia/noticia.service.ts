@@ -3,6 +3,7 @@ import { Noticia } from '../database/entities/noticia.entity';
 import { Repository } from 'typeorm';
 import { repositoryConfig } from '../common/config/repositories.config';
 import { NoticiaParams } from './noticiaParams';
+import { appConfig } from '../common/config/app.config';
 
 @Injectable()
 export class NoticiaService {
@@ -11,7 +12,7 @@ export class NoticiaService {
     private readonly noticiaRepository: Repository<Noticia>,
   ) {}
 
-  async searchNoticias(query: NoticiaParams) {
+  async searchNews(query: NoticiaParams) {
     const params: NoticiaParams = new NoticiaParams(query);
 
     console.log(params);
@@ -48,10 +49,26 @@ export class NoticiaService {
         },
       )
       .take(params.qtdNoticias)
-      .skip(params.pagina)
+      .skip(params.pagina * params.qtdNoticias)
       .cache(false)
+      .orderBy('noticia.dataAtualizacao', 'DESC', 'NULLS LAST')
+      .orderBy('noticia.dataPublicacao', 'DESC', 'NULLS LAST')
+      .orderBy('noticia.dataCriacao', 'DESC', 'NULLS LAST')
       .getMany();
     // .getQueryAndParameters();
+    noticias.forEach(noticia => {
+      noticia.conteudo = `${appConfig.uri}:${appConfig.port}/noticias/id/${noticia.id}`;
+    });
     return noticias;
+  }
+
+  async searchNewsByPage(query: NoticiaParams, page: number) {
+    query.pagina = page;
+    return this.searchNews(query);
+  }
+
+  async getNewsById(id: number) {
+    const noticia: Noticia = await this.noticiaRepository.findOne(id);
+    return noticia;
   }
 }

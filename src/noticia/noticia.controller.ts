@@ -1,5 +1,10 @@
-import { Controller, Get, Body, Post, Query } from '@nestjs/common';
-import { ApiUseTags, ApiResponse, ApiImplicitQuery } from '@nestjs/swagger';
+import { Controller, Get, Body, Post, Query, Param } from '@nestjs/common';
+import {
+  ApiUseTags,
+  ApiResponse,
+  ApiImplicitQuery,
+  ApiImplicitParam,
+} from '@nestjs/swagger';
 import { NoticiaService } from './noticia.service';
 
 @ApiUseTags('Noticias')
@@ -89,6 +94,36 @@ export class NoticiaController {
   })
   @Get()
   public search(@Query() query) {
-    return this.noticiaService.searchNoticias(query);
+    return this.noticiaService.searchNews(query);
+  }
+
+  @ApiImplicitParam({
+    name: 'pagina',
+    description: 'numero da pagina a qual deseja visualizar',
+    required: true,
+    type: Number,
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Noticias paginadas',
+  })
+  @Get('/pagina/:pagina')
+  public getByPage(@Query() query, @Param() param: { pagina: number }) {
+    return this.noticiaService.searchNewsByPage(query, param.pagina);
+  }
+
+  @ApiImplicitParam({
+    name: 'id',
+    description: 'id da noticia que deseja visualizar',
+    required: true,
+    type: Number,
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Noticia',
+  })
+  @Get('/id/:id')
+  public getNewsById(@Query() query, @Param() param: { id: number }) {
+    return this.noticiaService.getNewsById(param.id);
   }
 }
