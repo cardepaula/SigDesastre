@@ -4,12 +4,21 @@ import { Repository } from 'typeorm';
 import { repositoryConfig } from '../common/config/repositories.config';
 import { NoticiaParams } from './noticiaParams';
 import { appConfig } from '../common/config/app.config';
+import { TipoFonte } from '../database/entities/tipoFonte.entity';
+import { Fonte } from '../database/entities/fonte.entity';
+import { GrupoAcesso } from '../database/entities/grupoAcesso.entity';
 
 @Injectable()
 export class NoticiaService {
   constructor(
     @Inject(repositoryConfig.noticia)
     private readonly noticiaRepository: Repository<Noticia>,
+    @Inject(repositoryConfig.tipoFonte)
+    private readonly tipoFonteRepository: Repository<TipoFonte>,
+    @Inject(repositoryConfig.fonte)
+    private readonly fonteRepository: Repository<Fonte>,
+    @Inject(repositoryConfig.grupoAcesso)
+    private readonly grupoAcessoRepository: Repository<GrupoAcesso>,
   ) {}
 
   async searchNews(query: NoticiaParams) {
@@ -77,6 +86,47 @@ export class NoticiaService {
   }
 
   async saveOrUpdateNews(noticia: Noticia) {
-    return await this.noticiaRepository.save<Noticia>(noticia);
+    let fonte;
+    let tipoFonte;
+    let grupoAcesso;
+
+    fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
+    tipoFonte = await this.tipoFonteRepository.findOne({
+      nome: noticia.fonte.tipoFonte.nome,
+    });
+    grupoAcesso = await this.grupoAcessoRepository.findOne({
+      nome: noticia.grupoAcesso.nome,
+    });
+    console.log(fonte, tipoFonte, grupoAcesso)
+
+    if (tipoFonte != undefined) {
+      noticia.fonte.tipoFonte = tipoFonte;
+    } else {
+      await this.tipoFonteRepository.save(noticia.fonte.tipoFonte);
+      tipoFonte = await this.tipoFonteRepository.findOne({
+        nome: noticia.fonte.tipoFonte.nome,
+      });
+      noticia.fonte.tipoFonte = tipoFonte;
+    }
+
+    if (fonte != undefined) {
+      noticia.fonte = fonte;
+    } else {
+      noticia.fonte.tipoFonte = tipoFonte;
+      await this.fonteRepository.save(noticia.fonte)
+      fonte = await this.fonteRepository.findOne({ nome: fonte.nome });
+      noticia.fonte = fonte;
+    }
+
+    if (grupoAcesso != undefined) {
+      noticia.grupoAcesso = grupoAcesso;
+    } else {
+      await this.grupoAcessoRepository.save(noticia.grupoAcesso);
+      grupoAcesso = await this.grupoAcessoRepository.findOne({
+        nome: noticia.grupoAcesso.nome,
+      });
+      noticia.grupoAcesso = grupoAcesso;
+    }
+    return await this.noticiaRepository.save(noticia);
   }
 }
