@@ -25,4 +25,19 @@ export const databaseProviders = [
     useFactory: (connection: Connection) => connection.getRepository(GrupoAcesso),
     inject: [repositoryConfig.database],
   },
+  {
+    provide: repositoryConfig.fonte,
+    useFactory: (connection: Connection) => connection.getRepository(Fonte),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.tipoFonte,
+    useFactory: (connection: Connection) => connection.getRepository(TipoFonte),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.grupoAcesso,
+    useFactory: (connection: Connection) => connection.getRepository(GrupoAcesso),
+    inject: [repositoryConfig.database],
+  },
 ];

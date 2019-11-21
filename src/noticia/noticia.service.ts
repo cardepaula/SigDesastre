@@ -8,7 +8,6 @@ import { TipoFonte } from '../database/entities/tipoFonte.entity';
 import { Fonte } from '../database/entities/fonte.entity';
 import { GrupoAcesso } from '../database/entities/grupoAcesso.entity';
 
-
 @Injectable()
 export class NoticiaService {
   constructor(
@@ -20,7 +19,6 @@ export class NoticiaService {
     private readonly fonteRepository: Repository<Fonte>,
     @Inject(repositoryConfig.grupoAcesso)
     private readonly grupoAcessoRepository: Repository<GrupoAcesso>,
-
   ) {}
 
   async searchNews(query: NoticiaParams) {
@@ -99,7 +97,7 @@ export class NoticiaService {
     grupoAcesso = await this.grupoAcessoRepository.findOne({
       nome: noticia.grupoAcesso.nome,
     });
-    console.log(fonte, tipoFonte, grupoAcesso)
+    console.log(fonte, tipoFonte, grupoAcesso);
 
     if (tipoFonte != undefined) {
       noticia.fonte.tipoFonte = tipoFonte;
@@ -115,7 +113,7 @@ export class NoticiaService {
       noticia.fonte = fonte;
     } else {
       noticia.fonte.tipoFonte = tipoFonte;
-      await this.fonteRepository.save(noticia.fonte)
+      await this.fonteRepository.save(noticia.fonte);
       fonte = await this.fonteRepository.findOne({ nome: fonte.nome });
       noticia.fonte = fonte;
     }
