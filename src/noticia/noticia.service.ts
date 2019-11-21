@@ -114,7 +114,7 @@ export class NoticiaService {
     } else {
       noticia.fonte.tipoFonte = tipoFonte;
       await this.fonteRepository.save(noticia.fonte);
-      fonte = await this.fonteRepository.findOne({ nome: fonte.nome });
+      fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
       noticia.fonte = fonte;
     }
 
