@@ -154,7 +154,7 @@ export class NoticiaController {
       return await this.noticiaService.saveOrUpdateNews(body);
     } catch (e) {
       return {
-        statusCode: HttpStatus.BAD_REQUEST,
+        statusCode: HttpStatus.PAYLOAD_TOO_LARGE,
         message: `Erro: ${e.message}`,
       };
     }

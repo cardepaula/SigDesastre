@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { Noticia } from '../database/entities/noticia.entity';
 import { Repository } from 'typeorm';
 import { repositoryConfig } from '../common/config/repositories.config';

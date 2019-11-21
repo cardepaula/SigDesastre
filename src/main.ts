@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { appConfig } from './common/config/app.config';
 import * as pacote from '../package.json';
-import { json } from 'body-parser';
+import * as bodyParser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,7 +25,8 @@ async function bootstrap() {
   SwaggerModule.setup('', app, document);
 
   await app.listen(appConfig.port);
-  app.use(json({ limit: '150mb'})) // changing max size of payload
+  app.use(bodyParser.json({ limit: '150mb' }));
+  app.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
   console.log('app listening on port', appConfig.port);
 }
 
