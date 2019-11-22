@@ -25,6 +25,14 @@ export class NoticiaService {
     if (params.qtdNoticias == undefined && params.pagina == undefined) {
       params.qtdNoticias = 10;
       params.pagina = 0;
+    } else {
+      if (params.qtdNoticias == undefined) {
+        params.qtdNoticias = 10;
+      } else {
+        if (params.pagina == undefined) {
+          params.pagina = 0;
+        }
+      }
     }
 
     console.log(await this.getWhere(params));
@@ -85,12 +93,12 @@ export class NoticiaService {
 
   async searchNewsByPage(query: NoticiaParams, page: number) {
     query.pagina = page;
-    return this.searchNews(query);
+    return await this.searchNews(query);
   }
 
-  async getNewsById(id: number) {
-    const noticia: Noticia = await this.noticiaRepository.findOne(id);
-    return noticia;
+  async getNewsById(query: NoticiaParams, id: string) {
+    query.id = id;
+    return await this.searchNews(query);
   }
 
   async saveOrUpdateNews(noticia: Noticia) {

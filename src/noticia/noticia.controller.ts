@@ -134,8 +134,9 @@ export class NoticiaController {
     description: 'Noticia',
   })
   @Get('/id/:id')
-  public getNewsById(@Query() query, @Param() param: { id: number }) {
-    return this.noticiaService.getNewsById(param.id);
+  async getNewsById(@Query() query,@Param() param) {
+    console.log(param)
+    return await this.noticiaService.getNewsById(query, param.id);
   }
 
   @ApiImplicitBody({
