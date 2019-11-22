@@ -17,6 +17,7 @@ import {
 } from '@nestjs/swagger';
 import { NoticiaService } from './noticia.service';
 import { Noticia } from '../database/entities/noticia.entity';
+import { NoticiaDto } from './dto/noticia.dto';
 
 @ApiUseTags('Noticias')
 @Controller('noticias')
@@ -139,16 +140,11 @@ export class NoticiaController {
     return await this.noticiaService.getNewsById(query, param.id);
   }
 
-  @ApiImplicitBody({
-    name: 'noticia',
-    description: 'Objeto do tipo noticia',
-    required: true,
-    type: Noticia,
-  })
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Noticia',
   })
+  @ApiImplicitBody({ name: 'NoticiaDto', required: true, type: NoticiaDto })
   @Post()
   public async postNews(@Body() body: Noticia) {
     try {
