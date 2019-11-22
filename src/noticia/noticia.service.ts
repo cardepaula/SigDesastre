@@ -21,58 +21,66 @@ export class NoticiaService {
     private readonly grupoAcessoRepository: Repository<GrupoAcesso>,
   ) {}
 
-  async searchNews(query: NoticiaParams) {
-    const params: NoticiaParams = new NoticiaParams(query);
+  async searchNews(params: NoticiaParams) {
+    if (params.qtdNoticias == undefined && params.pagina == undefined) {
+      params.qtdNoticias = 10;
+      params.pagina = 0;
+    }
 
-    console.log(params);
+    console.log(await this.getWhere(params));
 
-    const noticias: Noticia[] = await this.noticiaRepository
-      .createQueryBuilder('noticia')
-      .select()
-      .leftJoinAndSelect('noticia.descritores', 'descritor')
-      .leftJoinAndSelect('noticia.fonte', 'fonte')
-      .leftJoinAndSelect('noticia.grupoAcesso', 'grupoacesso')
-      .leftJoinAndSelect('noticia.midias', 'midia')
-      .leftJoinAndSelect('fonte.tipoFonte', 'tipoFonte')
-      .where('noticia.id::TEXT ILIKE :id', { id: params.id })
-      .andWhere('noticia.titulo ILIKE :titulo', {
-        titulo: params.titulo,
-      })
-      .andWhere('noticia.conteudo ILIKE :conteudo', {
-        conteudo: params.conteudo,
-      })
-      .andWhere('fonte.nome ILIKE :fonte', {
-        fonte: params.fonte,
-      })
-      .andWhere('grupoAcesso.nome ILIKE :grupoAcesso', {
-        grupoAcesso: params.grupoAcesso,
-      })
-      .andWhere('tipoFonte.nome ILIKE :tipoFonte', {
-        tipoFonte: params.tipoFonte,
-      })
-      .andWhere(
-        'noticia.dataPublicacao BETWEEN :dataInicio::DATE AND :dataFim::DATE',
-        {
-          dataInicio: params.periodo[0],
-          dataFim: params.periodo[1],
+    const noticias: Noticia[] = await this.noticiaRepository.find({
+      join: {
+        alias: 'noticia',
+        leftJoinAndSelect: {
+          descritor: 'noticia.descritores',
+          fonte: 'noticia.fonte',
+          grupoacesso: 'noticia.grupoAcesso',
+          midia: 'noticia.midias',
+          tipoFonte: 'fonte.tipoFonte',
         },
-      )
-      .take(params.qtdNoticias)
-      .skip(params.pagina * params.qtdNoticias)
-      .cache(false)
-      .orderBy('noticia.dataAtualizacao', 'DESC', 'NULLS LAST')
-      .orderBy('noticia.dataPublicacao', 'DESC', 'NULLS LAST')
-      .orderBy('noticia.dataCriacao', 'DESC', 'NULLS LAST')
-      .getMany();
-    // .getQueryAndParameters();
+      },
+      where: await this.getWhere(params),
+      skip: params.pagina * params.qtdNoticias,
+      take: params.qtdNoticias,
+    });
     noticias.forEach(noticia => {
-      // DEV
-      // noticia.conteudo = `${appConfig.uri}:${appConfig.port}/noticias/id/${noticia.id}`;
-
-      // PROD
       noticia.conteudo = `${appConfig.uri}/noticias/id/${noticia.id}`;
     });
     return noticias;
+  }
+
+  async getWhere(query) {
+    console.log(query);
+    const keysPermitidas = [
+      'id',
+      'titulo',
+      'conteudo',
+      'tipoFonte',
+      'fonte',
+      'grupoAcesso',
+      'periodo',
+    ];
+    let where = '';
+    Object.keys(query)
+      .filter(key => keysPermitidas.indexOf(key) !== -1)
+      .forEach(key => {
+        if (Array.isArray(query[key])) {
+          where += '( ';
+          where += `noticia.dataPublicacao BETWEEN '${query[key][0]}' and '${query[key][1]}'`;
+          where += ') and ';
+        }
+        if (key == 'id') {
+          where += `noticia.${key} = '${query[key]}' and `;
+        }
+        if (key == 'titulo' || key == 'conteudo') {
+          where += `noticia.${key} ilike '%${query[key]}%' and `;
+        }
+        if (key == 'fonte' || key == 'grupoAcesso' || key == 'tipoFonte') {
+          where += `${key}.nome ilike '%${query[key]}%' and `;
+        }
+      });
+    return where.substr(0, where.length - 4);
   }
 
   async searchNewsByPage(query: NoticiaParams, page: number) {
