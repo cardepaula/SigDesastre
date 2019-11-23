@@ -41,6 +41,12 @@ export class Noticia {
   })
   link: string | null;
 
+  @Column('text', {
+    nullable: true,
+    name: 'descricao',
+  })
+  descricao: string | null;
+
   @Column('date', {
     nullable: true,
     name: 'data_publicacao',
