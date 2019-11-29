@@ -135,9 +135,19 @@ export class NoticiaController {
     description: 'Noticia',
   })
   @Get('/id/:id')
-  async getNewsById(@Query() query,@Param() param) {
-    console.log(param)
+  async getNewsById(@Query() query, @Param() param) {
+    console.log(param);
     return await this.noticiaService.getNewsById(query, param.id);
+  }
+
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Noticia',
+  })
+  @Get('recentes')
+  async getLastWeeksNews(@Query() query, @Param() param) {
+    console.log(param);
+    return await this.noticiaService.getLastWeeksNews();
   }
 
   @ApiResponse({

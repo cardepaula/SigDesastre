@@ -9,7 +9,7 @@ export class NoticiaParams {
   private _tipoFonte?: string;
   private _periodo?: string[];
 
-  constructor(queryParams: NoticiaParams) {
+  constructor(queryParams) {
     this.id = queryParams.id;
     this.titulo = queryParams.titulo;
     this.conteudo = queryParams.conteudo;
@@ -26,7 +26,7 @@ export class NoticiaParams {
   }
 
   set id(id: string) {
-    id ? (this._id = id) : (this._id = '%');
+    this._id = id ? id : '%';
   }
 
   get titulo(): string {
@@ -34,7 +34,7 @@ export class NoticiaParams {
   }
 
   set titulo(titulo: string) {
-    titulo ? (this._titulo = `%${titulo}%`) : (this._titulo = '%');
+    this._titulo = titulo ? `%${titulo}%` : '%';
     this._titulo = this._titulo.replace(' ', '%');
   }
 
@@ -43,7 +43,7 @@ export class NoticiaParams {
   }
 
   set conteudo(conteudo: string) {
-    conteudo ? (this._conteudo = `%${conteudo}%`) : (this._conteudo = '%');
+    this._conteudo = conteudo ? `%${conteudo}%` : '%';
     this._conteudo = this._conteudo.replace(';', '%');
   }
 
@@ -52,7 +52,7 @@ export class NoticiaParams {
   }
 
   set fonte(fonte: string) {
-    fonte ? (this._fonte = fonte) : (this._fonte = '%');
+    this._fonte = fonte ? fonte : '%';
     // this._fonte = this._fonte.replace(' ', '%');
   }
 
@@ -61,7 +61,7 @@ export class NoticiaParams {
   }
 
   set grupoAcesso(grupoAcesso: string) {
-    grupoAcesso ? (this._grupoAcesso = grupoAcesso) : (this._grupoAcesso = '%');
+    this._grupoAcesso = grupoAcesso ? grupoAcesso : '%';
   }
 
   get qtdNoticias() {
@@ -69,7 +69,7 @@ export class NoticiaParams {
   }
 
   set qtdNoticias(qtdNoticias: number) {
-    qtdNoticias ? (this._qtdNoticias = qtdNoticias) : (this._qtdNoticias = 10);
+    this._qtdNoticias = qtdNoticias ? qtdNoticias : 10;
   }
 
   get pagina() {
@@ -77,7 +77,7 @@ export class NoticiaParams {
   }
 
   set pagina(pagina: number) {
-    pagina ? (this._pagina = pagina - 1) : (this._pagina = 0);
+    this._pagina = pagina ? pagina - 1 : 0;
   }
 
   get tipoFonte() {
@@ -85,7 +85,7 @@ export class NoticiaParams {
   }
 
   set tipoFonte(tipoFonte: string) {
-    tipoFonte ? (this._tipoFonte = tipoFonte) : (this._tipoFonte = '%');
+    this._tipoFonte = tipoFonte ? tipoFonte : '%';
   }
 
   get periodo() {

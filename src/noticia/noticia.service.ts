@@ -7,6 +7,7 @@ import { appConfig } from '../common/config/app.config';
 import { TipoFonte } from '../database/entities/tipoFonte.entity';
 import { Fonte } from '../database/entities/fonte.entity';
 import { GrupoAcesso } from '../database/entities/grupoAcesso.entity';
+import * as Moment from 'moment';
 
 @Injectable()
 export class NoticiaService {
@@ -37,7 +38,7 @@ export class NoticiaService {
 
     console.log(await this.getWhere(params));
 
-    const noticias: Noticia[] = await this.noticiaRepository.find({
+    const [noticias, qtdNoticias] = await this.noticiaRepository.findAndCount({
       join: {
         alias: 'noticia',
         leftJoinAndSelect: {
@@ -55,7 +56,24 @@ export class NoticiaService {
     noticias.forEach(noticia => {
       noticia.conteudo = `${appConfig.uri}/noticias/id/${noticia.id}`;
     });
-    return noticias;
+    return {
+      totalNoticias: qtdNoticias,
+      paginaAtual: Math.ceil(params.pagina),
+      totalPaginas: Math.ceil(qtdNoticias / params.qtdNoticias),
+      quantidadeExibida: Math.ceil(params.qtdNoticias),
+      params: {
+        id: params.id,
+        titulo: params.titulo,
+        conteudo: params.conteudo,
+        fonte: params.fonte,
+        grupoAcesso: params.grupoAcesso,
+        qtdNoticias: params.qtdNoticias,
+        pagina: params.pagina,
+        tipoFonte: params.tipoFonte,
+        periodo: params.periodo,
+      },
+      noticias,
+    };
   }
 
   async getWhere(query) {
@@ -144,5 +162,15 @@ export class NoticiaService {
       noticia.grupoAcesso = grupoAcesso;
     }
     return await this.noticiaRepository.save(noticia);
+  }
+
+  async getLastWeeksNews() {
+    const dataInicio = Moment()
+      .subtract(7, 'days')
+      .calendar();
+    const dataFim = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`;
+    const periodo = [dataInicio, dataFim];
+    const params: NoticiaParams = new NoticiaParams({ periodo });
+    return this.searchNews(params);
   }
 }
