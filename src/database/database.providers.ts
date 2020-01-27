@@ -1,10 +1,11 @@
-import { dbConfig } from '../common/config/database.config';
+import { dbConfig, dbTweetConfig } from '../common/config/database.config';
 import { Noticia } from './entities/noticia.entity';
-import { repositoryConfig } from '../common/config/repositories.config';
+import { repositoryConfig, repositoryTweetConfig } from '../common/config/repositories.config';
 import { Fonte } from './entities/fonte.entity';
 import { TipoFonte } from './entities/tipoFonte.entity';
 import { GrupoAcesso } from './entities/grupoAcesso.entity';
 import { Connection, createConnection } from 'typeorm';
+import { Tweets } from './entities/tweets.entity';
 
 export const databaseProviders = [
   {
@@ -43,5 +44,29 @@ export const databaseProviders = [
     useFactory: (connection: Connection) =>
       connection.getRepository(GrupoAcesso),
     inject: [repositoryConfig.database],
+  },
+];
+
+export const databaseTweetProviders = [
+  {
+    provide: repositoryConfig.database,
+    useFactory: async () =>
+      await createConnection({
+        type: 'postgres',
+        host: dbTweetConfig.host,
+        port: dbTweetConfig.port,
+        username: dbTweetConfig.user,
+        password: dbTweetConfig.pass,
+        database: dbTweetConfig.name,
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        synchronize: false, // TODO fazer essa config atraves de ENV
+        dropSchema: false,
+        cache: true,
+      }),
+  },
+  {
+    provide: repositoryTweetConfig.tweets,
+    useFactory: (connection: Connection) => connection.getRepository(Tweets),
+    inject: [repositoryTweetConfig.database],
   },
 ];

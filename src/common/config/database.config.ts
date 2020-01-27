@@ -7,3 +7,13 @@ export const dbConfig = {
   schema: process.env.DB_SCHEMA,
   name: process.env.DB_NAME,
 };
+
+export const dbTweetConfig = {
+  type: process.env.DB_TYPE_TW,
+  host: process.env.DB_HOST_TW,
+  port: parseInt(process.env.DB_PORT_TW, 0),
+  user: process.env.DB_USERNAME_TW,
+  pass: process.env.DB_PASSWORD_TW,
+  schema: process.env.DB_SCHEMA_TW,
+  name: process.env.DB_NAME_TW,
+}
