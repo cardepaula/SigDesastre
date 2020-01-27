@@ -11,3 +11,8 @@ export const repositoryConfig = {
   tipoMidia: 'TIPO_MIDIA_REPOSITORY',
   usuario: 'USUARIO_REPOSITORY',
 };
+
+export const repositoryTweetConfig = {
+  database: 'DATABASE_CONNECTION',
+  tweets: 'TWEETS_REPOSITORY',
+};
