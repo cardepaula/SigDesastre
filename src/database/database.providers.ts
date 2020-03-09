@@ -1,6 +1,9 @@
 import { dbConfig, dbTweetConfig } from '../common/config/database.config';
 import { Noticia } from './entities/noticia.entity';
-import { repositoryConfig, repositoryTweetConfig } from '../common/config/repositories.config';
+import {
+  repositoryConfig,
+  repositoryTweetConfig,
+} from '../common/config/repositories.config';
 import { Fonte } from './entities/fonte.entity';
 import { TipoFonte } from './entities/tipoFonte.entity';
 import { GrupoAcesso } from './entities/grupoAcesso.entity';
@@ -49,9 +52,10 @@ export const databaseProviders = [
 
 export const databaseTweetProviders = [
   {
-    provide: repositoryConfig.database,
+    provide: repositoryTweetConfig.database,
     useFactory: async () =>
       await createConnection({
+        name: 'twitter',
         type: 'postgres',
         host: dbTweetConfig.host,
         port: dbTweetConfig.port,
