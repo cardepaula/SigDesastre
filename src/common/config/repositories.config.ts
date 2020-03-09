@@ -13,6 +13,6 @@ export const repositoryConfig = {
 };
 
 export const repositoryTweetConfig = {
-  database: 'DATABASE_CONNECTION',
+  database: 'DATABASE_CONNECTION_TW',
   tweets: 'TWEETS_REPOSITORY',
 };
