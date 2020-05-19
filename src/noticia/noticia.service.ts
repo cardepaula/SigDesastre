@@ -3,7 +3,6 @@ import { Noticia } from '../database/entities/noticia.entity';
 import { Repository } from 'typeorm';
 import { repositoryConfig } from '../common/config/repositories.config';
 import { NoticiaParams } from './noticiaParams';
-import { appConfig } from '../common/config/app.config';
 import { TipoFonte } from '../database/entities/tipoFonte.entity';
 import { Fonte } from '../database/entities/fonte.entity';
 import { GrupoAcesso } from '../database/entities/grupoAcesso.entity';

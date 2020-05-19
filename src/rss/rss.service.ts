@@ -1,7 +1,7 @@
 import { Inject, HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { repositoryRSSConfig } from 'src/common/config/repositories.config';
+import { repositoryRSSConfig } from '../common/config/repositories.config';
 import { Repository } from 'typeorm';
-import { RSS } from 'src/database/entities/rss.entity';
+import { RSS } from '../database/entities/rss.entity';
 
 @Injectable()
 export class RSSService {

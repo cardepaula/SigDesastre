@@ -9,7 +9,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { ApiUseTags, ApiResponse } from '@nestjs/swagger';
-import { RSS } from 'src/database/entities/rss.entity';
+import { RSS } from '../database/entities/rss.entity';
 
 @ApiUseTags('rss')
 @Controller('rss')
