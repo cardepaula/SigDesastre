@@ -6,7 +6,7 @@ import {
   Query,
   Param,
   HttpStatus,
-  Res,
+  Delete,
 } from '@nestjs/common';
 import {
   ApiUseTags,
@@ -151,19 +151,23 @@ export class NoticiaController {
   }
 
   @ApiResponse({
-    status: HttpStatus.CREATED,
-    description: 'Noticia',
+    status: 201,
+    description: 'Noticia Created',
   })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiImplicitBody({ name: 'NoticiaDto', required: true, type: NoticiaDto })
   @Post()
   public async postNews(@Body() body: Noticia) {
-    try {
-      return await this.noticiaService.saveOrUpdateNews(body);
-    } catch (e) {
-      return {
-        statusCode: HttpStatus.PAYLOAD_TOO_LARGE,
-        message: `Erro: ${e.message}`,
-      };
-    }
+    return await this.noticiaService.saveOrUpdateNews(body);
+  }
+  @ApiResponse({
+    status: 201,
+    description: 'Deleted',
+  })
+  @ApiResponse({ status: 403, description: 'Noticia existente.' })
+  @ApiImplicitBody({ name: 'NoticiaDto', required: true, type: NoticiaDto })
+  @Delete('/id/:id')
+  public async deleteNews(@Param() param) {
+    return await this.noticiaService.DeleteNews(param.id);
   }
 }

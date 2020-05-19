@@ -1,4 +1,4 @@
-import { Injectable, Inject, HttpStatus } from '@nestjs/common';
+import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { Noticia } from '../database/entities/noticia.entity';
 import { Repository } from 'typeorm';
 import { repositoryConfig } from '../common/config/repositories.config';
@@ -53,9 +53,10 @@ export class NoticiaService {
       skip: params.pagina * params.qtdNoticias,
       take: params.qtdNoticias,
     });
-    noticias.forEach(noticia => {
-      noticia.conteudo = `${appConfig.uri}/noticias/id/${noticia.id}`;
-    });
+    // noticias.forEach(noticia => {
+
+    //   noticia.conteudo = `${appConfig.uri}/noticias/id/${noticia.id}`;
+    // });
     return {
       totalNoticias: qtdNoticias,
       paginaAtual: Math.ceil(params.pagina),
@@ -116,22 +117,69 @@ export class NoticiaService {
 
   async getNewsById(query: NoticiaParams, id: string) {
     query.id = id;
-    return await this.searchNews(query);
+    try {
+      return await this.searchNews(query);
+    } catch (error) {
+      throw new HttpException(
+        'Noticia existente: ' + error,
+        HttpStatus.FORBIDDEN,
+      );
+    }
   }
-
+  async DeleteNews(id: number) {
+    try {
+      console.log('noticia deletada:', id);
+      await this.noticiaRepository.delete({ id: id });
+    } catch (error) {
+      console.log('Erro ao deletar:', error);
+      throw new HttpException(
+        'Noticia existente: ' + error,
+        HttpStatus.FORBIDDEN,
+      );
+    }
+  }
   async saveOrUpdateNews(noticia: Noticia) {
     let fonte;
     let tipoFonte;
     let grupoAcesso;
+    let dbnoticia;
+    try {
+      dbnoticia = await this.noticiaRepository.findOne({
+        titulo: noticia.titulo,
+      });
+      if (dbnoticia != undefined) {
+        console.log('noticia já existe');
+        throw new HttpException('Noticia existente', HttpStatus.FORBIDDEN);
+      }
+    } catch (error) {
+      console.log(error);
+      throw new HttpException('Noticia existente.', HttpStatus.FORBIDDEN);
+    }
+    try {
+      fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
+    } catch (error) {
+      console.log(error);
+      throw new HttpException('Fonte ', HttpStatus.FORBIDDEN);
+    }
+    try {
+      tipoFonte = await this.tipoFonteRepository.findOne({
+        nome: noticia.fonte.tipoFonte.nome,
+      });
+    } catch (error) {
+      console.log(error);
+      throw new HttpException('tipoFonte ', HttpStatus.FORBIDDEN);
+    }
 
-    fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
-    tipoFonte = await this.tipoFonteRepository.findOne({
-      nome: noticia.fonte.tipoFonte.nome,
-    });
-    grupoAcesso = await this.grupoAcessoRepository.findOne({
-      nome: noticia.grupoAcesso.nome,
-    });
-    console.log(fonte, tipoFonte, grupoAcesso);
+    try {
+      grupoAcesso = await this.grupoAcessoRepository.findOne({
+        nome: noticia.grupoAcesso.nome,
+      });
+    } catch (error) {
+      console.log(error);
+      throw new HttpException('grupoAcesso ', HttpStatus.FORBIDDEN);
+    }
+
+    console.log(noticia);
 
     if (tipoFonte != undefined) {
       noticia.fonte.tipoFonte = tipoFonte;
@@ -161,7 +209,13 @@ export class NoticiaService {
       });
       noticia.grupoAcesso = grupoAcesso;
     }
-    return await this.noticiaRepository.save(noticia);
+    try {
+      return await this.noticiaRepository.save(noticia);
+    } catch (error) {
+      console.log(error);
+
+      throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
+    }
   }
 
   async getLastWeeksNews() {

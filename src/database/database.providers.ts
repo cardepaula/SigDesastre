@@ -1,14 +1,20 @@
-import { dbConfig, dbTweetConfig } from '../common/config/database.config';
+import {
+  dbConfig,
+  dbTweetConfig,
+  dbRSSConfig,
+} from '../common/config/database.config';
 import { Noticia } from './entities/noticia.entity';
 import {
   repositoryConfig,
   repositoryTweetConfig,
+  repositoryRSSConfig,
 } from '../common/config/repositories.config';
 import { Fonte } from './entities/fonte.entity';
 import { TipoFonte } from './entities/tipoFonte.entity';
 import { GrupoAcesso } from './entities/grupoAcesso.entity';
 import { Connection, createConnection } from 'typeorm';
 import { Tweets } from './entities/tweets.entity';
+import { RSS } from './entities/rss.entity';
 
 export const databaseProviders = [
   {
@@ -72,5 +78,30 @@ export const databaseTweetProviders = [
     provide: repositoryTweetConfig.tweets,
     useFactory: (connection: Connection) => connection.getRepository(Tweets),
     inject: [repositoryTweetConfig.database],
+  },
+];
+
+export const databaseRSSProviders = [
+  {
+    provide: repositoryRSSConfig.database,
+    useFactory: async () =>
+      await createConnection({
+        name: 'rss',
+        type: 'postgres',
+        host: dbRSSConfig.host,
+        port: dbRSSConfig.port,
+        username: dbRSSConfig.user,
+        password: dbRSSConfig.pass,
+        database: dbRSSConfig.name,
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        synchronize: false, // TODO fazer essa config atraves de ENV
+        dropSchema: false,
+        cache: true,
+      }),
+  },
+  {
+    provide: repositoryRSSConfig.rss,
+    useFactory: (connection: Connection) => connection.getRepository(RSS),
+    inject: [repositoryRSSConfig.database],
   },
 ];
