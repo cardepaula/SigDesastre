@@ -12,6 +12,11 @@ export const repositoryConfig = {
   usuario: 'USUARIO_REPOSITORY',
 };
 
+export const repositoryRSSConfig = {
+  database: 'DATABASE_CONNECTION_RSS',
+  rss: 'RSS_REPOSITORY',
+};
+
 export const repositoryTweetConfig = {
   database: 'DATABASE_CONNECTION_TW',
   tweets: 'TWEETS_REPOSITORY',
