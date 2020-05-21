@@ -18,6 +18,7 @@ import {
 import { NoticiaService } from './noticia.service';
 import { Noticia } from '../database/entities/noticia.entity';
 import { NoticiaDto } from './dto/noticia.dto';
+import { get } from 'http';
 
 @ApiUseTags('Noticias')
 @Controller('noticias')
@@ -169,5 +170,22 @@ export class NoticiaController {
   @Delete('/id/:id')
   public async deleteNews(@Param() param) {
     return await this.noticiaService.DeleteNews(param.id);
+  }
+
+  @ApiResponse({
+    status: 201,
+    description: 'OK',
+  })
+  @Get('/fontes')
+  public async getTipoFonte() {
+    return await this.noticiaService.getTipoFonte();
+  }
+  @ApiResponse({
+    status: 201,
+    description: 'OK',
+  })
+  @Get('/nuvem')
+  public async getNuvem() {
+    return await this.noticiaService.getNumevemPalavras();
   }
 }

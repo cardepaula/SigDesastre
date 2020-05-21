@@ -7,6 +7,8 @@ import { TipoFonte } from '../database/entities/tipoFonte.entity';
 import { Fonte } from '../database/entities/fonte.entity';
 import { GrupoAcesso } from '../database/entities/grupoAcesso.entity';
 import * as Moment from 'moment';
+import moment = require('moment');
+import { stopWord } from './stopwords';
 
 @Injectable()
 export class NoticiaService {
@@ -52,10 +54,18 @@ export class NoticiaService {
       skip: params.pagina * params.qtdNoticias,
       take: params.qtdNoticias,
     });
-    // noticias.forEach(noticia => {
 
-    //   noticia.conteudo = `${appConfig.uri}/noticias/id/${noticia.id}`;
-    // });
+    noticias.forEach(noticia => {
+      noticia.dataAtualizacao = noticia.dataAtualizacao
+        ? moment(new Date(noticia.dataAtualizacao)).format('DD/MM/YYYY')
+        : noticia.dataAtualizacao;
+      noticia.dataCriacao = noticia.dataCriacao
+        ? moment(new Date(noticia.dataCriacao)).format('DD/MM/YYYY')
+        : noticia.dataCriacao;
+      noticia.dataPublicacao = noticia.dataPublicacao
+        ? moment(new Date(noticia.dataPublicacao)).format('DD/MM/YYYY')
+        : noticia.dataPublicacao;
+    });
     return {
       totalNoticias: qtdNoticias,
       paginaAtual: Math.ceil(params.pagina),
@@ -225,5 +235,42 @@ export class NoticiaService {
     const periodo = [dataInicio, dataFim];
     const params: NoticiaParams = new NoticiaParams({ periodo });
     return this.searchNews(params);
+  }
+  async getTipoFonte() {
+    let tipoFonte = await this.tipoFonteRepository.find();
+    return tipoFonte;
+  }
+  async getNumevemPalavras() {
+    let noticias = await this.noticiaRepository.find();
+    let nuvem = [];
+    let re = /[^a-zA-Z\u00C0-\u00FF]+/i;
+    noticias.forEach(n => {
+      let noticia;
+      if (n.conteudo) {
+        noticia = n.conteudo.replace(/<[^>]+>/g || /{[^>]+}/g, '');
+        noticia = noticia.split(re);
+        noticia = noticia.filter(c => !stopWord.includes(c));
+        this.CriaListaNuvem(nuvem, noticia);
+      }
+    });
+    nuvem.sort((a, b) => b.quantidade - a.quantidade);
+    return nuvem;
+  }
+  CriaListaNuvem(nuvem, noticia: string[]) {
+    let possui;
+    noticia.map(palavra => {
+      possui = false;
+      for (let i = 0; i < nuvem.length; i++) {
+        let item = nuvem[i];
+        if (item.chave === palavra) {
+          item.quantidade++;
+          possui = true;
+          break;
+        }
+      }
+      if (possui == false) {
+        nuvem.push({ chave: palavra, quantidade: 1 });
+      }
+    });
   }
 }
