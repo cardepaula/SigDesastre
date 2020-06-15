@@ -22,7 +22,7 @@ async function bootstrap() {
     options.setSchemes('http', 'https');
   }
   const document = SwaggerModule.createDocument(app, options.build());
-  SwaggerModule.setup('', app, document);
+  SwaggerModule.setup('/docs', app, document);
 
   await app.listen(appConfig.port);
   app.use(bodyParser.json({ limit: '150mb' }));
