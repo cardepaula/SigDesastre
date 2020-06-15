@@ -219,6 +219,20 @@ export class NoticiaService {
       noticia.grupoAcesso = grupoAcesso;
     }
     try {
+      noticia.dataAtualizacao = noticia.dataAtualizacao
+        ? moment(new Date(noticia.dataAtualizacao)).format('YYYY-MM-DD')
+        : noticia.dataAtualizacao;
+      noticia.dataCriacao = noticia.dataCriacao
+        ? moment(new Date(noticia.dataCriacao)).format('YYYY-MM-DD')
+        : noticia.dataCriacao;
+      noticia.dataPublicacao = noticia.dataPublicacao
+        ? moment(new Date(noticia.dataPublicacao)).format('YYYY-MM-DD')
+        : noticia.dataPublicacao;
+    } catch (error) {
+      throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
+    }
+
+    try {
       return await this.noticiaRepository.save(noticia);
     } catch (error) {
       console.log(error);
