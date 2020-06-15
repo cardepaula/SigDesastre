@@ -7,6 +7,7 @@ import {
   Body,
   Put,
   HttpStatus,
+  Delete,
 } from '@nestjs/common';
 import { ApiUseTags, ApiResponse } from '@nestjs/swagger';
 import { RSS } from '../database/entities/rss.entity';
@@ -66,5 +67,15 @@ export class RSSController {
   @Get()
   public async getAll() {
     return await this.rssService.getRssAll();
+  }
+  /**DELETE */
+  @ApiResponse({
+    status: 201,
+    description: 'Deleted',
+  })
+  @ApiResponse({ status: 403, description: 'Noticia existente.' })
+  @Delete('/id/:id')
+  public async deleteRss(@Param() param) {
+    return await this.rssService.deleteRss(param.id);
   }
 }

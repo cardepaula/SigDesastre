@@ -66,4 +66,11 @@ export class RSSService {
     }
     throw new HttpException('Objeto não encontrado', HttpStatus.FORBIDDEN);
   }
+  async deleteRss(id: number) {
+    try {
+      await this.RSSRepository.delete({ id: id });
+    } catch (error) {
+      throw new HttpException('Objeto não encontrado', HttpStatus.FORBIDDEN);
+    }
+  }
 }
