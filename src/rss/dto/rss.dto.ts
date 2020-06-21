@@ -1,12 +1,25 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class RSSDto {
-  @ApiModelProperty()
-  readonly nome?: string;
-  @ApiModelProperty()
-  readonly url?: string;
-  @ApiModelProperty()
-  readonly tipoFonteId?: number;
-  @ApiModelProperty()
-  readonly id?: number;
+
+  @ApiModelProperty({
+    description:'Identificador do RSS',
+  })
+  id: number;
+
+  @ApiModelProperty({
+    description: 'Nome da fonte RSS',
+  })
+  nome: string;
+
+  @ApiModelProperty({
+    description: 'Url do RSS da fonte',
+  })
+  url: string;
+
+  @ApiModelProperty({
+    description: 'Tipo da Fonte',
+  })
+  tipoFonteId: number;
+
 }

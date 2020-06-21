@@ -1,9 +1,15 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+} from 'typeorm';
 
 @Index('tweets_pkey', ['id'], { unique: true })
 @Index('tweets_twitter_id_key', ['twitterId'], { unique: true })
 @Entity('tweets', { schema: 'public' })
-export class Tweets {
+export class Tweets extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })
   id: number;
 
@@ -28,10 +34,18 @@ export class Tweets {
   @Column('integer', { name: 'favoritos' })
   favoritos: number;
 
-  @Column('character varying', { name: 'mentions', length: 280 })
+  @Column('character varying', {
+    name: 'mentions',
+    length: 280,
+    nullable: true,
+  })
   mentions: string;
 
-  @Column('character varying', { name: 'hashtags', length: 280 })
+  @Column('character varying', {
+    name: 'hashtags',
+    length: 280,
+    nullable: true,
+  })
   hashtags: string;
 
   @Column('character varying', {
