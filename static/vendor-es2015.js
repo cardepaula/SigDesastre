@@ -92663,6 +92663,115 @@ PanelModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
 
 /***/ }),
 
+/***/ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-progressspinner.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-progressspinner.js ***!
+  \*******************************************************************************/
+/*! exports provided: ProgressSpinner, ProgressSpinnerModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProgressSpinner", function() { return ProgressSpinner; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProgressSpinnerModule", function() { return ProgressSpinnerModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+
+
+
+
+
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let ProgressSpinner = class ProgressSpinner {
+    constructor() {
+        this.strokeWidth = "2";
+        this.fill = "none";
+        this.animationDuration = "2s";
+    }
+};
+ProgressSpinner.ɵfac = function ProgressSpinner_Factory(t) { return new (t || ProgressSpinner)(); };
+ProgressSpinner.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProgressSpinner, selectors: [["p-progressSpinner"]], inputs: { strokeWidth: "strokeWidth", fill: "fill", animationDuration: "animationDuration", style: "style", styleClass: "styleClass" }, decls: 3, vars: 6, consts: [["role", "alert", "aria-busy", "true", 1, "ui-progress-spinner", 3, "ngStyle", "ngClass"], ["viewBox", "25 25 50 50", 1, "ui-progress-spinner-svg"], ["cx", "50", "cy", "50", "r", "20", "stroke-miterlimit", "10", 1, "ui-progress-spinner-circle"]], template: function ProgressSpinner_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnamespaceSVG"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "svg", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "circle", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", ctx.style)("ngClass", ctx.styleClass);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("animation-duration", ctx.animationDuration);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("fill", ctx.fill)("stroke-width", ctx.strokeWidth);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["NgStyle"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["NgClass"]], encapsulation: 2 });
+__decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])()
+], ProgressSpinner.prototype, "style", void 0);
+__decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])()
+], ProgressSpinner.prototype, "styleClass", void 0);
+__decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])()
+], ProgressSpinner.prototype, "strokeWidth", void 0);
+__decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])()
+], ProgressSpinner.prototype, "fill", void 0);
+__decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])()
+], ProgressSpinner.prototype, "animationDuration", void 0);
+let ProgressSpinnerModule = class ProgressSpinnerModule {
+};
+ProgressSpinnerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: ProgressSpinnerModule });
+ProgressSpinnerModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function ProgressSpinnerModule_Factory(t) { return new (t || ProgressSpinnerModule)(); }, imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]]] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ProgressSpinner, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'p-progressSpinner',
+                template: `
+        <div class="ui-progress-spinner" [ngStyle]="style" [ngClass]="styleClass"  role="alert" aria-busy="true">
+            <svg class="ui-progress-spinner-svg" viewBox="25 25 50 50" [style.animation-duration]="animationDuration">
+                <circle class="ui-progress-spinner-circle" cx="50" cy="50" r="20" [attr.fill]="fill" [attr.stroke-width]="strokeWidth" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+    `,
+                changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].Default
+            }]
+    }], function () { return []; }, { strokeWidth: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], fill: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], animationDuration: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], style: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], styleClass: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](ProgressSpinnerModule, { declarations: function () { return [ProgressSpinner]; }, imports: function () { return [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]]; }, exports: function () { return [ProgressSpinner]; } }); })();
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ProgressSpinnerModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
+        args: [{
+                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]],
+                exports: [ProgressSpinner],
+                declarations: [ProgressSpinner]
+            }]
+    }], null, null); })();
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+
+//# sourceMappingURL=primeng-progressspinner.js.map
+
+/***/ }),
+
 /***/ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-toast.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-toast.js ***!

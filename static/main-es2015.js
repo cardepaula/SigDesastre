@@ -151,6 +151,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _rss_rss_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./rss/rss.component */ "./src/app/rss/rss.component.ts");
 /* harmony import */ var primeng_dialog__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! primeng/dialog */ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-dialog.js");
 /* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! primeng/dropdown */ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-dropdown.js");
+/* harmony import */ var primeng_progressspinner__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! primeng/progressspinner */ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-progressspinner.js");
+
 
 
 
@@ -172,6 +174,7 @@ class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]] });
 AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [], imports: [[
+            primeng_progressspinner__WEBPACK_IMPORTED_MODULE_16__["ProgressSpinnerModule"],
             primeng_dropdown__WEBPACK_IMPORTED_MODULE_15__["DropdownModule"],
             primeng_dialog__WEBPACK_IMPORTED_MODULE_14__["DialogModule"],
             _noticia_noticia_module__WEBPACK_IMPORTED_MODULE_12__["NoticiaModule"],
@@ -186,7 +189,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
             _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
         ],
         _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _noticia_noticia_component__WEBPACK_IMPORTED_MODULE_5__["NoticiaComponent"], _rss_rss_component__WEBPACK_IMPORTED_MODULE_13__["RssComponent"]], imports: [primeng_dropdown__WEBPACK_IMPORTED_MODULE_15__["DropdownModule"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _noticia_noticia_component__WEBPACK_IMPORTED_MODULE_5__["NoticiaComponent"], _rss_rss_component__WEBPACK_IMPORTED_MODULE_13__["RssComponent"]], imports: [primeng_progressspinner__WEBPACK_IMPORTED_MODULE_16__["ProgressSpinnerModule"],
+        primeng_dropdown__WEBPACK_IMPORTED_MODULE_15__["DropdownModule"],
         primeng_dialog__WEBPACK_IMPORTED_MODULE_14__["DialogModule"],
         _noticia_noticia_module__WEBPACK_IMPORTED_MODULE_12__["NoticiaModule"],
         _rss_rss_module__WEBPACK_IMPORTED_MODULE_11__["RssModule"],
@@ -203,6 +207,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         args: [{
                 declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _noticia_noticia_component__WEBPACK_IMPORTED_MODULE_5__["NoticiaComponent"], _rss_rss_component__WEBPACK_IMPORTED_MODULE_13__["RssComponent"]],
                 imports: [
+                    primeng_progressspinner__WEBPACK_IMPORTED_MODULE_16__["ProgressSpinnerModule"],
                     primeng_dropdown__WEBPACK_IMPORTED_MODULE_15__["DropdownModule"],
                     primeng_dialog__WEBPACK_IMPORTED_MODULE_14__["DialogModule"],
                     _noticia_noticia_module__WEBPACK_IMPORTED_MODULE_12__["NoticiaModule"],
@@ -652,6 +657,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var _service_rss_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../service/rss.service */ "./src/app/rss/service/rss.service.ts");
 /* harmony import */ var primeng_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! primeng/api */ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-api.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var primeng_progressspinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! primeng/progressspinner */ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-progressspinner.js");
 
 
 
@@ -661,7 +668,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const _c0 = function () { return { width: "25vw", height: "22vw" }; };
+
+
+const _c0 = function () { return { width: "50px", height: "50px" }; };
+function RssFromComponent_div_24_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "p-progressSpinner");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵstyleMap"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](2, _c0));
+} }
 class RssFromComponent {
     constructor(formBuilder, rssService, messageService) {
         this.formBuilder = formBuilder;
@@ -687,6 +704,7 @@ class RssFromComponent {
     onSubmit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             if (!this.validador()) {
+                this.lockVar = false;
                 let rss = new _models_rss_model__WEBPACK_IMPORTED_MODULE_2__["Rss"]();
                 rss.nome = this.formRss.value.nome;
                 rss.url = this.formRss.value.url;
@@ -699,6 +717,8 @@ class RssFromComponent {
                 }, (e) => {
                     this.callMensageErro('Criar rss');
                     console.log('Erro', e);
+                }, () => {
+                    this.lockVar = true;
                 });
             }
         });
@@ -706,7 +726,8 @@ class RssFromComponent {
     validador() {
         return !(this.formRss.value.nome.length >= 1 &&
             this.formRss.value.url.length >= 1 &&
-            this.tipoFonteEscolhido.id);
+            this.tipoFonteEscolhido.id &&
+            this.lockVar);
     }
     callMensageErro(action) {
         this.messageService.add({
@@ -724,7 +745,7 @@ class RssFromComponent {
     }
 }
 RssFromComponent.ɵfac = function RssFromComponent_Factory(t) { return new (t || RssFromComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_service_rss_service__WEBPACK_IMPORTED_MODULE_5__["RssService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](primeng_api__WEBPACK_IMPORTED_MODULE_6__["MessageService"])); };
-RssFromComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: RssFromComponent, selectors: [["app-rss-from"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵProvidersFeature"]([primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownModule"]])], decls: 23, vars: 8, consts: [[1, "base", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "conteudo"], [1, "divNome"], ["for", "nome"], ["required", "", "minlength", "1", "type", "text", "NgModule", "", "name", "name", "formControlName", "nome", 1, "form-control", "validate"], ["data-error", "campo obrigat\u00F3rio", "data-success", "Correto", 1, "helper-text"], [1, "divDrop"], ["NgModule", "", "formControlName", "tipoFonteId", "name", "tipoFonteId", 1, "form-control", "validate", 3, "options", "ngModel", "ngModelChange"], ["for", "url"], ["required", "", "minlength", "1", "type", "text", "NgModule", "", "name", "url", "formControlName", "url", 1, "form-control", "validate"], ["type", "submit", "value", "Salvar", 1, "btn", "btn-primary", "mt-4"]], template: function RssFromComponent_Template(rf, ctx) { if (rf & 1) {
+RssFromComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: RssFromComponent, selectors: [["app-rss-from"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵProvidersFeature"]([primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownModule"]])], decls: 25, vars: 6, consts: [[1, "base", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "conteudo"], [1, "divNome"], ["for", "nome"], ["required", "", "minlength", "1", "type", "text", "NgModule", "", "name", "name", "formControlName", "nome", 1, "form-control", "validate"], ["data-error", "campo obrigat\u00F3rio", "data-success", "Correto", 1, "helper-text"], [1, "divDrop"], ["NgModule", "", "formControlName", "tipoFonteId", "name", "tipoFonteId", 1, "form-control", "validate", 3, "options", "ngModel", "ngModelChange"], ["for", "url"], ["required", "", "minlength", "1", "type", "text", "NgModule", "", "name", "url", "formControlName", "url", 1, "form-control", "validate"], ["type", "submit", "value", "Salvar", 1, "btn", "btn-primary", "mt-4"], [1, "load"], [4, "ngIf"]], template: function RssFromComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngSubmit", function RssFromComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
@@ -760,15 +781,19 @@ RssFromComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineC
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](20, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](21, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](22, "input", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](24, RssFromComponent_div_24_Template, 2, 3, "div", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵstyleMap"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](7, _c0));
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.formRss);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](12);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("options", ctx.tipoFontelist)("ngModel", ctx.tipoFonteEscolhido);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](10);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵclassProp"]("disabled", ctx.validador());
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["MinLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControlName"], primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__["Dropdown"]], styles: [".sumir[_ngcontent-%COMP%] {\n  visibility: hidden;\n}\n.base[_ngcontent-%COMP%] {\n  width: 100%;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  border: 1px solid #ccc;\n}\n.conteudo[_ngcontent-%COMP%] {\n  display: flex;\n  justify-self: flex-start;\n  margin: 1 auto;\n}\n.divNome[_ngcontent-%COMP%] {\n  max-width: 260px;\n}\n.divDrop[_ngcontent-%COMP%] {\n  margin-left: 50px;\n  align-content: flex-start;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcnNzL3Jzcy1mcm9tL3Jzcy1mcm9tLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7QUFDcEI7QUFDQTtFQUNFLFdBQVc7RUFDWCxjQUFjO0VBQ2QsYUFBYTtFQUNiLHNCQUFzQjtFQUN0QixzQkFBc0I7QUFDeEI7QUFDQTtFQUNFLGFBQWE7RUFDYix3QkFBd0I7RUFDeEIsY0FBYztBQUNoQjtBQUNBO0VBQ0UsZ0JBQWdCO0FBQ2xCO0FBQ0E7RUFDRSxpQkFBaUI7RUFDakIseUJBQXlCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvcnNzL3Jzcy1mcm9tL3Jzcy1mcm9tLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3VtaXIge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG59XG4uYmFzZSB7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW46IDAgYXV0bztcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcbn1cbi5jb250ZXVkbyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktc2VsZjogZmxleC1zdGFydDtcbiAgbWFyZ2luOiAxIGF1dG87XG59XG4uZGl2Tm9tZSB7XG4gIG1heC13aWR0aDogMjYwcHg7XG59XG4uZGl2RHJvcCB7XG4gIG1hcmdpbi1sZWZ0OiA1MHB4O1xuICBhbGlnbi1jb250ZW50OiBmbGV4LXN0YXJ0O1xufVxuIl19 */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.lockVar);
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["MinLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControlName"], primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__["Dropdown"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], primeng_progressspinner__WEBPACK_IMPORTED_MODULE_8__["ProgressSpinner"]], styles: [".sumir[_ngcontent-%COMP%] {\n  visibility: hidden;\n}\n.base[_ngcontent-%COMP%] {\n  \n  height: 370px;\n  max-width: 500px;\n  max-height: 500px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  border: 1px solid #ccc;\n}\n.conteudo[_ngcontent-%COMP%] {\n  display: flex;\n  justify-self: flex-start;\n  margin: 1 auto;\n}\n.divNome[_ngcontent-%COMP%] {\n  max-width: 260px;\n}\n.divDrop[_ngcontent-%COMP%] {\n  margin-left: 50px;\n  align-content: flex-start;\n}\n.load[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n}\n@-webkit-keyframes ui-progress-spinner-color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n@keyframes ui-progress-spinner-color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcnNzL3Jzcy1mcm9tL3Jzcy1mcm9tLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7QUFDcEI7QUFDQTtFQUNFLGlCQUFpQjtFQUNqQixhQUFhO0VBQ2IsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsYUFBYTtFQUNiLHNCQUFzQjtFQUN0QixzQkFBc0I7QUFDeEI7QUFDQTtFQUNFLGFBQWE7RUFDYix3QkFBd0I7RUFDeEIsY0FBYztBQUNoQjtBQUNBO0VBQ0UsZ0JBQWdCO0FBQ2xCO0FBQ0E7RUFDRSxpQkFBaUI7RUFDakIseUJBQXlCO0FBQzNCO0FBQ0E7RUFDRSxhQUFhO0VBQ2IsdUJBQXVCO0FBQ3pCO0FBQ0E7RUFDRTs7SUFFRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7O0lBRUUsZUFBZTtFQUNqQjtBQUNGO0FBZkE7RUFDRTs7SUFFRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7O0lBRUUsZUFBZTtFQUNqQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvcnNzL3Jzcy1mcm9tL3Jzcy1mcm9tLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3VtaXIge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG59XG4uYmFzZSB7XG4gIC8qICB3aWR0aDogOTAlOyAqL1xuICBoZWlnaHQ6IDM3MHB4O1xuICBtYXgtd2lkdGg6IDUwMHB4O1xuICBtYXgtaGVpZ2h0OiA1MDBweDtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG59XG4uY29udGV1ZG8ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LXNlbGY6IGZsZXgtc3RhcnQ7XG4gIG1hcmdpbjogMSBhdXRvO1xufVxuLmRpdk5vbWUge1xuICBtYXgtd2lkdGg6IDI2MHB4O1xufVxuLmRpdkRyb3Age1xuICBtYXJnaW4tbGVmdDogNTBweDtcbiAgYWxpZ24tY29udGVudDogZmxleC1zdGFydDtcbn1cbi5sb2FkIHtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5Aa2V5ZnJhbWVzIHVpLXByb2dyZXNzLXNwaW5uZXItY29sb3Ige1xuICAxMDAlLFxuICAwJSB7XG4gICAgc3Ryb2tlOiAjZDYyZDIwO1xuICB9XG4gIDQwJSB7XG4gICAgc3Ryb2tlOiAjMDA1N2U3O1xuICB9XG4gIDY2JSB7XG4gICAgc3Ryb2tlOiAjMDA4NzQ0O1xuICB9XG4gIDgwJSxcbiAgOTAlIHtcbiAgICBzdHJva2U6ICNmZmE3MDA7XG4gIH1cbn1cbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](RssFromComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"],
         args: [{
@@ -861,7 +886,7 @@ function RssComponent_ng_template_11_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", rss_r2.excluido);
 } }
-const _c0 = function () { return { width: "28vw", height: "28vw" }; };
+const _c0 = function () { return { width: "500px", height: "500px" }; };
 class RssComponent {
     constructor(messageService, rssService) {
         this.messageService = messageService;
@@ -998,6 +1023,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var _rss_from_rss_from_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./rss-from/rss-from.component */ "./src/app/rss/rss-from/rss-from.component.ts");
 /* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! primeng/dropdown */ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-dropdown.js");
+/* harmony import */ var primeng_progressspinner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! primeng/progressspinner */ "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-progressspinner.js");
+
 
 
 
@@ -1008,13 +1035,26 @@ __webpack_require__.r(__webpack_exports__);
 class RssModule {
 }
 RssModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: RssModule });
-RssModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function RssModule_Factory(t) { return new (t || RssModule)(); }, providers: [_rss_component__WEBPACK_IMPORTED_MODULE_2__["RssComponent"]], imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], primeng_dropdown__WEBPACK_IMPORTED_MODULE_5__["DropdownModule"]]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](RssModule, { declarations: [_rss_from_rss_from_component__WEBPACK_IMPORTED_MODULE_4__["RssFromComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], primeng_dropdown__WEBPACK_IMPORTED_MODULE_5__["DropdownModule"]], exports: [_rss_from_rss_from_component__WEBPACK_IMPORTED_MODULE_4__["RssFromComponent"]] }); })();
+RssModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function RssModule_Factory(t) { return new (t || RssModule)(); }, providers: [_rss_component__WEBPACK_IMPORTED_MODULE_2__["RssComponent"]], imports: [[
+            _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
+            primeng_dropdown__WEBPACK_IMPORTED_MODULE_5__["DropdownModule"],
+            primeng_progressspinner__WEBPACK_IMPORTED_MODULE_6__["ProgressSpinnerModule"],
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](RssModule, { declarations: [_rss_from_rss_from_component__WEBPACK_IMPORTED_MODULE_4__["RssFromComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
+        primeng_dropdown__WEBPACK_IMPORTED_MODULE_5__["DropdownModule"],
+        primeng_progressspinner__WEBPACK_IMPORTED_MODULE_6__["ProgressSpinnerModule"]], exports: [_rss_from_rss_from_component__WEBPACK_IMPORTED_MODULE_4__["RssFromComponent"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](RssModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
                 declarations: [_rss_from_rss_from_component__WEBPACK_IMPORTED_MODULE_4__["RssFromComponent"]],
-                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], primeng_dropdown__WEBPACK_IMPORTED_MODULE_5__["DropdownModule"]],
+                imports: [
+                    _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
+                    primeng_dropdown__WEBPACK_IMPORTED_MODULE_5__["DropdownModule"],
+                    primeng_progressspinner__WEBPACK_IMPORTED_MODULE_6__["ProgressSpinnerModule"],
+                ],
                 providers: [_rss_component__WEBPACK_IMPORTED_MODULE_2__["RssComponent"]],
                 exports: [_rss_from_rss_from_component__WEBPACK_IMPORTED_MODULE_4__["RssFromComponent"]],
             }]
