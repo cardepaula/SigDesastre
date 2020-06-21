@@ -6,5 +6,7 @@ export class RSSDto {
   @ApiModelProperty()
   readonly url?: string;
   @ApiModelProperty()
+  readonly tipoFonteId?: number;
+  @ApiModelProperty()
   readonly id?: number;
 }
