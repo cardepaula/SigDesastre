@@ -68,7 +68,7 @@ export const databaseTweetProviders = [
         username: dbTweetConfig.user,
         password: dbTweetConfig.pass,
         database: dbTweetConfig.name,
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        entities: [__dirname + '/../**/tweets.entity{.ts,.js}'],
         synchronize: false, // TODO fazer essa config atraves de ENV
         dropSchema: false,
         cache: true,
@@ -93,7 +93,7 @@ export const databaseRSSProviders = [
         username: dbRSSConfig.user,
         password: dbRSSConfig.pass,
         database: dbRSSConfig.name,
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        entities: [__dirname + '/../**/rss.entity{.ts,.js}'],
         synchronize: false, // TODO fazer essa config atraves de ENV
         dropSchema: false,
         cache: true,
