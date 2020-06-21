@@ -1,11 +1,7 @@
-import {
-  Controller,
-} from '@nestjs/common';
-import {
-  ApiUseTags,
-} from '@nestjs/swagger';
+import { Controller } from '@nestjs/common';
+import { ApiUseTags } from '@nestjs/swagger';
 import { TweetsService } from './tweets.service';
-import { TweetsDto, CreateTweetsDto } from './dto';
+import { TweetsDto, CreateTweetsDto } from './dto/';
 import { Tweets } from '../database/entities/tweets.entity';
 import { CrudController, Crud } from '@nestjsx/crud';
 
