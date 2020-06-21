@@ -11,4 +11,7 @@ export class RSS {
 
   @Column('character varying', { name: 'url', length: 240 })
   url: string;
+
+  @Column({ type: 'integer', name: 'tipoFonteId' })
+  tipoFonteId: number;
 }
