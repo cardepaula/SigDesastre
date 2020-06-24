@@ -7,7 +7,6 @@ import { TipoFonte } from '../database/entities/tipoFonte.entity';
 import { Fonte } from '../database/entities/fonte.entity';
 import { GrupoAcesso } from '../database/entities/grupoAcesso.entity';
 import * as Moment from 'moment';
-import moment = require('moment');
 import { stopWord } from './stopwords';
 
 @Injectable()
@@ -37,7 +36,7 @@ export class NoticiaService {
       }
     }
 
-    console.log(await this.getWhere(params));
+    // console.log(await this.getWhere(params));
 
     const [noticias, qtdNoticias] = await this.noticiaRepository.findAndCount({
       join: {
@@ -51,20 +50,17 @@ export class NoticiaService {
         },
       },
       where: await this.getWhere(params),
+
       skip: params.pagina * params.qtdNoticias,
       take: params.qtdNoticias,
+      order: { dataPublicacao: params.ordem ? params.ordem : 'DESC' },
     });
 
     noticias.forEach(noticia => {
-      noticia.dataAtualizacao = noticia.dataAtualizacao
-        ? moment(new Date(noticia.dataAtualizacao)).format('DD/MM/YYYY')
-        : noticia.dataAtualizacao;
-      noticia.dataCriacao = noticia.dataCriacao
-        ? moment(new Date(noticia.dataCriacao)).format('DD/MM/YYYY')
-        : noticia.dataCriacao;
-      noticia.dataPublicacao = noticia.dataPublicacao
-        ? moment(new Date(noticia.dataPublicacao)).format('DD/MM/YYYY')
-        : noticia.dataPublicacao;
+      noticia.dataAtualizacao = this.converteDataSaida(noticia.dataAtualizacao);
+
+      noticia.dataCriacao = this.converteDataSaida(noticia.dataCriacao);
+      noticia.dataPublicacao = this.converteDataSaida(noticia.dataPublicacao);
     });
     return {
       totalNoticias: qtdNoticias,
@@ -219,15 +215,11 @@ export class NoticiaService {
       noticia.grupoAcesso = grupoAcesso;
     }
     try {
-      noticia.dataAtualizacao = noticia.dataAtualizacao
-        ? moment(new Date(noticia.dataAtualizacao)).format('YYYY-MM-DD')
-        : noticia.dataAtualizacao;
-      noticia.dataCriacao = noticia.dataCriacao
-        ? moment(new Date(noticia.dataCriacao)).format('YYYY-MM-DD')
-        : noticia.dataCriacao;
-      noticia.dataPublicacao = noticia.dataPublicacao
-        ? moment(new Date(noticia.dataPublicacao)).format('YYYY-MM-DD')
-        : noticia.dataPublicacao;
+      noticia.dataPublicacao = this.converteDataEntrada(noticia.dataPublicacao);
+      noticia.dataAtualizacao = this.converteDataEntrada(
+        noticia.dataAtualizacao,
+      );
+      noticia.dataCriacao = this.converteDataEntrada(noticia.dataCriacao);
     } catch (error) {
       throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
     }
@@ -286,5 +278,20 @@ export class NoticiaService {
         nuvem.push({ chave: palavra, quantidade: 1 });
       }
     });
+  }
+
+  converteDataEntrada(data) {
+    if (Moment(data, 'DD/MM/YYYY').isValid()) {
+      data = Moment(data, 'DD/MM/YYYY').format('MM-DD-YYYY');
+    } else if (Moment(data, 'DD-MM-YYYY').isValid()) {
+      data = Moment(data, 'DD-MM-YYYY').format('MM-DD-YYYY');
+    }
+    return data;
+  }
+  converteDataSaida(data) {
+    if (data) {
+      data = Moment(new Date(data)).format('DD/MM/YYYY');
+    }
+    return data;
   }
 }

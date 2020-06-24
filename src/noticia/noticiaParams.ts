@@ -8,6 +8,7 @@ export class NoticiaParams {
   private _pagina?: number;
   private _tipoFonte?: string;
   private _periodo?: string[];
+  private _ordem?: 'DESC' | 'ASC';
 
   constructor(queryParams) {
     this.id = queryParams.id;
@@ -19,8 +20,15 @@ export class NoticiaParams {
     this.pagina = queryParams.pagina;
     this.tipoFonte = queryParams.tipoFonte;
     this.periodo = queryParams.periodo;
+    this.ordem = queryParams.ordem;
   }
 
+  get ordem(): 'DESC' | 'ASC' {
+    return this._ordem;
+  }
+  set ordem(ordem: 'DESC' | 'ASC') {
+    this._ordem = ordem ? ordem : 'DESC';
+  }
   get id(): string {
     return this._id;
   }
