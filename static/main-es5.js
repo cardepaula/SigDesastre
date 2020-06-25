@@ -1242,21 +1242,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _models_rss_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _models_rss_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ../models/rss.model */
     "./src/app/rss/models/rss.model.ts");
     /* harmony import */
 
 
-    var primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var primeng_dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! primeng/dropdown */
     "./node_modules/primeng/__ivy_ngcc__/fesm2015/primeng-dropdown.js");
-    /* harmony import */
-
-
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -1312,13 +1312,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.formBuilder = formBuilder;
         this.rssService = rssService;
         this.messageService = messageService;
-        this.rss = new _models_rss_model__WEBPACK_IMPORTED_MODULE_2__["Rss"]();
-        this.tipoFontelist = [{
-          label: '',
-          value: {}
-        }];
-        this.lockVar = true;
-        this.formRss = this.formBuilder.group(this.rss);
+        this.rss = new _models_rss_model__WEBPACK_IMPORTED_MODULE_3__["Rss"]();
+        this.tipoFontelist = [];
+        this.lockVar = true; // formRss: FormGroup = this.formBuilder.group(this.rss);
+
+        this.formRss = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+          nome: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(1)),
+          url: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(1)),
+          tipoFonteId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
+        });
       }
 
       _createClass(RssFromComponent, [{
@@ -1353,17 +1355,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     if (!this.validador()) {
                       this.lockVar = false;
-                      rss = new _models_rss_model__WEBPACK_IMPORTED_MODULE_2__["Rss"]();
+                      rss = new _models_rss_model__WEBPACK_IMPORTED_MODULE_3__["Rss"]();
                       rss.nome = this.formRss.value.nome;
                       rss.url = this.formRss.value.url;
-                      rss.tipoFonteId = this.tipoFonteEscolhido.id;
+                      rss.tipoFonteId = this.formRss.value.tipoFonteId.id;
                       console.log(rss);
                       this.rssService.postRss(rss).subscribe(function (n) {
                         console.log('resposta: ', n);
 
                         _this6.callMensageSuccess('Criado rss');
 
-                        _this6.formRss.reset(new _models_rss_model__WEBPACK_IMPORTED_MODULE_2__["Rss"]());
+                        _this6.formRss.reset(new _models_rss_model__WEBPACK_IMPORTED_MODULE_3__["Rss"]());
                       }, function (e) {
                         _this6.callMensageErro('Criar rss');
 
@@ -1384,7 +1386,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "validador",
         value: function validador() {
-          return !(this.formRss.value.nome.length >= 1 && this.formRss.value.url.length >= 1 && this.tipoFonteEscolhido.id && this.lockVar);
+          return !(this.formRss.value.nome.length >= 1 && this.formRss.value.url.length >= 1 && this.formRss.value.tipoFonteId && this.lockVar);
         }
       }, {
         key: "callMensageErro",
@@ -1410,16 +1412,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     RssFromComponent.ɵfac = function RssFromComponent_Factory(t) {
-      return new (t || RssFromComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_service_rss_service__WEBPACK_IMPORTED_MODULE_5__["RssService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](primeng_api__WEBPACK_IMPORTED_MODULE_6__["MessageService"]));
+      return new (t || RssFromComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_service_rss_service__WEBPACK_IMPORTED_MODULE_5__["RssService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](primeng_api__WEBPACK_IMPORTED_MODULE_6__["MessageService"]));
     };
 
     RssFromComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
       type: RssFromComponent,
       selectors: [["app-rss-from"]],
-      features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵProvidersFeature"]([primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownModule"]])],
+      features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵProvidersFeature"]([primeng_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownModule"]])],
       decls: 25,
-      vars: 6,
-      consts: [[1, "base", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "conteudo"], [1, "divNome"], ["for", "nome"], ["required", "", "minlength", "1", "type", "text", "NgModule", "", "name", "name", "formControlName", "nome", 1, "form-control", "validate"], ["data-error", "campo obrigat\xF3rio", "data-success", "Correto", 1, "helper-text"], [1, "divDrop"], ["NgModule", "", "formControlName", "tipoFonteId", "name", "tipoFonteId", 1, "form-control", "validate", 3, "options", "ngModel", "ngModelChange"], ["for", "url"], ["required", "", "minlength", "1", "type", "text", "NgModule", "", "name", "url", "formControlName", "url", 1, "form-control", "validate"], ["type", "submit", "value", "Salvar", 1, "btn", "btn-primary", "mt-4"], [1, "load"], [4, "ngIf"]],
+      vars: 5,
+      consts: [[1, "base", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "conteudo"], [1, "divNome"], ["for", "nome"], ["required", "", "minlength", "1", "type", "text", "name", "name", "placeholder", "A gazeta", "formControlName", "nome", 1, "form-control", "validate"], ["data-error", "campo obrigat\xF3rio", "data-success", "Correto", 1, "helper-text"], [1, "divDrop"], ["placeholder", "Tipo de Fonte", "formControlName", "tipoFonteId", "name", "tipoFonteId", 1, "form-control", "validate", 3, "options"], ["for", "url"], ["required", "", "minlength", "1", "type", "text", "placeholder", "www.agazeta.com.br/rss", "name", "url", "formControlName", "url", 1, "form-control", "validate"], ["type", "submit", "value", "Salvar", 1, "btn", "btn-primary", "mt-4"], [1, "load"], [4, "ngIf"]],
       template: function RssFromComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);
@@ -1456,13 +1458,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "p-dropdown", 8);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function RssFromComponent_Template_p_dropdown_ngModelChange_12_listener($event) {
-            return ctx.tipoFonteEscolhido = $event;
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "p-dropdown", 8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
@@ -1476,7 +1472,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "label", 9);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Url");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Link do RSS");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
@@ -1510,7 +1506,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("options", ctx.tipoFontelist)("ngModel", ctx.tipoFonteEscolhido);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("options", ctx.tipoFontelist);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](10);
 
@@ -1521,7 +1517,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.lockVar);
         }
       },
-      directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["MinLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControlName"], primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__["Dropdown"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], primeng_progressspinner__WEBPACK_IMPORTED_MODULE_8__["ProgressSpinner"]],
+      directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["MinLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControlName"], primeng_dropdown__WEBPACK_IMPORTED_MODULE_4__["Dropdown"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], primeng_progressspinner__WEBPACK_IMPORTED_MODULE_8__["ProgressSpinner"]],
       styles: [".sumir[_ngcontent-%COMP%] {\n  visibility: hidden;\n}\n.base[_ngcontent-%COMP%] {\n  \n  height: 370px;\n  max-width: 500px;\n  max-height: 500px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  border: 1px solid #ccc;\n}\n.conteudo[_ngcontent-%COMP%] {\n  display: flex;\n  justify-self: flex-start;\n  margin: 1 auto;\n}\n.divNome[_ngcontent-%COMP%] {\n  max-width: 260px;\n}\n.divDrop[_ngcontent-%COMP%] {\n  margin-left: 50px;\n  align-content: flex-start;\n}\n.load[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n}\n@-webkit-keyframes ui-progress-spinner-color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n@keyframes ui-progress-spinner-color {\n  100%,\n  0% {\n    stroke: #d62d20;\n  }\n  40% {\n    stroke: #0057e7;\n  }\n  66% {\n    stroke: #008744;\n  }\n  80%,\n  90% {\n    stroke: #ffa700;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcnNzL3Jzcy1mcm9tL3Jzcy1mcm9tLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7QUFDcEI7QUFDQTtFQUNFLGlCQUFpQjtFQUNqQixhQUFhO0VBQ2IsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsYUFBYTtFQUNiLHNCQUFzQjtFQUN0QixzQkFBc0I7QUFDeEI7QUFDQTtFQUNFLGFBQWE7RUFDYix3QkFBd0I7RUFDeEIsY0FBYztBQUNoQjtBQUNBO0VBQ0UsZ0JBQWdCO0FBQ2xCO0FBQ0E7RUFDRSxpQkFBaUI7RUFDakIseUJBQXlCO0FBQzNCO0FBQ0E7RUFDRSxhQUFhO0VBQ2IsdUJBQXVCO0FBQ3pCO0FBQ0E7RUFDRTs7SUFFRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7O0lBRUUsZUFBZTtFQUNqQjtBQUNGO0FBZkE7RUFDRTs7SUFFRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7O0lBRUUsZUFBZTtFQUNqQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvcnNzL3Jzcy1mcm9tL3Jzcy1mcm9tLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3VtaXIge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG59XG4uYmFzZSB7XG4gIC8qICB3aWR0aDogOTAlOyAqL1xuICBoZWlnaHQ6IDM3MHB4O1xuICBtYXgtd2lkdGg6IDUwMHB4O1xuICBtYXgtaGVpZ2h0OiA1MDBweDtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG59XG4uY29udGV1ZG8ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LXNlbGY6IGZsZXgtc3RhcnQ7XG4gIG1hcmdpbjogMSBhdXRvO1xufVxuLmRpdk5vbWUge1xuICBtYXgtd2lkdGg6IDI2MHB4O1xufVxuLmRpdkRyb3Age1xuICBtYXJnaW4tbGVmdDogNTBweDtcbiAgYWxpZ24tY29udGVudDogZmxleC1zdGFydDtcbn1cbi5sb2FkIHtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5Aa2V5ZnJhbWVzIHVpLXByb2dyZXNzLXNwaW5uZXItY29sb3Ige1xuICAxMDAlLFxuICAwJSB7XG4gICAgc3Ryb2tlOiAjZDYyZDIwO1xuICB9XG4gIDQwJSB7XG4gICAgc3Ryb2tlOiAjMDA1N2U3O1xuICB9XG4gIDY2JSB7XG4gICAgc3Ryb2tlOiAjMDA4NzQ0O1xuICB9XG4gIDgwJSxcbiAgOTAlIHtcbiAgICBzdHJva2U6ICNmZmE3MDA7XG4gIH1cbn1cbiJdfQ== */"]
     });
     /*@__PURE__*/
@@ -1533,11 +1529,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           selector: 'app-rss-from',
           templateUrl: './rss-from.component.html',
           styleUrls: ['./rss-from.component.css'],
-          providers: [primeng_dropdown__WEBPACK_IMPORTED_MODULE_3__["DropdownModule"]]
+          providers: [primeng_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownModule"]]
         }]
       }], function () {
         return [{
-          type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]
+          type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]
         }, {
           type: _service_rss_service__WEBPACK_IMPORTED_MODULE_5__["RssService"]
         }, {
@@ -1759,16 +1755,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "loadData",
-        value: function loadData() {
+        value: function loadData(e) {
           var _this7 = this;
 
-          this.rssService.getRss().subscribe(function (n) {
+          this.rssService.getRss(e.rows, e.first).subscribe(function (n) {
             console.log(n);
-            _this7.rss = n.map(function (r) {
+            _this7.rss = n.data.map(function (r) {
               r.excluido = false;
               return r;
             });
-            _this7.totalRecords = n.length;
+            _this7.totalRecords = n.total;
           });
         }
       }, {
@@ -1828,8 +1824,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "reload",
         value: function reload() {
+          var _this10 = this;
+
           this.displayModal = false;
-          this.loadData();
+          this.rssService.getRss(10, 0).subscribe(function (n) {
+            console.log(n);
+            _this10.rss = n.data.map(function (r) {
+              r.excluido = false;
+              return r;
+            });
+            _this10.totalRecords = n.data.length;
+          });
         }
       }]);
 
@@ -1885,8 +1890,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "p-dataView", 4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onLazyLoad", function RssComponent_Template_p_dataView_onLazyLoad_10_listener() {
-            return ctx.loadData();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onLazyLoad", function RssComponent_Template_p_dataView_onLazyLoad_10_listener($event) {
+            return ctx.loadData($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, RssComponent_ng_template_11_Template, 9, 6, "ng-template", 5);
@@ -1933,7 +1938,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", ctx.rss)("paginator", true)("rows", 20)("lazy", true)("totalRecords", ctx.totalRecords);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", ctx.rss)("paginator", true)("rows", 10)("lazy", true)("totalRecords", ctx.totalRecords);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -2123,8 +2128,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "getRss",
-        value: function getRss() {
-          return this.http.get("".concat(this.url, "rss/"));
+        value: function getRss(limit, offset) {
+          return this.http.get("".concat(this.url, "rss?limit=").concat(limit, "&offset=").concat(offset));
         }
       }, {
         key: "postRss",
