@@ -83,7 +83,6 @@ export class NoticiaService {
   }
 
   async getWhere(query) {
-    console.log(query);
     const keysPermitidas = [
       'id',
       'titulo',
@@ -133,10 +132,9 @@ export class NoticiaService {
   }
   async DeleteNews(id: number) {
     try {
-      console.log('noticia deletada:', id);
       await this.noticiaRepository.delete({ id: id });
     } catch (error) {
-      console.log('Erro ao deletar:', error);
+      console.error('Erro ao deletar:', error);
       throw new HttpException(
         'Noticia existente: ' + error,
         HttpStatus.FORBIDDEN,
@@ -151,19 +149,21 @@ export class NoticiaService {
     try {
       dbnoticia = await this.noticiaRepository.findOne({
         titulo: noticia.titulo,
+        dataPublicacao: noticia.dataPublicacao,
+        conteudo: noticia.conteudo,
       });
       if (dbnoticia != undefined) {
-        console.log('noticia já existe');
+        console.error('noticia já existe');
         throw new HttpException('Noticia existente', HttpStatus.FORBIDDEN);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new HttpException('Noticia existente.', HttpStatus.FORBIDDEN);
     }
     try {
       fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new HttpException('Fonte ', HttpStatus.FORBIDDEN);
     }
     try {
@@ -171,7 +171,7 @@ export class NoticiaService {
         nome: noticia.fonte.tipoFonte.nome,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new HttpException('tipoFonte ', HttpStatus.FORBIDDEN);
     }
 
@@ -180,11 +180,9 @@ export class NoticiaService {
         nome: noticia.grupoAcesso.nome,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new HttpException('grupoAcesso ', HttpStatus.FORBIDDEN);
     }
-
-    console.log(noticia);
 
     if (tipoFonte != undefined) {
       noticia.fonte.tipoFonte = tipoFonte;
@@ -227,7 +225,7 @@ export class NoticiaService {
     try {
       return await this.noticiaRepository.save(noticia);
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
     }

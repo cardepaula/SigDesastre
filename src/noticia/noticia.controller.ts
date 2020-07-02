@@ -18,7 +18,6 @@ import {
 import { NoticiaService } from './noticia.service';
 import { Noticia } from '../database/entities/noticia.entity';
 import { NoticiaDto } from './dto/noticia.dto';
-import { get } from 'http';
 
 @ApiUseTags('Noticias')
 @Controller('noticias')
@@ -137,7 +136,6 @@ export class NoticiaController {
   })
   @Get('/id/:id')
   async getNewsById(@Query() query, @Param() param) {
-    console.log(param);
     return await this.noticiaService.getNewsById(query, param.id);
   }
 
@@ -147,7 +145,6 @@ export class NoticiaController {
   })
   @Get('recentes')
   async getLastWeeksNews(@Query() query, @Param() param) {
-    console.log(param);
     return await this.noticiaService.getLastWeeksNews();
   }
 
@@ -156,11 +153,16 @@ export class NoticiaController {
     description: 'Noticia Created',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiImplicitBody({ name: 'NoticiaDto', required: true, type: NoticiaDto })
+  @ApiImplicitBody({
+    name: 'NoticiaDto',
+    required: true,
+    type: NoticiaDto,
+  })
   @Post()
   public async postNews(@Body() body: Noticia) {
     return await this.noticiaService.saveOrUpdateNews(body);
   }
+
   @ApiResponse({
     status: 201,
     description: 'Deleted',
