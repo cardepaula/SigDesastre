@@ -17,11 +17,11 @@ export class TipoFonte {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     unique: true,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
   @OneToMany(() => Fonte, fonte => fonte.tipoFonte)
   fontes: Fonte[];

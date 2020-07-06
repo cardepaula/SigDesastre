@@ -21,17 +21,17 @@ export class Assunto {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     unique: true,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
   @Column('character varying', {
     nullable: true,
     name: 'descricao',
   })
-  descricao: string | null;
+  descricao: string;
 
   @OneToMany(() => Interesse, interesse => interesse.assunto)
   interesses: Interesse[];

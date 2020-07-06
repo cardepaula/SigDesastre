@@ -67,14 +67,14 @@ export class Noticia {
 
   @ManyToOne(() => Fonte, fonte => fonte.noticias, { nullable: false })
   @JoinColumn({ name: 'fk_fonte' })
-  fonte: Fonte | null;
+  fonte: Fonte;
 
   @ManyToOne(() => GrupoAcesso, grupoAcesso => grupoAcesso.noticias, {
     nullable: false,
     eager: true,
   })
   @JoinColumn({ name: 'fk_grupo_acesso' })
-  grupoAcesso: GrupoAcesso | null;
+  grupoAcesso: GrupoAcesso;
 
   @OneToMany(() => Midia, midia => midia.noticia, { eager: true })
   midias: Midia[];

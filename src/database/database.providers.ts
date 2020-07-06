@@ -15,6 +15,12 @@ import { GrupoAcesso } from './entities/grupoAcesso.entity';
 import { Connection, createConnection } from 'typeorm';
 import { Tweets } from './entities/tweets.entity';
 import { RSS } from './entities/rss.entity';
+import { Descritor } from './entities/descritor.entity';
+import { Assunto } from './entities/assunto.entity';
+import { Interesse } from './entities/interesse.entity';
+import { Midia } from './entities/midia.entity';
+import { TipoMidia } from './entities/tipoMidia.entity';
+import { Usuario } from './entities/usuario.entity';
 
 export const databaseProviders = [
   {
@@ -52,6 +58,42 @@ export const databaseProviders = [
     provide: repositoryConfig.grupoAcesso,
     useFactory: (connection: Connection) =>
       connection.getRepository(GrupoAcesso),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.assunto,
+    useFactory: (connection: Connection) =>
+      connection.getRepository(Assunto),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.descritor,
+    useFactory: (connection: Connection) =>
+      connection.getRepository(Descritor),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.interesse,
+    useFactory: (connection: Connection) =>
+      connection.getRepository(Interesse),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.midia,
+    useFactory: (connection: Connection) =>
+      connection.getRepository(Midia),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.tipoMidia,
+    useFactory: (connection: Connection) =>
+      connection.getRepository(TipoMidia),
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.usuario,
+    useFactory: (connection: Connection) =>
+      connection.getRepository(Usuario),
     inject: [repositoryConfig.database],
   },
 ];

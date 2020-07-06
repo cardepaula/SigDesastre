@@ -6,6 +6,9 @@ export const dbConfig = {
   pass: process.env.DB_PASSWORD,
   schema: process.env.DB_SCHEMA,
   name: process.env.DB_NAME,
+  synchronize: process.env.DB_SYNC || false,
+  dropSchema: process.env.DB_DROP_SCHEME || false,
+  cache: process.env.DB_CACHE || false,
 };
 export const dbRSSConfig = {
   type: process.env.DB_TYPE_RSS,
@@ -15,6 +18,9 @@ export const dbRSSConfig = {
   pass: process.env.DB_PASSWORD_RSS,
   schema: process.env.DB_SCHEMA_RSS,
   name: process.env.DB_NAME_RSS,
+  synchronize: process.env.DB_SYNC || false,
+  dropSchema: process.env.DB_DROP_SCHEME || false,
+  cache: process.env.DB_CACHE || false,
 };
 
 export const dbTweetConfig = {
@@ -25,4 +31,7 @@ export const dbTweetConfig = {
   pass: process.env.DB_PASSWORD_TW,
   schema: process.env.DB_SCHEMA_TW,
   name: process.env.DB_NAME_TW,
+  synchronize: process.env.DB_SYNC || false,
+  dropSchema: process.env.DB_DROP_SCHEME || false,
+  cache: process.env.DB_CACHE || false,
 };

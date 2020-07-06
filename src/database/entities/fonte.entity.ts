@@ -45,7 +45,7 @@ export class Fonte {
     nullable: false,
   })
   @JoinColumn({ name: 'fk_tipo_fonte' })
-  tipoFonte: TipoFonte | null;
+  tipoFonte: TipoFonte;
 
   @OneToMany(() => Noticia, noticia => noticia.fonte)
   noticias: Noticia[];

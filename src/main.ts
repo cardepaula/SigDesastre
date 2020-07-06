@@ -1,6 +1,9 @@
 import { setEnvironment } from './common/config/env.config';
 setEnvironment();
 import { NestFactory } from '@nestjs/core';
+import { CrudConfigService } from '@nestjsx/crud';
+import { crudGlobalConfig } from './common/config/crud.config';
+CrudConfigService.load(crudGlobalConfig);
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { appConfig } from './common/config/app.config';

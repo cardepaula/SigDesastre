@@ -17,11 +17,11 @@ export class TipoMidia {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     unique: true,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
   @OneToMany(() => Midia, midia => midia.tipoMidia)
   midias: Midia[];
