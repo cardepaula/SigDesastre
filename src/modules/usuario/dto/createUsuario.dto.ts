@@ -31,10 +31,10 @@ export class CreateUsuarioDto {
   })
   grupoAcesso: GrupoAcessoDto;
 
-  // @ApiModelPropertyOptional({
-  //   description: 'Interesses do usuario',
-  //   type: InteresseDto,
-  //   isArray: true
-  // })
-  // interesses: InteresseDto[];
+  @ApiModelPropertyOptional({
+    description: 'Interesses do usuario',
+    type: InteresseDto,
+    isArray: true
+  })
+  interesses: InteresseDto[];
 }

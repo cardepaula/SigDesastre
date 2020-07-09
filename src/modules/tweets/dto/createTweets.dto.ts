@@ -1,8 +1,7 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsDateString, IsNumber, MaxLength } from 'class-validator';
 
 export class CreateTweetsDto {
-
   @ApiModelProperty({
     description: 'Identificador do tweet.',
     type: 'string',
@@ -43,49 +42,43 @@ export class CreateTweetsDto {
   @IsDateString()
   data: Date;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Quantidade de retweets feitos.',
     type: 'number',
     default: 0,
-    required: false
   })
   @IsNumber()
   retweets: number;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Quantidade que o favorito foi retwetado.',
     type: 'number',
     default: 0,
-    required: false
   })
   @IsNumber()
   favoritos: number;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Menções a outros usuarios feitas no tweet.',
     type: 'number',
-    required: false
   })
   @IsString()
   @MaxLength(280)
   mentions: string;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Hashtags contidas no tweet.',
     type: 'string',
-    required: false
   })
   @IsString()
   @MaxLength(280)
   hashtags: string;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Geolocalização de quem publicou tweet.',
     type: 'string',
-    required: false
   })
   @IsString()
   @MaxLength(500)
   geolocalizacao: string;
-
 }

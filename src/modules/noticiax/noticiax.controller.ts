@@ -14,24 +14,42 @@ import { NoticiaxService } from './noticiax.service';
       fonte: {
         eager: true,
       },
-      grupoAcessoDto: {
-        eager: true,
-      },
-      midia: {
+      'fonte.tipoFonte': {
+        alias: 'fonteTipoFonte',
         eager: false,
       },
-      descritor: {
+      grupoAcessoDto: {
+        eager: false,
+      },
+      midias: {
+        eager: false,
+      },
+      'midias.tipoMidia': {
+        alias: 'midiasTipoMidia',
+        eager: false,
+      },
+      descritores: {
+        eager: false,
+      },
+      'descritores.assunto': {
+        alias: 'descritoresAssunto',
         eager: false,
       },
     },
+    sort: [
+      {
+        field: 'dataPublicacao',
+        order: 'DESC',
+      },
+    ],
   },
   dto: {
     create: CreateNoticiaDto,
     update: UpdateNoticiaDto,
   },
 })
-@ApiUseTags('NoticiaX')
-@Controller('noticiax')
+@ApiUseTags('Noticia/v2')
+@Controller('noticia/v2')
 export class NoticiaxController implements CrudController<Noticia> {
   constructor(public service: NoticiaxService) {}
 

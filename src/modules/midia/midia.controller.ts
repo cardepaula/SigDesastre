@@ -9,6 +9,13 @@ import { MidiaService } from './midia.service';
   model: {
     type: MidiaDto,
   },
+  query: {
+    join: {
+      tipoMidia: {
+        eager: true,
+      }
+    }
+  },
   dto: {
     create: CreateMidiaDto,
     update: UpdateMidiaDto,

@@ -1,8 +1,8 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { Midia } from '../../../database/entities/midia.entity';
-import { Descritor } from '../../../database/entities/descritor.entity';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto';
 import { FonteDto } from '../../fonte/dto';
+import { MidiaDto } from '../../midia/dto/index';
+import { DescritorDto } from '../../descritor/dto/index';
 
 export class NoticiaDto {
   @ApiModelProperty({
@@ -64,15 +64,15 @@ export class NoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Mídias',
-    type: Midia,
+    type: MidiaDto,
     isArray: true,
   })
-  midias: Midia[];
+  midias: MidiaDto[];
 
   @ApiModelPropertyOptional({
     description: 'Descritores',
-    type: Descritor,
+    type: DescritorDto,
     isArray: true,
   })
-  descritores: Descritor[];
+  descritores: DescritorDto[];
 }

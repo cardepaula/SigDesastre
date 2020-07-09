@@ -14,6 +14,7 @@ import { UsuarioService } from './usuario.service';
     update: UpdateUsuarioDto,
   },
   query: {
+    exclude: ['senha'],
     join: {
       grupoAcesso: {
         eager: true,

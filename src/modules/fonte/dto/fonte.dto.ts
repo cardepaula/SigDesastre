@@ -4,6 +4,8 @@ import { TipoFonteDto } from '../../tipoFonte/dto/index';
 import { NoticiaDto } from '../../noticiax/dto/index';
 import { Assunto } from '../../../database/entities/assunto.entity';
 import { Descritor } from '../../../database/entities/descritor.entity';
+import { AssuntoDto } from '../../assunto/dto/index';
+import { DescritorDto } from '../../descritor/dto/index';
 
 export class FonteDto {
   @ApiModelProperty({
@@ -42,14 +44,14 @@ export class FonteDto {
   @ApiModelProperty({
     description: 'Assutos relacionados a fonte',
     isArray: true,
-    type: Assunto,
+    type: AssuntoDto,
   })
-  assuntos: Assunto[];
+  assuntos: AssuntoDto[];
 
   @ApiModelProperty({
     description: 'Descritores relacionados a fonte',
     isArray: true,
-    type: Descritor,
+    type: DescritorDto,
   })
-  descritores: Descritor[];
+  descritores: DescritorDto[];
 }

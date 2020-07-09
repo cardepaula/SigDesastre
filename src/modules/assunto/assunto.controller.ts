@@ -9,6 +9,25 @@ import { AssuntoService } from './assunto.service';
   model: {
     type: AssuntoDto,
   },
+  query: {
+    join: {
+      fontes: {
+        eager: false,
+      },
+      'fontes.tipoFonte': {
+        eager: true
+      },
+      interesses: {
+        eager: false,
+      },
+      descritores: {
+        eager: false,
+      },
+      'descritores.noticia': {
+        eager: false,
+      }
+    },
+  },
   dto: {
     create: CreateAssuntoDto,
     update: UpdateAssuntoDto,

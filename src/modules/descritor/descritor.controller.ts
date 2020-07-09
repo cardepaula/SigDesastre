@@ -13,6 +13,23 @@ import { DescritorService } from './descritor.service';
   model: {
     type: DescritorDto,
   },
+  query: {
+    join: {
+      assuntos: {
+        eager: false,
+      },
+      noticias: {
+        eager: false,
+      },
+      fontes: {
+        eager: false,
+      },
+      'fontes.tipoFonte': {
+        alias: 'fontesTipoFonte',
+        eager: true,
+      },
+    },
+  },
   dto: {
     create: CreateDescritorDto,
     update: UpdateDescritorDto,

@@ -22,20 +22,4 @@ export class UpdateAssuntoDto {
   })
   @IsString()
   descricao: string;
-
-  @ApiModelPropertyOptional({
-    description: 'Fontes relacionados ao assunto',
-    type: UpdateFonteDto,
-    isArray: true
-  })
-  @IsArray()
-  fontes: UpdateFonteDto[];
-
-  @ApiModelPropertyOptional({
-    description: 'Descritores relacionado ao assunto',
-    type: UpdateDescritorDto,
-    isArray: true
-  })
-  @IsArray()
-  descritores: UpdateDescritorDto[];
 }

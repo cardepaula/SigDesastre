@@ -9,6 +9,22 @@ import { FonteService } from './fonte.service';
   model: {
     type: FonteDto,
   },
+  query: {
+    join: {
+      tipoFonte: {
+        eager: false,
+      },
+      noticias: {
+        eager: false,
+      },
+      assuntos: {
+        eager: false,
+      },
+      descritores: {
+        eager: false,
+      },
+    }
+  },
   dto: {
     create: CreateFonteDto,
     update: UpdateFonteDto,

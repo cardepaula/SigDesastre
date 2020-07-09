@@ -4,6 +4,8 @@ import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
 import { Midia } from '../../../database/entities/midia.entity';
 import { Descritor } from '../../../database/entities/descritor.entity';
 import { IsArray, IsDefined, IsDateString, IsString, IsInt, IsNotEmpty } from 'class-validator';
+import { DescritorDto } from '../../descritor/dto/index';
+import { MidiaDto } from '../../midia/dto/index';
 
 export class UpdateNoticiaDto {
   @ApiModelProperty({
@@ -59,16 +61,15 @@ export class UpdateNoticiaDto {
   @IsDateString()
   dataAtualizacao: string;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Fonte da notícia',
     type: FonteDto,
-    required: true
   })
   @IsDefined()
   @IsNotEmpty()
   fonte: FonteDto;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Grupo de acesso',
     type: GrupoAcessoDto,
   })
@@ -78,17 +79,17 @@ export class UpdateNoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Mídias',
-    type: Midia,
+    type: MidiaDto,
     isArray: true,
   })
   @IsArray()
-  midias: Midia[];
+  midias: MidiaDto[];
 
   @ApiModelPropertyOptional({
     description: 'Descritores',
-    type: Descritor,
+    type: DescritorDto,
     isArray: true,
   })
   @IsArray()
-  descritores: Descritor[];
+  descritores: DescritorDto[];
 }
