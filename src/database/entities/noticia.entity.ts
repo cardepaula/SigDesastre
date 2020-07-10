@@ -26,44 +26,43 @@ export class Noticia {
     nullable: true,
     name: 'titulo',
   })
-  titulo: string | null;
+  titulo: string;
 
   @Column('character varying', {
     nullable: true,
     name: 'conteudo',
   })
-  conteudo: string | null;
+  conteudo: string;
 
   @Column('character varying', {
-    nullable: true,
     unique: true,
     name: 'link',
   })
-  link: string | null;
+  link: string;
 
   @Column('text', {
     nullable: true,
     name: 'descricao',
   })
-  descricao: string | null;
+  descricao: string;
 
   @Column('date', {
     nullable: true,
     name: 'data_publicacao',
   })
-  dataPublicacao: string | null;
+  dataPublicacao: string;
 
   @Column('date', {
     nullable: true,
     name: 'data_criacao',
   })
-  dataCriacao: string | null;
+  dataCriacao: string;
 
   @Column('date', {
     nullable: true,
     name: 'data_atualizacao',
   })
-  dataAtualizacao: string | null;
+  dataAtualizacao: string;
 
   @ManyToOne(() => Fonte, fonte => fonte.noticias, { nullable: false })
   @JoinColumn({ name: 'fk_fonte' })

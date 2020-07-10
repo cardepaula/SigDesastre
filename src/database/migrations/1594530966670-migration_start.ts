@@ -1,0 +1,111 @@
+import {MigrationInterface, QueryRunner} from "typeorm";
+
+export class migrationStart1594530966670 implements MigrationInterface {
+
+    public async up(queryRunner: QueryRunner): Promise<any> {
+        await queryRunner.query(`CREATE TABLE "public"."tipo_fonte" ("id" SERIAL NOT NULL, "nome" character varying NOT NULL, CONSTRAINT "UQ_3ca6cb113ea2b39a0a31bd20789" UNIQUE ("nome"), CONSTRAINT "PK_4975d6b67a415e8d86ed21e9e7b" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "tipo_fonte_nome_key" ON "public"."tipo_fonte" ("nome") `);
+        await queryRunner.query(`CREATE TABLE "public"."descritor" ("id" SERIAL NOT NULL, "nome" character varying NOT NULL, CONSTRAINT "PK_c0009f2e5b50e33af1c74a8d79a" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "public"."fonte" ("id" SERIAL NOT NULL, "nome" character varying, "link" character varying, "descricao" character varying, "fk_tipo_fonte" integer NOT NULL, CONSTRAINT "UQ_1f193a526e447292cf57805cbf6" UNIQUE ("link"), CONSTRAINT "PK_5c22cbb1fe92985a21bc521d762" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "fonte_link_key" ON "public"."fonte" ("link") `);
+        await queryRunner.query(`CREATE TABLE "public"."tipo_midia" ("id" SERIAL NOT NULL, "nome" character varying NOT NULL, CONSTRAINT "UQ_5a7387aaf27d0aedc9c508bb91d" UNIQUE ("nome"), CONSTRAINT "PK_6542d139e9811fab7332f4e0c15" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "tipo_midia_nome_key" ON "public"."tipo_midia" ("nome") `);
+        await queryRunner.query(`CREATE TABLE "public"."midia" ("id" SERIAL NOT NULL, "nome" character varying, "link" character varying NOT NULL, "fk_noticia" integer NOT NULL, "fk_tipo_midia" integer NOT NULL, CONSTRAINT "PK_66eb8ed78d4efac7e17489e1039" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "public"."noticia" ("id" SERIAL NOT NULL, "titulo" character varying, "conteudo" character varying, "link" character varying NOT NULL, "descricao" text, "data_publicacao" date, "data_criacao" date, "data_atualizacao" date, "fk_fonte" integer NOT NULL, "fk_grupo_acesso" integer NOT NULL, CONSTRAINT "UQ_0e25a3f8e6261ee9683ec403c37" UNIQUE ("link"), CONSTRAINT "PK_774ab582471f2a0454cc485fe38" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "noticia_link_key" ON "public"."noticia" ("link") `);
+        await queryRunner.query(`CREATE TABLE "public"."grupo_acesso" ("id" SERIAL NOT NULL, "nome" character varying, CONSTRAINT "UQ_f19781375d824bd3384f014a32f" UNIQUE ("nome"), CONSTRAINT "PK_91bf19563b5f9d652794d20f16e" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "grupo_acesso_nome_key" ON "public"."grupo_acesso" ("nome") `);
+        await queryRunner.query(`CREATE TABLE "public"."usuario" ("id" SERIAL NOT NULL, "nome" character varying NOT NULL, "email" character varying NOT NULL, "senha" character varying NOT NULL, "fk_grupo_acesso" integer NOT NULL, CONSTRAINT "PK_b0daf6a6d01da82d74f95f519f9" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "usuario_email_key" ON "public"."usuario" ("email") `);
+        await queryRunner.query(`CREATE TABLE "public"."interesse" ("id" SERIAL NOT NULL, "descricao" character varying, "fk_assunto" integer NOT NULL, "fk_usuario" integer NOT NULL, CONSTRAINT "PK_ecb687a6c38708c5ff9ee0024ae" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "public"."assunto" ("id" SERIAL NOT NULL, "nome" character varying NOT NULL, "descricao" character varying, CONSTRAINT "UQ_7c104eec27ef88089f950ff0430" UNIQUE ("nome"), CONSTRAINT "PK_26806e79ebbf24325ddd9dc6a2e" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "assunto_nome_key" ON "public"."assunto" ("nome") `);
+        await queryRunner.query(`CREATE TABLE "public"."rss" ("id" SERIAL NOT NULL, "nome" character varying(240) NOT NULL, "url" character varying(240) NOT NULL, "tipoFonteId" integer NOT NULL, CONSTRAINT "PK_08414d7274d6db9e066a9ebae32" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "rss_pkey" ON "public"."rss" ("id") `);
+        await queryRunner.query(`CREATE TABLE "public"."tweets" ("id" SERIAL NOT NULL, "twitter_id" bigint NOT NULL, "fonte" character varying(100) NOT NULL, "username" character varying(50) NOT NULL, "texto" character varying(500) NOT NULL, "data" TIMESTAMP NOT NULL, "retweets" integer NOT NULL, "favoritos" integer NOT NULL, "mentions" character varying(280), "hashtags" character varying(280), "geolocalizacao" character varying(500), CONSTRAINT "UQ_4562239725defb7ba967823bb22" UNIQUE ("twitter_id"), CONSTRAINT "PK_73c616f47bf2f940b349ab0fdea" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "tweets_twitter_id_key" ON "public"."tweets" ("twitter_id") `);
+        await queryRunner.query(`CREATE UNIQUE INDEX "tweets_pkey" ON "public"."tweets" ("id") `);
+        await queryRunner.query(`CREATE TABLE "public"."descritor_x_noticia" ("descritorId" integer NOT NULL, "noticiaId" integer NOT NULL, CONSTRAINT "PK_a1a1fce6d918790c91e8d67f81b" PRIMARY KEY ("descritorId", "noticiaId"))`);
+        await queryRunner.query(`CREATE INDEX "IDX_3aab19dec62da37d0216979a24" ON "public"."descritor_x_noticia" ("descritorId") `);
+        await queryRunner.query(`CREATE INDEX "IDX_ca6e4b5f68b503808b57751ad0" ON "public"."descritor_x_noticia" ("noticiaId") `);
+        await queryRunner.query(`CREATE TABLE "public"."descritor_x_fonte" ("descritorId" integer NOT NULL, "fonteId" integer NOT NULL, CONSTRAINT "PK_9401858320fdf6b4ba27a199b49" PRIMARY KEY ("descritorId", "fonteId"))`);
+        await queryRunner.query(`CREATE INDEX "IDX_952af3d97c933e379099087223" ON "public"."descritor_x_fonte" ("descritorId") `);
+        await queryRunner.query(`CREATE INDEX "IDX_ce2b3b32f4d587fcaad4b4e2d1" ON "public"."descritor_x_fonte" ("fonteId") `);
+        await queryRunner.query(`CREATE TABLE "public"."assunto_x_fonte" ("assuntoId" integer NOT NULL, "fonteId" integer NOT NULL, CONSTRAINT "PK_893feca9d27513e99a246f5df78" PRIMARY KEY ("assuntoId", "fonteId"))`);
+        await queryRunner.query(`CREATE INDEX "IDX_720df58c342fe58e73132542ef" ON "public"."assunto_x_fonte" ("assuntoId") `);
+        await queryRunner.query(`CREATE INDEX "IDX_777478eb34865f660ce38cdd97" ON "public"."assunto_x_fonte" ("fonteId") `);
+        await queryRunner.query(`CREATE TABLE "public"."assunto_x_descritor" ("assuntoId" integer NOT NULL, "descritorId" integer NOT NULL, CONSTRAINT "PK_383abd80ed59cf8fdf6b1037e4f" PRIMARY KEY ("assuntoId", "descritorId"))`);
+        await queryRunner.query(`CREATE INDEX "IDX_44e3dd99196c5326fe04eeb24f" ON "public"."assunto_x_descritor" ("assuntoId") `);
+        await queryRunner.query(`CREATE INDEX "IDX_c00db6246a2ef3f7dc86b4ac56" ON "public"."assunto_x_descritor" ("descritorId") `);
+        await queryRunner.query(`ALTER TABLE "public"."fonte" ADD CONSTRAINT "FK_37b12f6488d81f47be1c38eaa85" FOREIGN KEY ("fk_tipo_fonte") REFERENCES "public"."tipo_fonte"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."midia" ADD CONSTRAINT "FK_54f14dab31b82670d237b7462d0" FOREIGN KEY ("fk_noticia") REFERENCES "public"."noticia"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."midia" ADD CONSTRAINT "FK_db0da61e516e747f212d83cdee0" FOREIGN KEY ("fk_tipo_midia") REFERENCES "public"."tipo_midia"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."noticia" ADD CONSTRAINT "FK_4cacb05f67c6dbc5e6b17d45729" FOREIGN KEY ("fk_fonte") REFERENCES "public"."fonte"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."noticia" ADD CONSTRAINT "FK_0a574f0b69f9f966fd4791eb223" FOREIGN KEY ("fk_grupo_acesso") REFERENCES "public"."grupo_acesso"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."usuario" ADD CONSTRAINT "FK_fc4ed782f425c3b7cda53bf3b1c" FOREIGN KEY ("fk_grupo_acesso") REFERENCES "public"."grupo_acesso"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."interesse" ADD CONSTRAINT "FK_3784d2da6f8ef59e5a63878348a" FOREIGN KEY ("fk_assunto") REFERENCES "public"."assunto"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."interesse" ADD CONSTRAINT "FK_a516dc88590aeaa96fe3f209b23" FOREIGN KEY ("fk_usuario") REFERENCES "public"."usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_noticia" ADD CONSTRAINT "FK_3aab19dec62da37d0216979a24d" FOREIGN KEY ("descritorId") REFERENCES "public"."descritor"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_noticia" ADD CONSTRAINT "FK_ca6e4b5f68b503808b57751ad0a" FOREIGN KEY ("noticiaId") REFERENCES "public"."noticia"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_fonte" ADD CONSTRAINT "FK_952af3d97c933e3790990872232" FOREIGN KEY ("descritorId") REFERENCES "public"."descritor"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_fonte" ADD CONSTRAINT "FK_ce2b3b32f4d587fcaad4b4e2d12" FOREIGN KEY ("fonteId") REFERENCES "public"."fonte"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_fonte" ADD CONSTRAINT "FK_720df58c342fe58e73132542ef2" FOREIGN KEY ("assuntoId") REFERENCES "public"."assunto"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_fonte" ADD CONSTRAINT "FK_777478eb34865f660ce38cdd971" FOREIGN KEY ("fonteId") REFERENCES "public"."fonte"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_descritor" ADD CONSTRAINT "FK_44e3dd99196c5326fe04eeb24fb" FOREIGN KEY ("assuntoId") REFERENCES "public"."assunto"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_descritor" ADD CONSTRAINT "FK_c00db6246a2ef3f7dc86b4ac56e" FOREIGN KEY ("descritorId") REFERENCES "public"."descritor"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+    }
+
+    public async down(queryRunner: QueryRunner): Promise<any> {
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_descritor" DROP CONSTRAINT "FK_c00db6246a2ef3f7dc86b4ac56e"`);
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_descritor" DROP CONSTRAINT "FK_44e3dd99196c5326fe04eeb24fb"`);
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_fonte" DROP CONSTRAINT "FK_777478eb34865f660ce38cdd971"`);
+        await queryRunner.query(`ALTER TABLE "public"."assunto_x_fonte" DROP CONSTRAINT "FK_720df58c342fe58e73132542ef2"`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_fonte" DROP CONSTRAINT "FK_ce2b3b32f4d587fcaad4b4e2d12"`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_fonte" DROP CONSTRAINT "FK_952af3d97c933e3790990872232"`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_noticia" DROP CONSTRAINT "FK_ca6e4b5f68b503808b57751ad0a"`);
+        await queryRunner.query(`ALTER TABLE "public"."descritor_x_noticia" DROP CONSTRAINT "FK_3aab19dec62da37d0216979a24d"`);
+        await queryRunner.query(`ALTER TABLE "public"."interesse" DROP CONSTRAINT "FK_a516dc88590aeaa96fe3f209b23"`);
+        await queryRunner.query(`ALTER TABLE "public"."interesse" DROP CONSTRAINT "FK_3784d2da6f8ef59e5a63878348a"`);
+        await queryRunner.query(`ALTER TABLE "public"."usuario" DROP CONSTRAINT "FK_fc4ed782f425c3b7cda53bf3b1c"`);
+        await queryRunner.query(`ALTER TABLE "public"."noticia" DROP CONSTRAINT "FK_0a574f0b69f9f966fd4791eb223"`);
+        await queryRunner.query(`ALTER TABLE "public"."noticia" DROP CONSTRAINT "FK_4cacb05f67c6dbc5e6b17d45729"`);
+        await queryRunner.query(`ALTER TABLE "public"."midia" DROP CONSTRAINT "FK_db0da61e516e747f212d83cdee0"`);
+        await queryRunner.query(`ALTER TABLE "public"."midia" DROP CONSTRAINT "FK_54f14dab31b82670d237b7462d0"`);
+        await queryRunner.query(`ALTER TABLE "public"."fonte" DROP CONSTRAINT "FK_37b12f6488d81f47be1c38eaa85"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_c00db6246a2ef3f7dc86b4ac56"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_44e3dd99196c5326fe04eeb24f"`);
+        await queryRunner.query(`DROP TABLE "public"."assunto_x_descritor"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_777478eb34865f660ce38cdd97"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_720df58c342fe58e73132542ef"`);
+        await queryRunner.query(`DROP TABLE "public"."assunto_x_fonte"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_ce2b3b32f4d587fcaad4b4e2d1"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_952af3d97c933e379099087223"`);
+        await queryRunner.query(`DROP TABLE "public"."descritor_x_fonte"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_ca6e4b5f68b503808b57751ad0"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_3aab19dec62da37d0216979a24"`);
+        await queryRunner.query(`DROP TABLE "public"."descritor_x_noticia"`);
+        await queryRunner.query(`DROP INDEX "public"."tweets_pkey"`);
+        await queryRunner.query(`DROP INDEX "public"."tweets_twitter_id_key"`);
+        await queryRunner.query(`DROP TABLE "public"."tweets"`);
+        await queryRunner.query(`DROP INDEX "public"."rss_pkey"`);
+        await queryRunner.query(`DROP TABLE "public"."rss"`);
+        await queryRunner.query(`DROP INDEX "public"."assunto_nome_key"`);
+        await queryRunner.query(`DROP TABLE "public"."assunto"`);
+        await queryRunner.query(`DROP TABLE "public"."interesse"`);
+        await queryRunner.query(`DROP INDEX "public"."usuario_email_key"`);
+        await queryRunner.query(`DROP TABLE "public"."usuario"`);
+        await queryRunner.query(`DROP INDEX "public"."grupo_acesso_nome_key"`);
+        await queryRunner.query(`DROP TABLE "public"."grupo_acesso"`);
+        await queryRunner.query(`DROP INDEX "public"."noticia_link_key"`);
+        await queryRunner.query(`DROP TABLE "public"."noticia"`);
+        await queryRunner.query(`DROP TABLE "public"."midia"`);
+        await queryRunner.query(`DROP INDEX "public"."tipo_midia_nome_key"`);
+        await queryRunner.query(`DROP TABLE "public"."tipo_midia"`);
+        await queryRunner.query(`DROP INDEX "public"."fonte_link_key"`);
+        await queryRunner.query(`DROP TABLE "public"."fonte"`);
+        await queryRunner.query(`DROP TABLE "public"."descritor"`);
+        await queryRunner.query(`DROP INDEX "public"."tipo_fonte_nome_key"`);
+        await queryRunner.query(`DROP TABLE "public"."tipo_fonte"`);
+    }
+
+}

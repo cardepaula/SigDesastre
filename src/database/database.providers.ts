@@ -34,9 +34,18 @@ export const databaseProviders = [
         password: dbConfig.pass,
         database: dbConfig.name,
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: false, // TODO fazer essa config atraves de ENV
-        dropSchema: false,
-        cache: true,
+        synchronize: dbConfig.synchronize,
+        cache: dbConfig.cache,
+        migrationsTableName: 'migrations',
+        migrationsRun: dbConfig.migrationRun,
+        migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
+        cli: {
+          entitiesDir: './database/entities',
+          migrationsDir: './database/migrations',
+        },
+        logging: dbConfig.logging,
+        logger: 'simple-console',
+        ssl: dbConfig.ssl,
       }),
   },
   {
@@ -62,38 +71,32 @@ export const databaseProviders = [
   },
   {
     provide: repositoryConfig.assunto,
-    useFactory: (connection: Connection) =>
-      connection.getRepository(Assunto),
+    useFactory: (connection: Connection) => connection.getRepository(Assunto),
     inject: [repositoryConfig.database],
   },
   {
     provide: repositoryConfig.descritor,
-    useFactory: (connection: Connection) =>
-      connection.getRepository(Descritor),
+    useFactory: (connection: Connection) => connection.getRepository(Descritor),
     inject: [repositoryConfig.database],
   },
   {
     provide: repositoryConfig.interesse,
-    useFactory: (connection: Connection) =>
-      connection.getRepository(Interesse),
+    useFactory: (connection: Connection) => connection.getRepository(Interesse),
     inject: [repositoryConfig.database],
   },
   {
     provide: repositoryConfig.midia,
-    useFactory: (connection: Connection) =>
-      connection.getRepository(Midia),
+    useFactory: (connection: Connection) => connection.getRepository(Midia),
     inject: [repositoryConfig.database],
   },
   {
     provide: repositoryConfig.tipoMidia,
-    useFactory: (connection: Connection) =>
-      connection.getRepository(TipoMidia),
+    useFactory: (connection: Connection) => connection.getRepository(TipoMidia),
     inject: [repositoryConfig.database],
   },
   {
     provide: repositoryConfig.usuario,
-    useFactory: (connection: Connection) =>
-      connection.getRepository(Usuario),
+    useFactory: (connection: Connection) => connection.getRepository(Usuario),
     inject: [repositoryConfig.database],
   },
 ];
@@ -111,9 +114,9 @@ export const databaseTweetProviders = [
         password: dbTweetConfig.pass,
         database: dbTweetConfig.name,
         entities: [__dirname + '/../**/tweets.entity{.ts,.js}'],
-        synchronize: false, // TODO fazer essa config atraves de ENV
-        dropSchema: false,
-        cache: true,
+        // synchronize: dbTweetConfig.synchronize,
+        // dropSchema: dbTweetConfig.dropSchema,
+        // cache: dbTweetConfig.cache,
       }),
   },
   {
@@ -136,9 +139,9 @@ export const databaseRSSProviders = [
         password: dbRSSConfig.pass,
         database: dbRSSConfig.name,
         entities: [__dirname + '/../**/rss.entity{.ts,.js}'],
-        synchronize: false, // TODO fazer essa config atraves de ENV
-        dropSchema: false,
-        cache: true,
+        // synchronize: dbRSSConfig.synchronize,
+        // dropSchema: dbRSSConfig.dropSchema,
+        // cache: dbRSSConfig.cache
       }),
   },
   {

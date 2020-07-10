@@ -18,10 +18,9 @@ export class Descritor {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
   @ManyToMany(() => Assunto, assunto => assunto.descritores)
   assuntos: Assunto[];

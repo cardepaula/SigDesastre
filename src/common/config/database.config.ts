@@ -1,14 +1,16 @@
 export const dbConfig = {
-  type: process.env.DB_TYPE,
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT, 0),
-  user: process.env.DB_USERNAME,
-  pass: process.env.DB_PASSWORD,
-  schema: process.env.DB_SCHEMA,
-  name: process.env.DB_NAME,
-  synchronize: process.env.DB_SYNC || false,
-  dropSchema: process.env.DB_DROP_SCHEME || false,
-  cache: process.env.DB_CACHE || false,
+  type: process.env.DB_TYPE || 'postgres',
+  host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT, 0) || 5432,
+  user: process.env.DB_USERNAME || 'postgres',
+  pass: process.env.DB_PASSWORD || 'senha',
+  schema: process.env.DB_SCHEMA || 'public',
+  name: process.env.DB_NAME || 'sigdesastre',
+  synchronize: Boolean(process.env.DB_SYNC) || false,
+  cache: Boolean(process.env.DB_CACHE) || false,
+  migrationRun: Boolean(process.env.DB_MIGRATION_RUN) || true,
+  logging: Boolean(process.env.DB_LOGGING) || false,
+  ssl: Boolean(process.env.DB_SSL) || false,
 };
 export const dbRSSConfig = {
   type: process.env.DB_TYPE_RSS,
@@ -18,9 +20,9 @@ export const dbRSSConfig = {
   pass: process.env.DB_PASSWORD_RSS,
   schema: process.env.DB_SCHEMA_RSS,
   name: process.env.DB_NAME_RSS,
-  synchronize: process.env.DB_SYNC || false,
-  dropSchema: process.env.DB_DROP_SCHEME || false,
-  cache: process.env.DB_CACHE || false,
+  synchronize: Boolean(process.env.DB_SYNC) || false,
+  dropSchema: Boolean(process.env.DB_DROP_SCHEME) || false,
+  cache: Boolean(process.env.DB_CACHE) || false,
 };
 
 export const dbTweetConfig = {
@@ -31,7 +33,7 @@ export const dbTweetConfig = {
   pass: process.env.DB_PASSWORD_TW,
   schema: process.env.DB_SCHEMA_TW,
   name: process.env.DB_NAME_TW,
-  synchronize: process.env.DB_SYNC || false,
-  dropSchema: process.env.DB_DROP_SCHEME || false,
-  cache: process.env.DB_CACHE || false,
+  synchronize: Boolean(process.env.DB_SYNC) || false,
+  dropSchema: Boolean(process.env.DB_DROP_SCHEME) || false,
+  cache: Boolean(process.env.DB_CACHE) || false,
 };
