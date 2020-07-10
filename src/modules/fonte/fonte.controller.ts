@@ -31,7 +31,7 @@ import { FonteService } from './fonte.service';
   },
 })
 @ApiUseTags('Fontes')
-@Controller('fonte')
+@Controller('fontes')
 export class FonteController implements CrudController<Fonte> {
   constructor(public service: FonteService) {}
 

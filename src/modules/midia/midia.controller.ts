@@ -21,8 +21,8 @@ import { MidiaService } from './midia.service';
     update: UpdateMidiaDto,
   }
 })
-@ApiUseTags('Midia')
-@Controller('midia')
+@ApiUseTags('Midias')
+@Controller('midias')
 export class MidiaController implements CrudController<Midia> {
   constructor(public service: MidiaService) {}
 

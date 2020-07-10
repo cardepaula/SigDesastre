@@ -14,7 +14,7 @@ import { RSS } from '../../database/entities/rss.entity';
     update: UpdateRSSDto,
   },
 })
-@ApiUseTags('rss')
+@ApiUseTags('RSS')
 @Controller('rss')
 export class RSSController implements CrudController<RSS> {
   constructor(public service: RSSService) {}

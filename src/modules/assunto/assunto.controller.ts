@@ -33,8 +33,8 @@ import { AssuntoService } from './assunto.service';
     update: UpdateAssuntoDto,
   },
 })
-@ApiUseTags('Assunto')
-@Controller('assunto')
+@ApiUseTags('Assuntos')
+@Controller('assuntos')
 export class AssuntoController implements CrudController<Assunto> {
   constructor(public service: AssuntoService) {}
 

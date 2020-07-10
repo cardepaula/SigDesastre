@@ -28,8 +28,8 @@ import { UsuarioService } from './usuario.service';
     exclude: ['createManyBase', 'replaceOneBase', 'deleteOneBase'],
   },
 })
-@ApiUseTags('Usuario')
-@Controller('usuario')
+@ApiUseTags('Usuarios')
+@Controller('usuarios')
 export class UsuarioController implements CrudController<Usuario> {
   constructor(public service: UsuarioService) {}
 

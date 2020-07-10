@@ -18,8 +18,8 @@ import { GrupoAcesso } from '../../database/entities/grupoAcesso.entity';
     update: UpdateGrupoAcessoDto,
   },
 })
-@ApiUseTags('Grupo Acesso')
-@Controller('grupo-acesso')
+@ApiUseTags('Grupos Acesso')
+@Controller('grupos-acesso')
 export class GrupoAcessoController implements CrudController<GrupoAcesso> {
   constructor(public service: GrupoAcessoService) {}
 

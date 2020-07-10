@@ -28,8 +28,8 @@ import { TipoFonteService } from './tipoFonte.service';
     exclude: ['createManyBase', 'replaceOneBase'],
   },
 })
-@ApiUseTags('Tipo Fonte')
-@Controller('tipo-fonte')
+@ApiUseTags('Tipos Fontes')
+@Controller('tipos-fontes')
 export class TipoFonteController implements CrudController<TipoFonte> {
   constructor(public service: TipoFonteService) {}
 

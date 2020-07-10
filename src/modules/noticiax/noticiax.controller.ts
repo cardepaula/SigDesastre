@@ -48,8 +48,8 @@ import { NoticiaxService } from './noticiax.service';
     update: UpdateNoticiaDto,
   },
 })
-@ApiUseTags('Noticia/v2')
-@Controller('noticia/v2')
+@ApiUseTags('Noticias/v2')
+@Controller('noticias/v2')
 export class NoticiaxController implements CrudController<Noticia> {
   constructor(public service: NoticiaxService) {}
 

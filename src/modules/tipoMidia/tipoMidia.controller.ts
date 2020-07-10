@@ -25,8 +25,8 @@ import { TipoMidiaService } from './tipoMidia.service';
     update: UpdateTipoMidiaDto,
   },
 })
-@ApiUseTags('TipoMidia')
-@Controller('tipo-midia')
+@ApiUseTags('Tipos Midia')
+@Controller('tipos-midia')
 export class TipoMidiaController implements CrudController<TipoMidia> {
   constructor(public service: TipoMidiaService) {}
 

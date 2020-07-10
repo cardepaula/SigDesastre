@@ -35,8 +35,8 @@ import { DescritorService } from './descritor.service';
     update: UpdateDescritorDto,
   },
 })
-@ApiUseTags('Descritor')
-@Controller('descritor')
+@ApiUseTags('Descritores')
+@Controller('descritores')
 export class DescritorController implements CrudController<Descritor> {
   constructor(public service: DescritorService) {}
 

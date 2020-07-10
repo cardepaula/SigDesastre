@@ -29,8 +29,8 @@ import { InteresseService } from './interesse.service';
     exclude: ['createManyBase', 'replaceOneBase'],
   },
 })
-@ApiUseTags('Interesse')
-@Controller('interesse')
+@ApiUseTags('Interesses')
+@Controller('interesses')
 export class InteresseController implements CrudController<Interesse> {
   constructor(public service: InteresseService) {}
 
