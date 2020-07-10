@@ -1,1 +1,1 @@
-web: cd dist/src/ ; node main.js
+web: npm run start:prod
