@@ -6,6 +6,7 @@ import {
   MaxLength,
   IsDefined,
   IsInt,
+  IsOptional,
 } from 'class-validator';
 
 export class UpdateTweetsDto {
@@ -20,6 +21,7 @@ export class UpdateTweetsDto {
     description: 'Identificador do tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(100)
   twitterId: string;
@@ -28,6 +30,7 @@ export class UpdateTweetsDto {
     description: 'URL do tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(100)
   fonte: string;
@@ -36,6 +39,7 @@ export class UpdateTweetsDto {
     description: 'Usuario do Twitter que fez o tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(50)
   username: string;
@@ -44,6 +48,7 @@ export class UpdateTweetsDto {
     description: 'Texto do tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(500)
   texto: string;
@@ -53,6 +58,7 @@ export class UpdateTweetsDto {
     type: 'string',
     format: 'date-time',
   })
+  @IsOptional()
   @IsDateString()
   data: Date;
 
@@ -61,6 +67,7 @@ export class UpdateTweetsDto {
     type: 'number',
     default: 0,
   })
+  @IsOptional()
   @IsNumber()
   retweets: number;
 
@@ -69,6 +76,7 @@ export class UpdateTweetsDto {
     type: 'number',
     default: 0,
   })
+  @IsOptional()
   @IsNumber()
   favoritos: number;
 
@@ -76,6 +84,7 @@ export class UpdateTweetsDto {
     description: 'Menções a outros usuarios feitas no tweet.',
     type: 'number',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(280)
   mentions: string;
@@ -84,6 +93,7 @@ export class UpdateTweetsDto {
     description: 'Hashtags contidas no tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(280)
   hashtags: string;
@@ -92,6 +102,7 @@ export class UpdateTweetsDto {
     description: 'Geolocalização de quem publicou tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(500)
   geolocalizacao: string;

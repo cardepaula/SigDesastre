@@ -17,7 +17,7 @@ import {
 } from '@nestjs/swagger';
 import { NoticiaService } from './noticia.service';
 import { Noticia } from '../database/entities/noticia.entity';
-import { NoticiaDto } from './dto/noticia.dto';
+import { NoticiaDto } from '../modules/noticiax/dto';
 
 @ApiUseTags('Noticias')
 @Controller('noticias')

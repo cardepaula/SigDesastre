@@ -1,5 +1,6 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { MidiaDto } from '../../midia/dto/index';
+import { IsOptional } from 'class-validator';
 
 export class TipoMidiaDto {
   @ApiModelProperty({
@@ -17,5 +18,6 @@ export class TipoMidiaDto {
     type: MidiaDto,
     isArray: true,
   })
+  @IsOptional()
   midias: MidiaDto[];
 }

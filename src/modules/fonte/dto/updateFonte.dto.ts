@@ -1,5 +1,5 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { IsInt, IsDefined, IsString, IsIn } from 'class-validator';
+import { IsInt, IsDefined, IsString, IsIn, IsOptional } from 'class-validator';
 import { TipoFonteDto } from '../../tipoFonte/dto/index';
 import { NoticiaDto } from '../../noticiax/dto/index';
 import { Assunto } from '../../../database/entities/assunto.entity';
@@ -19,18 +19,21 @@ export class UpdateFonteDto {
   @ApiModelPropertyOptional({
     description: 'Nome da fonte',
   })
+  @IsOptional()
   @IsString()
   nome: string;
 
   @ApiModelPropertyOptional({
     description: 'URL da fonte',
   })
+  @IsOptional()
   @IsString()
   link: string;
 
   @ApiModelPropertyOptional({
     description: 'Descrição da fonte',
   })
+  @IsOptional()
   @IsString()
   descricao: string;
 
@@ -38,5 +41,6 @@ export class UpdateFonteDto {
     description: 'Tipo da fonte',
     type: TipoFonteDto,
   })
+  @IsOptional()
   tipoFonte: TipoFonteDto;
 }

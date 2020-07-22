@@ -18,6 +18,8 @@ export class UsuarioDto {
   })
   email: string;
 
+  senha: string
+
   @ApiModelProperty({
     description: 'Grupo de acesso que o usuario pertence',
     type: GrupoAcessoDto,

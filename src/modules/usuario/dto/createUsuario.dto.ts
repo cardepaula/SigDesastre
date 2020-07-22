@@ -1,5 +1,5 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsDefined } from 'class-validator';
+import { IsString, IsDefined, IsOptional } from 'class-validator';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
 import { InteresseDto } from '../../interesse/dto/index';
 
@@ -36,5 +36,6 @@ export class CreateUsuarioDto {
     type: InteresseDto,
     isArray: true
   })
+  @IsOptional()
   interesses: InteresseDto[];
 }

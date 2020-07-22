@@ -1,5 +1,5 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsDateString, IsNumber, MaxLength } from 'class-validator';
+import { IsString, IsDateString, IsNumber, MaxLength, IsOptional } from 'class-validator';
 
 export class CreateTweetsDto {
   @ApiModelProperty({
@@ -47,6 +47,7 @@ export class CreateTweetsDto {
     type: 'number',
     default: 0,
   })
+  @IsOptional()
   @IsNumber()
   retweets: number;
 
@@ -55,6 +56,7 @@ export class CreateTweetsDto {
     type: 'number',
     default: 0,
   })
+  @IsOptional()
   @IsNumber()
   favoritos: number;
 
@@ -62,6 +64,7 @@ export class CreateTweetsDto {
     description: 'Menções a outros usuarios feitas no tweet.',
     type: 'number',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(280)
   mentions: string;
@@ -70,6 +73,7 @@ export class CreateTweetsDto {
     description: 'Hashtags contidas no tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(280)
   hashtags: string;
@@ -78,6 +82,7 @@ export class CreateTweetsDto {
     description: 'Geolocalização de quem publicou tweet.',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(500)
   geolocalizacao: string;

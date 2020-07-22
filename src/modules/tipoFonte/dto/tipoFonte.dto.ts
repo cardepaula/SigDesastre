@@ -1,4 +1,5 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
+import { FonteDto } from '../../fonte/dto/index';
 
 export class TipoFonteDto {
   @ApiModelProperty({
@@ -10,4 +11,9 @@ export class TipoFonteDto {
     description: 'Nome do tipo fonte'
   })
   nome: string;
+
+  @ApiModelPropertyOptional({
+    description: 'Fontes relacionadas ao tipo fonte'
+  })
+  fontes?: FonteDto[];
 }

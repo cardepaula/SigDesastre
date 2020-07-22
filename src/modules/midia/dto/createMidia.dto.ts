@@ -8,6 +8,7 @@ export class CreateMidiaDto {
   @ApiModelPropertyOptional({
     description: 'Nome da mídia',
   })
+  @IsOptional()
   @IsString()
   nome: string;
 
