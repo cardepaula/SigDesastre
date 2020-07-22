@@ -53,5 +53,5 @@ export class Tweets extends BaseEntity {
     nullable: true,
     length: 500,
   })
-  geolocalizacao: string | null;
+  geolocalizacao: string;
 }

@@ -22,16 +22,20 @@ export class Descritor {
   })
   nome: string;
 
-  @ManyToMany(() => Assunto, assunto => assunto.descritores)
+  @ManyToMany(() => Assunto, assuntos => assuntos.descritores, { eager: false })
   assuntos: Assunto[];
 
-  @ManyToMany(() => Noticia, noticia => noticia.descritores, {
+  @ManyToMany(() => Noticia, noticias => noticias.descritores, {
     nullable: false,
+    eager: false,
   })
   @JoinTable({ name: 'descritor_x_noticia' })
   noticias: Noticia[];
 
-  @ManyToMany(() => Fonte, fonte => fonte.descritores, { nullable: false })
+  @ManyToMany(() => Fonte, fontes => fontes.descritores, {
+    nullable: false,
+    eager: false,
+  })
   @JoinTable({ name: 'descritor_x_fonte' })
   fontes: Fonte[];
 }

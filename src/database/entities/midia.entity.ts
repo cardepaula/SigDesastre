@@ -31,12 +31,10 @@ export class Midia {
   @ManyToOne(() => Noticia, noticia => noticia.midias, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_noticia' })
   noticia: Noticia;
 
   @ManyToOne(() => TipoMidia, tipoMidia => tipoMidia.midias, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_tipo_midia' })
   tipoMidia: TipoMidia;
 }

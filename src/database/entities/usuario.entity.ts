@@ -40,7 +40,6 @@ export class Usuario {
   @ManyToOne(() => GrupoAcesso, grupoAcesso => grupoAcesso.usuarios, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_grupo_acesso' })
   grupoAcesso: GrupoAcesso;
 
   @OneToMany(() => Interesse, interesse => interesse.usuario)

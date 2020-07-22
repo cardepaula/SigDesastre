@@ -14,4 +14,10 @@ export class RSS {
 
   @Column({ type: 'integer', name: 'tipoFonteId' })
   tipoFonteId: number;
+
+  // @ManyToOne(() => TipoFonte, tipoFonte => tipoFonte.rss, {
+  //   nullable: false,
+  // })
+  // @JoinColumn({ name: 'tipoFonteId' })
+  // tipoFonte: TipoFonte;
 }
