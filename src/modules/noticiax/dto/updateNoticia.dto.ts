@@ -3,40 +3,51 @@ import { FonteDto } from '../../fonte/dto/index';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
 import { Midia } from '../../../database/entities/midia.entity';
 import { Descritor } from '../../../database/entities/descritor.entity';
-import { IsArray, IsDefined, IsDateString, IsString, IsInt, IsNotEmpty } from 'class-validator';
+import {
+  IsArray,
+  IsDefined,
+  IsDateString,
+  IsString,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
 import { DescritorDto } from '../../descritor/dto/index';
 import { MidiaDto } from '../../midia/dto/index';
 
 export class UpdateNoticiaDto {
   @ApiModelProperty({
     description: 'Identificados da notícia.',
-    required: true
   })
-  @IsInt()
   @IsDefined()
+  @IsInt()
   id: number;
 
   @ApiModelPropertyOptional({
     description: 'Título da notícia',
   })
+  @IsOptional()
   @IsString()
   titulo: string;
 
   @ApiModelPropertyOptional({
     description: 'Contúdo da notícia',
   })
+  @IsOptional()
   @IsString()
   conteudo: string;
 
   @ApiModelPropertyOptional({
     description: 'URL da notícia.',
   })
+  @IsOptional()
   @IsString()
   link: string;
 
   @ApiModelPropertyOptional({
     description: 'Descrição da notícia',
   })
+  @IsOptional()
   @IsString()
   descricao: string;
 
@@ -44,6 +55,7 @@ export class UpdateNoticiaDto {
     description: 'Data de publicação.',
     format: 'date-time',
   })
+  @IsOptional()
   @IsDateString()
   dataPublicacao: string;
 
@@ -51,6 +63,7 @@ export class UpdateNoticiaDto {
     description: 'Data de criação',
     format: 'date-time',
   })
+  @IsOptional()
   @IsDateString()
   dataCriacao: string;
 
@@ -58,6 +71,7 @@ export class UpdateNoticiaDto {
     description: 'Data de atualização',
     format: 'date-time',
   })
+  @IsOptional()
   @IsDateString()
   dataAtualizacao: string;
 
@@ -65,7 +79,7 @@ export class UpdateNoticiaDto {
     description: 'Fonte da notícia',
     type: FonteDto,
   })
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   fonte: FonteDto;
 
@@ -73,7 +87,7 @@ export class UpdateNoticiaDto {
     description: 'Grupo de acesso',
     type: GrupoAcessoDto,
   })
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   grupoAcesso: GrupoAcessoDto;
 
@@ -82,6 +96,7 @@ export class UpdateNoticiaDto {
     type: MidiaDto,
     isArray: true,
   })
+  @IsOptional()
   @IsArray()
   midias: MidiaDto[];
 
@@ -90,6 +105,7 @@ export class UpdateNoticiaDto {
     type: DescritorDto,
     isArray: true,
   })
+  @IsOptional()
   @IsArray()
   descritores: DescritorDto[];
 }

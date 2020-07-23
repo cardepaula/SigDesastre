@@ -7,7 +7,6 @@ import { DescritorDto } from '../../descritor/dto/index';
 export class NoticiaDto {
   @ApiModelProperty({
     description: 'Identificados da notícia.',
-    required: true,
   })
   id: number;
 

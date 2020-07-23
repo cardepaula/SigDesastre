@@ -6,6 +6,7 @@ import { DatabaseModule } from '../../database/database.module';
 @Module({
   imports: [DatabaseModule],
   providers: [TipoFonteService],
-  controllers: [TipoFonteController]
+  controllers: [TipoFonteController],
+  exports: [TipoFonteService],
 })
 export class TipoFonteModule {}

@@ -1,5 +1,13 @@
-import { Controller } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Controller, Logger, Body, Req } from '@nestjs/common';
+import {
+  Crud,
+  CrudController,
+  Override,
+  ParsedRequest,
+  CrudRequest,
+  ParsedBody,
+  CreateManyDto,
+} from '@nestjsx/crud';
 import { NoticiaDto, CreateNoticiaDto, UpdateNoticiaDto } from './dto';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Noticia } from '../../database/entities/noticia.entity';
@@ -55,5 +63,15 @@ export class NoticiaxController implements CrudController<Noticia> {
 
   get base(): CrudController<Noticia> {
     return this;
+  }
+
+  @Override()
+  createOne(
+    @ParsedRequest() req: CrudRequest,
+    @ParsedBody() dto: CreateNoticiaDto,
+  ) {
+    const response = this.service.create(req, dto);
+
+    return response;
   }
 }

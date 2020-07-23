@@ -164,7 +164,7 @@ export class NoticiaService {
       fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
     } catch (error) {
       console.error(error);
-      throw new HttpException('Fonte ', HttpStatus.FORBIDDEN);
+      throw new HttpException('Error ao encontrar Fonte', HttpStatus.FORBIDDEN);
     }
     try {
       tipoFonte = await this.tipoFonteRepository.findOne({
@@ -172,7 +172,10 @@ export class NoticiaService {
       });
     } catch (error) {
       console.error(error);
-      throw new HttpException('tipoFonte ', HttpStatus.FORBIDDEN);
+      throw new HttpException(
+        'Error ao encontrar tipoFonte',
+        HttpStatus.FORBIDDEN,
+      );
     }
 
     try {
@@ -181,7 +184,10 @@ export class NoticiaService {
       });
     } catch (error) {
       console.error(error);
-      throw new HttpException('grupoAcesso ', HttpStatus.FORBIDDEN);
+      throw new HttpException(
+        'Error ao encontrar grupoAcesso ',
+        HttpStatus.FORBIDDEN,
+      );
     }
 
     if (tipoFonte != undefined) {

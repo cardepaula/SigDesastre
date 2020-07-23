@@ -25,7 +25,7 @@ import { TipoFonteService } from './tipoFonte.service';
     update: UpdateTipoFonteDto,
   },
   routes: {
-    exclude: ['createManyBase', 'replaceOneBase'],
+    exclude: ['replaceOneBase'],
   },
 })
 @ApiUseTags('Tipos Fontes')

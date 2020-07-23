@@ -1,25 +1,31 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { FonteDto } from '../../fonte/dto';
+import { FonteDto, CreateFonteDto } from '../../fonte/dto';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto';
-import { IsString, IsDateString, IsDefined, IsNotEmpty, IsArray } from 'class-validator';
+import {
+  IsString,
+  IsDateString,
+  IsDefined,
+  IsNotEmpty,
+  IsArray,
+  IsOptional,
+} from 'class-validator';
 import { MidiaDto } from '../../midia/dto/index';
 import { DescritorDto } from '../../descritor/dto/index';
 
 export class CreateNoticiaDto {
-
-  @ApiModelPropertyOptional({
+  @ApiModelProperty({
     description: 'Título da notícia',
   })
   @IsString()
   titulo: string;
 
-  @ApiModelPropertyOptional({
+  @ApiModelProperty({
     description: 'Contúdo da notícia',
   })
   @IsString()
   conteudo: string;
 
-  @ApiModelPropertyOptional({
+  @ApiModelProperty({
     description: 'URL da notícia.',
   })
   @IsString()
@@ -28,6 +34,7 @@ export class CreateNoticiaDto {
   @ApiModelPropertyOptional({
     description: 'Descrição da notícia',
   })
+  @IsOptional()
   @IsString()
   descricao: string;
 
@@ -35,6 +42,7 @@ export class CreateNoticiaDto {
     description: 'Data de publicação.',
     format: 'date-time',
   })
+  @IsOptional()
   @IsDateString()
   dataPublicacao: string;
 
@@ -42,6 +50,7 @@ export class CreateNoticiaDto {
     description: 'Data de criação',
     format: 'date-time',
   })
+  @IsOptional()
   @IsDateString()
   dataCriacao: string;
 
@@ -49,17 +58,18 @@ export class CreateNoticiaDto {
     description: 'Data de atualização',
     format: 'date-time',
   })
+  @IsOptional()
   @IsDateString()
   dataAtualizacao: string;
 
   @ApiModelProperty({
     description: 'Fonte da notícia',
-    type: FonteDto,
-    required: true
+    type: CreateFonteDto,
+    required: true,
   })
   @IsDefined()
   @IsNotEmpty()
-  fonte: FonteDto;
+  fonte: CreateFonteDto;
 
   @ApiModelProperty({
     description: 'Grupo de acesso',
@@ -74,6 +84,7 @@ export class CreateNoticiaDto {
     type: MidiaDto,
     isArray: true,
   })
+  @IsOptional()
   @IsArray()
   midias: MidiaDto[];
 
@@ -82,6 +93,7 @@ export class CreateNoticiaDto {
     type: DescritorDto,
     isArray: true,
   })
+  @IsOptional()
   @IsArray()
   descritores: DescritorDto[];
 }
