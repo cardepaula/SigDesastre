@@ -39,5 +39,22 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
   ],
   controllers: [],
   providers: [],
+  exports: [
+    DatabaseModule,
+    NoticiaModule,
+    TweetsModule,
+    RSSModule,
+    AuthModule,
+    FonteModule,
+    GrupoAcessoModule,
+    TipoFonteModule,
+    NoticiaxModule,
+    DescritorModule,
+    AssuntoModule,
+    InteresseModule,
+    MidiaModule,
+    TipoMidiaModule,
+    UsuarioModule,
+  ]
 })
 export class AppModule {}
