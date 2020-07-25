@@ -1,4 +1,5 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { TipoFonte } from './tipoFonte.entity';
 
 @Index('rss_pkey', ['id'], { unique: true })
 @Entity('rss', { schema: 'public' })
@@ -12,12 +13,13 @@ export class RSS {
   @Column('character varying', { name: 'url', length: 240 })
   url: string;
 
-  @Column({ type: 'integer', name: 'tipoFonteId' })
-  tipoFonteId: number;
+  // @Column({ type: 'integer', name: 'tipoFonteId' })
+  // tipoFonteId: number;
 
-  // @ManyToOne(() => TipoFonte, tipoFonte => tipoFonte.rss, {
-  //   nullable: false,
-  // })
-  // @JoinColumn({ name: 'tipoFonteId' })
-  // tipoFonte: TipoFonte;
+  @ManyToOne(() => TipoFonte, tipoFonte => tipoFonte.rss, {
+    eager: true,
+    nullable: false,
+  })
+  @JoinColumn({ name: 'tipoFonteId' })
+  tipoFonte: TipoFonte;
 }

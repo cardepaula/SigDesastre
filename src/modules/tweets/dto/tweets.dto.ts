@@ -3,12 +3,12 @@ import { format } from 'path';
 
 export class TweetsDto {
   @ApiModelProperty({
-    description: 'Identificador.',
+    description: 'Identificador do tweet',
   })
   id: number;
 
   @ApiModelProperty({
-    description: 'Identificador do tweet.',
+    description: 'Identificador do tweet no Twitter.',
   })
   twitterId: string;
 

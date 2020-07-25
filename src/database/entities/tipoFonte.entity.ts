@@ -29,6 +29,6 @@ export class TipoFonte {
   })
   fontes: Fonte[];
 
-  // @OneToMany(() => RSS, rss => rss.tipoFonte)
-  // rss: RSS[];
+  @OneToMany(() => RSS, rss => rss.tipoFonte)
+  rss: RSS[];
 }

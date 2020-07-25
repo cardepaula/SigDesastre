@@ -1,13 +1,13 @@
 import {
   dbConfig,
-  dbTweetConfig,
-  dbRSSConfig,
+  //dbTweetConfig,
+  // dbRSSConfig,
 } from '../common/config/database.config';
 import { Noticia } from './entities/noticia.entity';
 import {
   repositoryConfig,
-  repositoryTweetConfig,
-  repositoryRSSConfig,
+  //repositoryTweetConfig,
+  //repositoryRSSConfig,
 } from '../common/config/repositories.config';
 import { Fonte } from './entities/fonte.entity';
 import { TipoFonte } from './entities/tipoFonte.entity';
@@ -21,6 +21,7 @@ import { Interesse } from './entities/interesse.entity';
 import { Midia } from './entities/midia.entity';
 import { TipoMidia } from './entities/tipoMidia.entity';
 import { Usuario } from './entities/usuario.entity';
+import { Logger } from '@nestjs/common';
 
 export const databaseProviders = [
   {
@@ -99,54 +100,64 @@ export const databaseProviders = [
     useFactory: (connection: Connection) => connection.getRepository(Usuario),
     inject: [repositoryConfig.database],
   },
-];
-
-export const databaseTweetProviders = [
   {
-    provide: repositoryTweetConfig.database,
-    useFactory: async () =>
-      await createConnection({
-        name: 'twitter',
-        type: 'postgres',
-        host: dbTweetConfig.host,
-        port: dbTweetConfig.port,
-        username: dbTweetConfig.user,
-        password: dbTweetConfig.pass,
-        database: dbTweetConfig.name,
-        entities: [__dirname + '/../**/tweets.entity{.ts,.js}'],
-        // synchronize: dbTweetConfig.synchronize,
-        // dropSchema: dbTweetConfig.dropSchema,
-        // cache: dbTweetConfig.cache,
-      }),
-  },
-  {
-    provide: repositoryTweetConfig.tweets,
+    provide: repositoryConfig.tweets,
     useFactory: (connection: Connection) => connection.getRepository(Tweets),
-    inject: [repositoryTweetConfig.database],
+    inject: [repositoryConfig.database],
+  },
+  {
+    provide: repositoryConfig.rss,
+    useFactory: (connection: Connection) => connection.getRepository(RSS),
+    inject: [repositoryConfig.database],
   },
 ];
 
-export const databaseRSSProviders = [
-  {
-    provide: repositoryRSSConfig.database,
-    useFactory: async () =>
-      await createConnection({
-        name: 'rss',
-        type: 'postgres',
-        host: dbRSSConfig.host,
-        port: dbRSSConfig.port,
-        username: dbRSSConfig.user,
-        password: dbRSSConfig.pass,
-        database: dbRSSConfig.name,
-        entities: [__dirname + '/../**/rss.entity{.ts,.js}'],
-        // synchronize: dbRSSConfig.synchronize,
-        // dropSchema: dbRSSConfig.dropSchema,
-        // cache: dbRSSConfig.cache
-      }),
-  },
-  {
-    provide: repositoryRSSConfig.rss,
-    useFactory: (connection: Connection) => connection.getRepository(RSS),
-    inject: [repositoryRSSConfig.database],
-  },
-];
+// export const databaseTweetProviders = [
+//   {
+//     provide: repositoryTweetConfig.database,
+//     useFactory: async () =>
+//       await createConnection({
+//         name: 'twitter',
+//         type: 'postgres',
+//         host: dbTweetConfig.host,
+//         port: dbTweetConfig.port,
+//         username: dbTweetConfig.user,
+//         password: dbTweetConfig.pass,
+//         database: dbTweetConfig.name,
+//         entities: [__dirname + '/../**/tweets.entity{.ts,.js}'],
+//         // synchronize: dbTweetConfig.synchronize,
+//         // dropSchema: dbTweetConfig.dropSchema,
+//         // cache: dbTweetConfig.cache,
+//       }),
+//   },
+//   {
+//     provide: repositoryTweetConfig.tweets,
+//     useFactory: (connection: Connection) => connection.getRepository(Tweets),
+//     inject: [repositoryTweetConfig.database],
+//   },
+// ];
+
+// export const databaseRSSProviders = [
+//   {
+//     provide: repositoryRSSConfig.database,
+//     useFactory: async () =>
+//       await createConnection({
+//         name: 'rss',
+//         type: 'postgres',
+//         host: dbRSSConfig.host,
+//         port: dbRSSConfig.port,
+//         username: dbRSSConfig.user,
+//         password: dbRSSConfig.pass,
+//         database: dbRSSConfig.name,
+//         entities: [__dirname + '/../**/rss.entity{.ts,.js}'],
+//         // synchronize: dbRSSConfig.synchronize,
+//         // dropSchema: dbRSSConfig.dropSchema,
+//         // cache: dbRSSConfig.cache
+//       }),
+//   },
+//   {
+//     provide: repositoryRSSConfig.rss,
+//     useFactory: (connection: Connection) => connection.getRepository(RSS),
+//     inject: [repositoryRSSConfig.database],
+//   },
+// ];

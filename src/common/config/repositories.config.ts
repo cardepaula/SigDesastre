@@ -10,14 +10,16 @@ export const repositoryConfig = {
   tipoFonte: 'TIPO_FONTE_REPOSITORY',
   tipoMidia: 'TIPO_MIDIA_REPOSITORY',
   usuario: 'USUARIO_REPOSITORY',
-};
-
-export const repositoryRSSConfig = {
-  database: 'DATABASE_CONNECTION_RSS',
   rss: 'RSS_REPOSITORY',
-};
-
-export const repositoryTweetConfig = {
-  database: 'DATABASE_CONNECTION_TW',
   tweets: 'TWEETS_REPOSITORY',
 };
+
+// export const repositoryRSSConfig = {
+//   database: 'DATABASE_CONNECTION_RSS',
+//   rss: 'RSS_REPOSITORY',
+// };
+
+// export const repositoryTweetConfig = {
+//   database: 'DATABASE_CONNECTION_TW',
+//   tweets: 'TWEETS_REPOSITORY',
+// };

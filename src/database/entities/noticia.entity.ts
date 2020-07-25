@@ -7,11 +7,13 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  OneToOne,
 } from 'typeorm';
 import { Fonte } from './fonte.entity';
 import { GrupoAcesso } from './grupoAcesso.entity';
 import { Midia } from './midia.entity';
 import { Descritor } from './descritor.entity';
+import { TweetInfo } from './tweetInfo.entity';
 
 @Entity('noticia', { schema: 'public' })
 @Index('noticia_link_key', ['link'], { unique: true })
@@ -81,4 +83,9 @@ export class Noticia {
 
   @ManyToMany(() => Descritor, descritor => descritor.noticias, { eager: true })
   descritores: Descritor[];
+
+  @OneToOne(() => TweetInfo, tweetInfo => tweetInfo.noticia, { 
+    eager: false,
+  })
+  tweetInfo: TweetInfo;
 }
