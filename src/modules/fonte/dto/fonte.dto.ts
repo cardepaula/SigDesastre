@@ -48,10 +48,10 @@ export class FonteDto {
   })
   assuntos: AssuntoDto[];
 
-  @ApiModelProperty({
-    description: 'Descritores relacionados a fonte',
-    isArray: true,
-    type: DescritorDto,
-  })
-  descritores: DescritorDto[];
+  // @ApiModelProperty({
+  //   description: 'Descritores relacionados a fonte',
+  //   isArray: true,
+  //   type: DescritorDto,
+  // })
+  // descritores: DescritorDto[];
 }

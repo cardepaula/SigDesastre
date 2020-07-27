@@ -29,11 +29,11 @@ export class CreateDescritorDto {
   @IsDefined()
   noticias: NoticiaDto[];
 
-  @ApiModelProperty({
-    description: 'Fontes relacionadas ao descritor.',
-    type: FonteDto,
-    isArray: true,
-  })
-  @IsArray()
-  fontes: FonteDto[];
+  // @ApiModelProperty({
+  //   description: 'Fontes relacionadas ao descritor.',
+  //   type: FonteDto,
+  //   isArray: true,
+  // })
+  // @IsArray()
+  // fontes: FonteDto[];
 }

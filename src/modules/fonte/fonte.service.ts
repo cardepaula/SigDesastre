@@ -15,9 +15,9 @@ export class FonteService extends TypeOrmCrudService<Fonte> {
   ) {
     super(fonteRepository);
   }
+  private logger = new Logger('Fonte create service', true);
 
   async create(dto: DeepPartial<Fonte>): Promise<Fonte> {
-    const logger = new Logger('Fonte create service', true);
     let fonte: Fonte;
 
     const tipoFonte = await this.tipoFonteService.findOne(dto.tipoFonte);
@@ -31,7 +31,7 @@ export class FonteService extends TypeOrmCrudService<Fonte> {
     try {
       fonte = await this.findOne(dto);
     } catch (error) {
-      logger.error('Fonte find: ' + error);
+      this.logger.error('Fonte find: ' + error);
       throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
@@ -39,7 +39,7 @@ export class FonteService extends TypeOrmCrudService<Fonte> {
       try {
         fonte = await this.fonteRepository.save(dto);
       } catch (error) {
-        logger.error(error)
+        this.logger.error(error)
         throw new Error("Error ao criar fonte.");
       }
     }

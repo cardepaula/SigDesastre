@@ -41,12 +41,12 @@ export class CreateFonteDto {
   @IsOptional()
   assuntos?: Assunto[];
 
-  @ApiModelPropertyOptional({
-    description: 'Descritores relacionados a fonte',
-    isArray: true,
-    type: Descritor,
-  })
-  @IsOptional()
-  descritores?: Descritor[];
+  // @ApiModelPropertyOptional({
+  //   description: 'Descritores relacionados a fonte',
+  //   isArray: true,
+  //   type: Descritor,
+  // })
+  // @IsOptional()
+  // descritores?: Descritor[];
 
 }

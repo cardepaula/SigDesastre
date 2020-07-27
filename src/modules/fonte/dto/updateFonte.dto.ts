@@ -30,12 +30,12 @@ export class UpdateFonteDto {
   @IsString()
   link: string;
 
-  @ApiModelPropertyOptional({
-    description: 'Descrição da fonte',
-  })
-  @IsOptional()
-  @IsString()
-  descricao: string;
+  // @ApiModelPropertyOptional({
+  //   description: 'Descrição da fonte',
+  // })
+  // @IsOptional()
+  // @IsString()
+  // descricao: string;
 
   @ApiModelPropertyOptional({
     description: 'Tipo da fonte',
