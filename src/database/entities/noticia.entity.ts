@@ -68,7 +68,7 @@ export class Noticia {
 
   @ManyToOne(() => Fonte, fonte => fonte.noticias, {
     nullable: false,
-    cascade: ['insert','update'],
+    cascade: ['insert'], 
   })
   fonte: Fonte;
 

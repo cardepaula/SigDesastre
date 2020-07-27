@@ -8,6 +8,7 @@ import {
   IsNotEmpty,
   IsArray,
   IsOptional,
+  ValidateNested,
 } from 'class-validator';
 import { MidiaDto } from '../../midia/dto/index';
 import { DescritorDto } from '../../descritor/dto/index';
@@ -69,6 +70,7 @@ export class CreateNoticiaDto {
   })
   @IsDefined()
   @IsNotEmpty()
+  @ValidateNested()
   fonte: CreateFonteDto;
 
   @ApiModelProperty({
@@ -77,6 +79,7 @@ export class CreateNoticiaDto {
   })
   @IsDefined()
   @IsNotEmpty()
+  @ValidateNested()
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelPropertyOptional({
@@ -86,6 +89,7 @@ export class CreateNoticiaDto {
   })
   @IsOptional()
   @IsArray()
+  @ValidateNested()
   midias: MidiaDto[];
 
   @ApiModelPropertyOptional({
@@ -95,5 +99,6 @@ export class CreateNoticiaDto {
   })
   @IsOptional()
   @IsArray()
+  @ValidateNested()
   descritores: DescritorDto[];
 }
