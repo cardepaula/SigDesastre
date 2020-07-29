@@ -33,8 +33,8 @@ export class CreateUsuarioDto {
 
   @ApiModelPropertyOptional({
     description: 'Interesses do usuario',
-    type: InteresseDto,
-    isArray: true
+    type: () => InteresseDto,
+    isArray: true,
   })
   @IsOptional()
   interesses: InteresseDto[];

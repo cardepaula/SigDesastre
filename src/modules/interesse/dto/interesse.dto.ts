@@ -15,13 +15,13 @@ export class InteresseDto {
 
   @ApiModelProperty({
     description: 'Identificador do assunto.',
-    type: AssuntoDto
+    type: () => AssuntoDto,
   })
   assunto: AssuntoDto;
 
   @ApiModelProperty({
     description: 'Identificador do interesse.',
-    type: UsuarioDto,
+    type: () => UsuarioDto,
   })
   usuario: UsuarioDto;
 }

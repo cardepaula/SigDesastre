@@ -40,14 +40,14 @@ export class UpdateUsuarioDto {
 
   @ApiModelPropertyOptional({
     description: 'Grupo de acesso que o usuario pertence',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   @IsOptional()
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelPropertyOptional({
     description: 'Interesses do usuario',
-    type: InteresseDto,
+    type: () => InteresseDto,
     isArray: true,
   })
   @IsOptional()

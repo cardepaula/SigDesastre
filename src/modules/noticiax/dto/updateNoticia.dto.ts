@@ -77,7 +77,7 @@ export class UpdateNoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Fonte da notícia',
-    type: FonteDto,
+    type: () => FonteDto,
   })
   @IsOptional()
   @IsNotEmpty()
@@ -85,7 +85,7 @@ export class UpdateNoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Grupo de acesso',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   @IsOptional()
   @IsNotEmpty()
@@ -93,7 +93,7 @@ export class UpdateNoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Mídias',
-    type: MidiaDto,
+    type: () => MidiaDto,
     isArray: true,
   })
   @IsOptional()
@@ -102,7 +102,7 @@ export class UpdateNoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Descritores',
-    type: DescritorDto,
+    type: () => DescritorDto,
     isArray: true,
   })
   @IsOptional()

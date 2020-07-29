@@ -18,18 +18,18 @@ export class UsuarioDto {
   })
   email: string;
 
-  senha: string
+  senha: string;
 
   @ApiModelProperty({
     description: 'Grupo de acesso que o usuario pertence',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelProperty({
     description: 'Interesses do usuario',
-    type: InteresseDto,
-    isArray: true
+    type: () => InteresseDto,
+    isArray: true,
   })
   interesses: InteresseDto[];
 }

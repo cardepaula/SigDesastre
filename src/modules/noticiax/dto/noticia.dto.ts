@@ -50,27 +50,27 @@ export class NoticiaDto {
 
   @ApiModelProperty({
     description: 'Fonte da notícia',
-    type: FonteDto,
+    type: () => FonteDto,
     required: true,
   })
   fonte: FonteDto;
 
   @ApiModelProperty({
     description: 'Grupo de acesso',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelPropertyOptional({
     description: 'Mídias',
-    type: MidiaDto,
+    type: () => MidiaDto,
     isArray: true,
   })
   midias: MidiaDto[];
 
   @ApiModelPropertyOptional({
     description: 'Descritores',
-    type: DescritorDto,
+    type: () => DescritorDto,
     isArray: true,
   })
   descritores: DescritorDto[];

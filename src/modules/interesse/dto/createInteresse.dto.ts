@@ -20,14 +20,14 @@ export class CreateInteresseDto {
 
   @ApiModelProperty({
     description: 'Identificador do assunto.',
-    type: AssuntoDto
+    type: () => AssuntoDto,
   })
   @IsDefined()
   assunto: AssuntoDto;
 
   @ApiModelProperty({
     description: 'Identificador do interesse.',
-    type: UsuarioDto,
+    type: () => UsuarioDto,
   })
   @IsDefined()
   usuario: UsuarioDto;

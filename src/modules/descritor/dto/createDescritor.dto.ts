@@ -13,7 +13,7 @@ export class CreateDescritorDto {
 
   @ApiModelPropertyOptional({
     description: 'Assuntos relacionados ao descritor.',
-    type: AssuntoDto,
+    type: () => AssuntoDto,
     isArray: true,
   })
   @IsOptional()
@@ -22,18 +22,10 @@ export class CreateDescritorDto {
 
   @ApiModelProperty({
     description: 'Noticias relacionados ao descritor.',
-    type: NoticiaDto,
+    type: () => NoticiaDto,
     isArray: true,
   })
   @IsArray()
   @IsDefined()
   noticias: NoticiaDto[];
-
-  // @ApiModelProperty({
-  //   description: 'Fontes relacionadas ao descritor.',
-  //   type: FonteDto,
-  //   isArray: true,
-  // })
-  // @IsArray()
-  // fontes: FonteDto[];
 }

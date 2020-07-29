@@ -20,14 +20,14 @@ export class UpdateInteresseDto {
 
   @ApiModelPropertyOptional({
     description: 'Identificador do assunto.',
-    type: AssuntoDto
+    type: () => AssuntoDto,
   })
   @IsOptional()
   assunto: AssuntoDto;
 
   @ApiModelPropertyOptional({
     description: 'Identificador do interesse.',
-    type: UsuarioDto,
+    type: () => UsuarioDto,
   })
   @IsOptional()
   usuario: UsuarioDto;

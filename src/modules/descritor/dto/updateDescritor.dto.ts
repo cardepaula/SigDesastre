@@ -2,7 +2,13 @@ import { ApiModelPropertyOptional, ApiModelProperty } from '@nestjs/swagger';
 import { AssuntoDto } from '../../assunto/dto/index';
 import { NoticiaDto } from '../../noticiax/dto/index';
 import { FonteDto } from '../../fonte/dto/index';
-import { IsInt, IsDefined, IsString, IsArray, IsOptional } from 'class-validator';
+import {
+  IsInt,
+  IsDefined,
+  IsString,
+  IsArray,
+  IsOptional,
+} from 'class-validator';
 
 export class UpdateDescritorDto {
   @ApiModelProperty({
@@ -17,12 +23,12 @@ export class UpdateDescritorDto {
   })
   @IsOptional()
   @IsString()
-  nome: string ;
+  nome: string;
 
   @ApiModelPropertyOptional({
     description: 'Assuntos relacionados ao descritor.',
-    type: AssuntoDto,
-    isArray: true
+    type: () => AssuntoDto,
+    isArray: true,
   })
   @IsOptional()
   @IsArray()
@@ -30,19 +36,10 @@ export class UpdateDescritorDto {
 
   @ApiModelPropertyOptional({
     description: 'Noticias relacionados ao descritor.',
-    type: NoticiaDto,
-    isArray: true
+    type: () => NoticiaDto,
+    isArray: true,
   })
   @IsOptional()
   @IsArray()
   noticias: NoticiaDto[];
-
-  // @ApiModelPropertyOptional({
-  //   description: 'Fontes relacionadas ao descritor.',
-  //   type: FonteDto,
-  //   isArray: true
-  // })
-  // @IsOptional()
-  // @IsArray()
-  // fontes: FonteDto[];
 }

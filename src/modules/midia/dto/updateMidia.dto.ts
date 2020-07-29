@@ -27,7 +27,7 @@ export class UpdateMidiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Noticia relacionada a mídia',
-    type: NoticiaDto,
+    type: () => NoticiaDto,
   })
   @IsOptional()
   noticia: NoticiaDto;

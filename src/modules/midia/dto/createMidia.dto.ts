@@ -4,7 +4,6 @@ import { TipoMidiaDto } from '../../tipoMidia/dto/tipoMidia.dto';
 import { IsString, IsOptional, IsDefined } from 'class-validator';
 
 export class CreateMidiaDto {
-
   @ApiModelPropertyOptional({
     description: 'Nome da mídia',
   })
@@ -21,7 +20,7 @@ export class CreateMidiaDto {
 
   @ApiModelProperty({
     description: 'Noticia relacionada a mídia',
-    type: NoticiaDto,
+    type: () => NoticiaDto,
   })
   @IsDefined()
   noticia: NoticiaDto;

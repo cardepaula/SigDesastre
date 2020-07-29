@@ -20,13 +20,13 @@ export class MidiaDto {
 
   @ApiModelProperty({
     description: 'Noticia relacionada a mídia',
-    type: NoticiaDto,
+    type: () => NoticiaDto,
   })
   noticia: NoticiaDto;
 
   @ApiModelProperty({
     description: 'Tipo da mídia',
-    type: TipoMidiaDto,
+    type: () => TipoMidiaDto,
   })
   tipoMidia: TipoMidiaDto;
 }

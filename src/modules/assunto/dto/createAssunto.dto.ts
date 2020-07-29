@@ -20,8 +20,8 @@ export class CreateAssuntoDto {
 
   @ApiModelPropertyOptional({
     description: 'Fontes relacionados ao assunto',
-    type: FonteDto,
-    isArray: true
+    type: () => FonteDto,
+    isArray: true,
   })
   @IsOptional()
   @IsArray()
@@ -29,8 +29,8 @@ export class CreateAssuntoDto {
 
   @ApiModelPropertyOptional({
     description: 'Descritores relacionado ao assunto',
-    type: DescritorDto,
-    isArray: true
+    type: () => DescritorDto,
+    isArray: true,
   })
   @IsOptional()
   @IsArray()

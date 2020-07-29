@@ -21,20 +21,20 @@ export class AssuntoDto {
 
   @ApiModelPropertyOptional({
     description: 'Interesses',
-    type: InteresseDto
+    type: () => InteresseDto,
   })
   interesses: InteresseDto[];
 
   @ApiModelPropertyOptional({
     description: 'Fontes relacionados ao assunto',
-    type: FonteDto
+    type: () => FonteDto,
   })
   fontes: FonteDto[];
 
   @ApiModelPropertyOptional({
     description: 'Descritores relacionado ao assunto',
-    type: DescritorDto,
-    isArray: true
+    type: () => DescritorDto,
+    isArray: true,
   })
   descritores: DescritorDto[];
 }

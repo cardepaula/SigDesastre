@@ -13,18 +13,4 @@ export class GrupoAcessoDto {
     description: 'Descrição do grupo de acesso',
   })
   nome: string;
-
-  @ApiModelProperty({
-    description: 'Noticias relacionadas ao grupo de acesso',
-    type: NoticiaDto,
-    isArray: true,
-  })
-  noticias?: NoticiaDto[];
-
-  @ApiModelProperty({
-    description: 'Usuarios do grupo de acesso',
-    type: UsuarioDto,
-    isArray: true,
-  })
-  usuarios?: UsuarioDto[];
 }
