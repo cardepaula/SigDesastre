@@ -15,5 +15,4 @@ export class UpdateTipoMidiaDto {
   @IsString()
   @IsDefined()
   nome: string;
-
 }

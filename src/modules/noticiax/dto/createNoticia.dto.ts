@@ -44,7 +44,6 @@ export class CreateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
-  @IsDateString()
   dataPublicacao: string;
 
   @ApiModelPropertyOptional({
@@ -52,7 +51,6 @@ export class CreateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
-  @IsDateString()
   dataCriacao: string;
 
   @ApiModelPropertyOptional({
@@ -60,12 +58,11 @@ export class CreateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
-  @IsDateString()
   dataAtualizacao: string;
 
   @ApiModelProperty({
     description: 'Fonte da notícia',
-    type: CreateFonteDto,
+    type: () => CreateFonteDto,
     required: true,
   })
   @IsDefined()
@@ -75,7 +72,7 @@ export class CreateNoticiaDto {
 
   @ApiModelProperty({
     description: 'Grupo de acesso',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   @IsDefined()
   @IsNotEmpty()
@@ -84,7 +81,7 @@ export class CreateNoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Mídias',
-    type: MidiaDto,
+    type: () => MidiaDto,
     isArray: true,
   })
   @IsOptional()
@@ -94,7 +91,7 @@ export class CreateNoticiaDto {
 
   @ApiModelPropertyOptional({
     description: 'Descritores',
-    type: DescritorDto,
+    type: () => DescritorDto,
     isArray: true,
   })
   @IsOptional()

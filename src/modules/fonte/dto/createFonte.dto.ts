@@ -1,24 +1,21 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional } from 'class-validator';
 import { TipoFonteDto } from '../../tipoFonte/dto/index';
-import { Assunto } from '../../../database/entities/assunto.entity';
-import { Descritor } from '../../../database/entities/descritor.entity';
+import { AssuntoDto } from '../../assunto/dto/index';
+import { DescritorDto } from '../../descritor/dto/index';
 
 export class CreateFonteDto {
-
-  @ApiModelPropertyOptional({
+  @ApiModelProperty({
     description: 'Nome da fonte',
   })
-  @IsOptional()
   @IsString()
-  nome?: string;
+  nome: string;
 
-  @ApiModelPropertyOptional({
+  @ApiModelProperty({
     description: 'URL da fonte',
   })
-  @IsOptional()
   @IsString()
-  link?: string;
+  link: string;
 
   @ApiModelPropertyOptional({
     description: 'Descrição da fonte',
@@ -36,17 +33,8 @@ export class CreateFonteDto {
   @ApiModelPropertyOptional({
     description: 'Assutos relacionados a fonte',
     isArray: true,
-    type: Assunto,
+    type: () => AssuntoDto,
   })
   @IsOptional()
-  assuntos?: Assunto[];
-
-  // @ApiModelPropertyOptional({
-  //   description: 'Descritores relacionados a fonte',
-  //   isArray: true,
-  //   type: Descritor,
-  // })
-  // @IsOptional()
-  // descritores?: Descritor[];
-
+  assuntos?: AssuntoDto[];
 }
