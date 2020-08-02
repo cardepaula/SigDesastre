@@ -12,6 +12,8 @@ import { Noticia } from '../../database/entities/noticia.entity';
 import { CreateNoticiaDto } from './dto/index';
 import { CrudRequest } from '@nestjsx/crud';
 import { FonteService } from '../fonte/fonte.service';
+import * as Moment from 'moment';
+import { stopWord } from './stopwords';
 
 @Injectable()
 export class NoticiaxService extends TypeOrmCrudService<Noticia> {
@@ -25,10 +27,12 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
   private logger = new Logger('Noticia Create Service', true);
 
   async create(req: CrudRequest, noticia: CreateNoticiaDto): Promise<Noticia> {
-    noticia.fonte = await this.fonteService.create(noticia.fonte);
-
-    const findNoticia = await this.findOne(noticia).catch(error => {
-      this.logger.error('Fonte create: ' + error);
+    const findNoticia = await this.findOne({
+      titulo: noticia.titulo,
+      conteudo: noticia.conteudo,
+      link: noticia.link,
+    }).catch(error => {
+      this.logger.error('Find noticia: ' + error);
       throw new HttpException(
         'Internal server error',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -40,27 +44,85 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
       return findNoticia;
     }
 
-    if (!findNoticia) {
-      try {
-        const noticiaCreated = await this.createOne(req, noticia);
-        return noticiaCreated;
-      } catch (error) {
-        this.logger.error(error);
-        throw new HttpException(
-          'Erro ao salvar ao Notícia.',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
-    }
+    noticia.fonte = await this.fonteService.create(noticia.fonte);
+    noticia.dataPublicacao = this.converteDataEntrada(noticia.dataPublicacao);
+    noticia.dataAtualizacao = this.converteDataEntrada(noticia.dataAtualizacao);
+    noticia.dataCriacao = this.converteDataEntrada(noticia.dataCriacao);
 
     try {
-      return await this.updateOne(req, findNoticia);
+      const noticiaCreated = await this.createOne(req, noticia);
+      noticiaCreated.dataPublicacao = this.converteDataSaida(
+        noticiaCreated.dataPublicacao,
+      );
+      noticiaCreated.dataAtualizacao = this.converteDataSaida(
+        noticiaCreated.dataAtualizacao,
+      );
+      noticiaCreated.dataCriacao = this.converteDataSaida(
+        noticiaCreated.dataCriacao,
+      );
+      return noticiaCreated;
     } catch (error) {
       this.logger.error(error);
       throw new HttpException(
-        'Erro ao atualizar ao Notícia.',
+        'Erro ao salvar ao Notícia.',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+  }
+
+  async getNumevemPalavras() {
+    let noticias = await this.noticiaRepository.find();
+    let nuvem = [];
+    let re = /[^a-zA-Z\u00C0-\u00FF]+/i;
+    noticias.forEach(n => {
+      let noticia;
+      if (n.conteudo) {
+        noticia = n.conteudo.replace(/<[^>]+>/g || /{[^>]+}/g, '');
+        noticia = noticia.split(re);
+        noticia = noticia.filter(c => !stopWord.includes(c));
+        this.CriaListaNuvem(nuvem, noticia);
+      }
+    });
+    nuvem.sort((a, b) => b.quantidade - a.quantidade);
+    return nuvem;
+  }
+
+  private CriaListaNuvem(nuvem: any, noticia: string[]) {
+    let possui: boolean;
+    noticia.map(palavra => {
+      possui = false;
+      for (let i = 0; i < nuvem.length; i++) {
+        let item = nuvem[i];
+        if (item.chave === palavra) {
+          item.quantidade++;
+          possui = true;
+          break;
+        }
+      }
+      if (!possui) {
+        nuvem.push({ chave: palavra, quantidade: 1 });
+      }
+    });
+  }
+
+  private converteDataEntrada(data: string) {
+    if (Moment(data, 'DD/MM/YYYY').isValid()) {
+      data = Moment(data, 'DD/MM/YYYY')
+        .utc()
+        .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+    } else if (Moment(data, 'DD-MM-YYYY').isValid()) {
+      data = Moment(data, 'DD-MM-YYYY')
+        .utc()
+        .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+    }
+
+    return data;
+  }
+
+  private converteDataSaida(data: any) {
+    if (data) {
+      data = Moment(new Date(data)).format('DD/MM/YYYY');
+    }
+    return data;
   }
 }

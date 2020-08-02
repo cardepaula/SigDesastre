@@ -1,4 +1,4 @@
-import { Controller, Logger, Body, Req } from '@nestjs/common';
+import { Controller, UseInterceptors, Get } from '@nestjs/common';
 import {
   Crud,
   CrudController,
@@ -6,7 +6,7 @@ import {
   ParsedRequest,
   CrudRequest,
   ParsedBody,
-  CreateManyDto,
+  CrudRequestInterceptor,
 } from '@nestjsx/crud';
 import { NoticiaDto, CreateNoticiaDto, UpdateNoticiaDto } from './dto';
 import { ApiUseTags } from '@nestjs/swagger';
@@ -56,8 +56,8 @@ import { NoticiaxService } from './noticiax.service';
     update: UpdateNoticiaDto,
   },
 })
-@ApiUseTags('Noticias/v2')
-@Controller('noticias/v2')
+@ApiUseTags('Noticias - v2')
+@Controller('v2/noticias')
 export class NoticiaxController implements CrudController<Noticia> {
   constructor(public service: NoticiaxService) {}
 
@@ -66,12 +66,17 @@ export class NoticiaxController implements CrudController<Noticia> {
   }
 
   @Override()
-  createOne(
+  public async createOne(
     @ParsedRequest() req: CrudRequest,
     @ParsedBody() dto: CreateNoticiaDto,
   ) {
-    const response = this.service.create(req, dto);
-
+    const response = await this.service.create(req, dto);
     return response;
+  }
+
+  @UseInterceptors(CrudRequestInterceptor)
+  @Get('/nuvem')
+  public async getNuvem() {
+    return await this.service.getNumevemPalavras();
   }
 }

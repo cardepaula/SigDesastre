@@ -1,4 +1,10 @@
-import { Injectable, Inject, HttpException, HttpStatus, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  HttpException,
+  HttpStatus,
+  Logger,
+} from '@nestjs/common';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { Fonte } from '../../database/entities/fonte.entity';
 import { repositoryConfig } from '../../common/config/repositories.config';
@@ -17,34 +23,33 @@ export class FonteService extends TypeOrmCrudService<Fonte> {
   }
   private logger = new Logger('Fonte create service', true);
 
-  async create(dto: DeepPartial<Fonte>): Promise<Fonte> {
-    let fonte: Fonte;
+  async create(fonte: DeepPartial<Fonte>): Promise<Fonte> {
+    const findFonte = await this.findOne({
+      nome: fonte.nome,
+      link: fonte.link,
+    }).catch(error => {
+      this.logger.error('Find fonte: ' + error);
+      throw new HttpException(
+        'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    });
 
-    const tipoFonte = await this.tipoFonteService.findOne(dto.tipoFonte);
+    const tipoFonte = await this.tipoFonteService.findOne(fonte.tipoFonte);
 
     if (!tipoFonte) {
-      throw new Error("Tipo fonte não existe");
+      throw new Error('Tipo fonte não existe');
     }
 
-    dto.tipoFonte = tipoFonte;
+    fonte.tipoFonte = tipoFonte;
 
-    try {
-      fonte = await this.findOne(dto);
-    } catch (error) {
-      this.logger.error('Fonte find: ' + error);
-      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR)
-    }
-
-    if(!fonte){
+    if (!findFonte) {
       try {
-        fonte = await this.fonteRepository.save(dto);
+        return await this.fonteRepository.save(fonte);
       } catch (error) {
-        this.logger.error(error)
-        throw new Error("Error ao criar fonte.");
+        this.logger.error(error);
+        throw new Error('Error ao criar fonte.');
       }
     }
-
-    return fonte;
   }
-
 }

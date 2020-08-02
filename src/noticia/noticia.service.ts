@@ -7,7 +7,7 @@ import { TipoFonte } from '../database/entities/tipoFonte.entity';
 import { Fonte } from '../database/entities/fonte.entity';
 import { GrupoAcesso } from '../database/entities/grupoAcesso.entity';
 import * as Moment from 'moment';
-import { stopWord } from './stopwords';
+import { stopWord } from '../modules/noticiax/stopwords';
 
 @Injectable()
 export class NoticiaService {

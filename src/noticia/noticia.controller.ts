@@ -182,6 +182,7 @@ export class NoticiaController {
   public async getTipoFonte() {
     return await this.noticiaService.getTipoFonte();
   }
+
   @ApiResponse({
     status: 201,
     description: 'OK',
