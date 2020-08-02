@@ -23,13 +23,11 @@ export class Fonte {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
     name: 'nome',
   })
   nome: string;
 
   @Column('character varying', {
-    nullable: true,
     unique: true,
     name: 'link',
   })
@@ -47,13 +45,13 @@ export class Fonte {
   })
   tipoFonte: TipoFonte;
 
-  @OneToMany(() => Noticia, noticias => noticias.fonte, { 
+  @OneToMany(() => Noticia, noticias => noticias.fonte, {
     eager: false,
   })
   noticias: Noticia[];
 
-  @ManyToMany(() => Assunto, assuntos => assuntos.fontes, { 
-    eager: false, 
+  @ManyToMany(() => Assunto, assuntos => assuntos.fontes, {
+    eager: false,
   })
   assuntos: Assunto[];
 
