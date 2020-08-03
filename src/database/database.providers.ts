@@ -45,7 +45,7 @@ export const databaseProviders = [
           migrationsDir: './database/migrations',
         },
         logging: dbConfig.logging,
-        logger: 'simple-console',
+        logger: 'file',
         ssl: dbConfig.ssl,
       }),
   },

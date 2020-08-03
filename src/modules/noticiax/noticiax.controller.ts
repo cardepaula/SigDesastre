@@ -12,12 +12,15 @@ import { NoticiaDto, CreateNoticiaDto, UpdateNoticiaDto } from './dto';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Noticia } from '../../database/entities/noticia.entity';
 import { NoticiaxService } from './noticiax.service';
+import { ConverteDataEntradaInterceptor } from '../../interceptors/converteDataEntrada.interceptor';
+import { ConverteDataSaidaInterceptor } from '../../interceptors/converteDataSaida.interceptor';
 
 @Crud({
   model: {
     type: NoticiaDto,
   },
   query: {
+    persist: ['dataPublicacao'],
     join: {
       fonte: {
         eager: true,
@@ -58,6 +61,7 @@ import { NoticiaxService } from './noticiax.service';
 })
 @ApiUseTags('Noticias - v2')
 @Controller('v2/noticias')
+@UseInterceptors(ConverteDataEntradaInterceptor, ConverteDataSaidaInterceptor)
 export class NoticiaxController implements CrudController<Noticia> {
   constructor(public service: NoticiaxService) {}
 

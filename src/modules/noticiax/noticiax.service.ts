@@ -12,7 +12,6 @@ import { Noticia } from '../../database/entities/noticia.entity';
 import { CreateNoticiaDto } from './dto/index';
 import { CrudRequest } from '@nestjsx/crud';
 import { FonteService } from '../fonte/fonte.service';
-import * as Moment from 'moment';
 import { stopWord } from './stopwords';
 
 @Injectable()
@@ -40,26 +39,13 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
     });
 
     if (findNoticia) {
-      this.logger.log('Noticia encontrada');
       return findNoticia;
     }
 
     noticia.fonte = await this.fonteService.create(noticia.fonte);
-    noticia.dataPublicacao = this.converteDataEntrada(noticia.dataPublicacao);
-    noticia.dataAtualizacao = this.converteDataEntrada(noticia.dataAtualizacao);
-    noticia.dataCriacao = this.converteDataEntrada(noticia.dataCriacao);
 
     try {
       const noticiaCreated = await this.createOne(req, noticia);
-      noticiaCreated.dataPublicacao = this.converteDataSaida(
-        noticiaCreated.dataPublicacao,
-      );
-      noticiaCreated.dataAtualizacao = this.converteDataSaida(
-        noticiaCreated.dataAtualizacao,
-      );
-      noticiaCreated.dataCriacao = this.converteDataSaida(
-        noticiaCreated.dataCriacao,
-      );
       return noticiaCreated;
     } catch (error) {
       this.logger.error(error);
@@ -103,26 +89,5 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
         nuvem.push({ chave: palavra, quantidade: 1 });
       }
     });
-  }
-
-  private converteDataEntrada(data: string) {
-    if (Moment(data, 'DD/MM/YYYY').isValid()) {
-      data = Moment(data, 'DD/MM/YYYY')
-        .utc()
-        .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-    } else if (Moment(data, 'DD-MM-YYYY').isValid()) {
-      data = Moment(data, 'DD-MM-YYYY')
-        .utc()
-        .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-    }
-
-    return data;
-  }
-
-  private converteDataSaida(data: any) {
-    if (data) {
-      data = Moment(new Date(data)).format('DD/MM/YYYY');
-    }
-    return data;
   }
 }
