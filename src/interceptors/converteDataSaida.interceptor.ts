@@ -14,27 +14,20 @@ export class ConverteDataSaidaInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const ctx = context.switchToHttp();
     const res: Response = ctx.getResponse();
-    console.log('Before...', res.json);
 
     const now = Date.now();
-    console.log(now);
     return next.handle().pipe(
-      map(value => {
-        if (value.data) {
-          for (const data of value.data) {
-            if (data.dataPublicacao)
-              data.dataPublicacao = this.converteDataSaida(data.dataPublicacao);
-            if (data.dataAtualizacao)
-              data.dataAtualizacao = this.converteDataSaida(
-                data.dataAtualizacao,
-              );
-            if (data.dataCriacao)
-              data.dataCriacao = this.converteDataSaida(data.dataCriacao);
+      map(noticia => {
+        if (noticia.dataPublicacao)
+          noticia.dataPublicacao = this.converteDataSaida(noticia.dataPublicacao);
+        if (noticia.dataAtualizacao)
+          noticia.dataAtualizacao = this.converteDataSaida(noticia.dataAtualizacao);
+        if (noticia.dataCriacao)
+          noticia.dataCriacao = this.converteDataSaida(noticia.dataCriacao);
 
-            if (data.data) data.data = this.converteDataSaida(data.data);
-          }
-        }
-        return value;
+        if (noticia.data) noticia.data = this.converteDataSaida(noticia.data);
+
+        return noticia;
       }),
     );
   }
