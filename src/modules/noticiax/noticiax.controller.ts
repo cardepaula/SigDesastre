@@ -1,4 +1,4 @@
-import { Controller, UseInterceptors, Get } from '@nestjs/common';
+import { Controller, UseInterceptors, Get, HttpStatus } from '@nestjs/common';
 import {
   Crud,
   CrudController,
@@ -9,11 +9,12 @@ import {
   CrudRequestInterceptor,
 } from '@nestjsx/crud';
 import { NoticiaDto, CreateNoticiaDto, UpdateNoticiaDto } from './dto';
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiUseTags, ApiResponse } from '@nestjs/swagger';
 import { Noticia } from '../../database/entities/noticia.entity';
 import { NoticiaxService } from './noticiax.service';
 import { ConverteDataEntradaInterceptor } from '../../interceptors/converteDataEntrada.interceptor';
 import { ConverteDataSaidaInterceptor } from '../../interceptors/converteDataSaida.interceptor';
+import { NuvemPalavraDto } from './dto/nuvemPalavras.dto';
 
 @Crud({
   model: {
@@ -58,6 +59,9 @@ import { ConverteDataSaidaInterceptor } from '../../interceptors/converteDataSai
     create: CreateNoticiaDto,
     update: UpdateNoticiaDto,
   },
+  routes: {
+    exclude: ['createManyBase'],
+  },
 })
 @ApiUseTags('Noticias - v2')
 @Controller('v2/noticias')
@@ -73,14 +77,19 @@ export class NoticiaxController implements CrudController<Noticia> {
   public async createOne(
     @ParsedRequest() req: CrudRequest,
     @ParsedBody() dto: CreateNoticiaDto,
-  ) {
+  ): Promise<Noticia> {
     const response = await this.service.create(req, dto);
     return response;
   }
 
-  @UseInterceptors(CrudRequestInterceptor)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Get Nuvem Response',
+    type: NuvemPalavraDto,
+    isArray: true,
+  })
   @Get('/nuvem')
-  public async getNuvem() {
+  public async getNuvem(): Promise<NuvemPalavraDto[]> {
     return await this.service.getNumevemPalavras();
   }
 }
