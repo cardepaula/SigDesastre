@@ -17,22 +17,33 @@ export class ConverteDataSaidaInterceptor implements NestInterceptor {
 
     const now = Date.now();
     return next.handle().pipe(
-      map(noticia => {
-        if (noticia.dataPublicacao)
-          noticia.dataPublicacao = this.converteDataSaida(noticia.dataPublicacao);
-        if (noticia.dataAtualizacao)
-          noticia.dataAtualizacao = this.converteDataSaida(noticia.dataAtualizacao);
-        if (noticia.dataCriacao)
-          noticia.dataCriacao = this.converteDataSaida(noticia.dataCriacao);
-
-        if (noticia.data) noticia.data = this.converteDataSaida(noticia.data);
-
-        return noticia;
+      map(value => {
+        if (Array.isArray(value.data)) {
+          value.data.map(v => {
+            v = this.converteDataSaida(v);
+          })
+        } else {
+          value = this.converteDataSaida(value);
+        }
+        
+        return value;
       }),
     );
   }
 
-  private converteDataSaida(data: any) {
+  private converteDataSaida(objeto: any) {
+    if (objeto.dataPublicacao)
+      objeto.dataPublicacao = this.converteData(objeto.dataPublicacao);
+    if (objeto.dataAtualizacao)
+      objeto.dataAtualizacao = this.converteData(objeto.dataAtualizacao);
+    if (objeto.dataCriacao)
+      objeto.dataCriacao = this.converteData(objeto.dataCriacao);
+
+    if (objeto.data) objeto.data = this.converteData(objeto.data);
+    return objeto;
+  }
+
+  private converteData(data: any) {
     if (data) {
       data = Moment(new Date(data)).format('DD/MM/YYYY');
     }
