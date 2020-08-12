@@ -8,5 +8,6 @@ import { FonteModule } from '../fonte/fonte.module';
   imports: [DatabaseModule, FonteModule],
   controllers: [NoticiaxController],
   providers: [NoticiaxService],
+  exports: [NoticiaxService],
 })
 export class NoticiaxModule {}

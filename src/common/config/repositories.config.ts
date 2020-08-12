@@ -11,15 +11,5 @@ export const repositoryConfig = {
   tipoMidia: 'TIPO_MIDIA_REPOSITORY',
   usuario: 'USUARIO_REPOSITORY',
   rss: 'RSS_REPOSITORY',
-  tweets: 'TWEETS_REPOSITORY',
+  tweetInfo: 'TWEET_INFO_REPOSITORY',
 };
-
-// export const repositoryRSSConfig = {
-//   database: 'DATABASE_CONNECTION_RSS',
-//   rss: 'RSS_REPOSITORY',
-// };
-
-// export const repositoryTweetConfig = {
-//   database: 'DATABASE_CONNECTION_TW',
-//   tweets: 'TWEETS_REPOSITORY',
-// };

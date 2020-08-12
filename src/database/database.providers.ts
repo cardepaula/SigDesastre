@@ -22,6 +22,7 @@ import { Midia } from './entities/midia.entity';
 import { TipoMidia } from './entities/tipoMidia.entity';
 import { Usuario } from './entities/usuario.entity';
 import { Logger } from '@nestjs/common';
+import { TweetInfo } from './entities/tweetInfo.entity';
 
 export const databaseProviders = [
   {
@@ -45,7 +46,7 @@ export const databaseProviders = [
           migrationsDir: './database/migrations',
         },
         logging: dbConfig.logging,
-        logger: 'file',
+        logger: 'simple-console',
         ssl: dbConfig.ssl,
       }),
   },
@@ -101,63 +102,13 @@ export const databaseProviders = [
     inject: [repositoryConfig.database],
   },
   {
-    provide: repositoryConfig.tweets,
-    useFactory: (connection: Connection) => connection.getRepository(Tweets),
-    inject: [repositoryConfig.database],
-  },
-  {
     provide: repositoryConfig.rss,
     useFactory: (connection: Connection) => connection.getRepository(RSS),
     inject: [repositoryConfig.database],
   },
+  {
+    provide: repositoryConfig.tweetInfo,
+    useFactory: (connection: Connection) => connection.getRepository(TweetInfo),
+    inject: [repositoryConfig.database],
+  },
 ];
-
-// export const databaseTweetProviders = [
-//   {
-//     provide: repositoryTweetConfig.database,
-//     useFactory: async () =>
-//       await createConnection({
-//         name: 'twitter',
-//         type: 'postgres',
-//         host: dbTweetConfig.host,
-//         port: dbTweetConfig.port,
-//         username: dbTweetConfig.user,
-//         password: dbTweetConfig.pass,
-//         database: dbTweetConfig.name,
-//         entities: [__dirname + '/../**/tweets.entity{.ts,.js}'],
-//         // synchronize: dbTweetConfig.synchronize,
-//         // dropSchema: dbTweetConfig.dropSchema,
-//         // cache: dbTweetConfig.cache,
-//       }),
-//   },
-//   {
-//     provide: repositoryTweetConfig.tweets,
-//     useFactory: (connection: Connection) => connection.getRepository(Tweets),
-//     inject: [repositoryTweetConfig.database],
-//   },
-// ];
-
-// export const databaseRSSProviders = [
-//   {
-//     provide: repositoryRSSConfig.database,
-//     useFactory: async () =>
-//       await createConnection({
-//         name: 'rss',
-//         type: 'postgres',
-//         host: dbRSSConfig.host,
-//         port: dbRSSConfig.port,
-//         username: dbRSSConfig.user,
-//         password: dbRSSConfig.pass,
-//         database: dbRSSConfig.name,
-//         entities: [__dirname + '/../**/rss.entity{.ts,.js}'],
-//         // synchronize: dbRSSConfig.synchronize,
-//         // dropSchema: dbRSSConfig.dropSchema,
-//         // cache: dbRSSConfig.cache
-//       }),
-//   },
-//   {
-//     provide: repositoryRSSConfig.rss,
-//     useFactory: (connection: Connection) => connection.getRepository(RSS),
-//     inject: [repositoryRSSConfig.database],
-//   },
-// ];

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { NoticiaModule } from './noticia/noticia.module';
-import { TweetsModule } from './modules/tweets/tweets.module';
 import { RSSModule } from './modules/rss/rss.module';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
@@ -16,11 +15,11 @@ import { InteresseModule } from './modules/interesse/interesse.module';
 import { MidiaModule } from './modules/midia/midia.module';
 import { TipoMidiaModule } from './modules/tipoMidia/tipoMidia.module';
 import { UsuarioModule } from './modules/usuario/usuario.module';
+import { TweetInfoModule } from './modules/tweetInfo/tweetInfo.module';
 @Module({
   imports: [
     DatabaseModule,
     NoticiaModule,
-    TweetsModule,
     RSSModule,
     AuthModule,
     ServeStaticModule.forRoot({
@@ -36,13 +35,13 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
     MidiaModule,
     TipoMidiaModule,
     UsuarioModule,
+    TweetInfoModule,
   ],
   controllers: [],
   providers: [],
   exports: [
     DatabaseModule,
     NoticiaModule,
-    TweetsModule,
     RSSModule,
     AuthModule,
     FonteModule,
@@ -55,6 +54,7 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
     MidiaModule,
     TipoMidiaModule,
     UsuarioModule,
+    TweetInfoModule,
   ]
 })
 export class AppModule {}

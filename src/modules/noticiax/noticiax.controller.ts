@@ -78,7 +78,7 @@ export class NoticiaxController implements CrudController<Noticia> {
     @ParsedRequest() req: CrudRequest,
     @ParsedBody() dto: CreateNoticiaDto,
   ): Promise<Noticia> {
-    const response = await this.service.create(req, dto);
+    const response = await this.service.create(dto, req);
     return response;
   }
 

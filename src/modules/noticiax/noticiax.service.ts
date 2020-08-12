@@ -25,7 +25,8 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
   }
   private logger = new Logger('Noticia Create Service', true);
 
-  async create(req: CrudRequest, noticia: CreateNoticiaDto): Promise<Noticia> {
+  async create(noticia: CreateNoticiaDto, req?: CrudRequest): Promise<Noticia> {
+    let createFunction: any;
     const findNoticia = await this.findOne({
       titulo: noticia.titulo,
       conteudo: noticia.conteudo,
@@ -42,10 +43,20 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
       return findNoticia;
     }
 
+    if (req) {
+      createFunction = (noticia: CreateNoticiaDto) => {
+        this.createOne(req, noticia);
+      };
+    } else {
+      createFunction = (noticia: CreateNoticiaDto) => {
+        this.noticiaRepository.save(noticia);
+      };
+    }
+
     noticia.fonte = await this.fonteService.create(noticia.fonte);
 
     try {
-      const noticiaCreated = await this.createOne(req, noticia);
+      const noticiaCreated = await createFunction(req, noticia);
       return noticiaCreated;
     } catch (error) {
       this.logger.error(error);

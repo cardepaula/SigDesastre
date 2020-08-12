@@ -39,7 +39,7 @@ export class FonteService extends TypeOrmCrudService<Fonte> {
       return findFonte;
     }    
 
-    const tipoFonte = await this.tipoFonteService.findOne(fonte.tipoFonte);
+    const tipoFonte = await this.tipoFonteService.findOne({nome: fonte.tipoFonte.nome});
 
     if (!tipoFonte) {
       throw new Error('Tipo fonte não existe');
