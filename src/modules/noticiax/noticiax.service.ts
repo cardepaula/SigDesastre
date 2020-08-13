@@ -44,19 +44,19 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
     }
 
     if (req) {
-      createFunction = (noticia: CreateNoticiaDto) => {
-        this.createOne(req, noticia);
+      createFunction =  async (noticia: CreateNoticiaDto) => {
+        return await this.createOne(req, noticia);
       };
     } else {
-      createFunction = (noticia: CreateNoticiaDto) => {
-        this.noticiaRepository.save(noticia);
+      createFunction = async (noticia: CreateNoticiaDto) => {
+        return await this.noticiaRepository.save(noticia);
       };
     }
 
     noticia.fonte = await this.fonteService.create(noticia.fonte);
 
     try {
-      const noticiaCreated = await createFunction(req, noticia);
+      const noticiaCreated = await createFunction(noticia);
       return noticiaCreated;
     } catch (error) {
       this.logger.error(error);
@@ -68,9 +68,9 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
   }
 
   async getNumevemPalavras() {
-    let noticias = await this.noticiaRepository.find();
-    let nuvem = [];
-    let re = /[^a-zA-Z\u00C0-\u00FF]+/i;
+    const noticias = await this.noticiaRepository.find();
+    const nuvem = [];
+    const re = /[^a-zA-Z\u00C0-\u00FF]+/i;
     noticias.forEach(n => {
       let noticia;
       if (n.conteudo) {
@@ -89,7 +89,7 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
     noticia.map(palavra => {
       possui = false;
       for (let i = 0; i < nuvem.length; i++) {
-        let item = nuvem[i];
+        const item = nuvem[i];
         if (item.chave === palavra) {
           item.quantidade++;
           possui = true;
