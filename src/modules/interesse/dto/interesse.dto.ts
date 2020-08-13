@@ -1,6 +1,6 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { AssuntoDto } from '../../assunto/dto/index';
-import { UsuarioDto } from '../../usuario/dto/index';
+import { AssuntoDto } from '../../assunto/dto';
+import { UsuarioDto } from '../../usuario/dto';
 
 export class InteresseDto {
   @ApiModelProperty({

@@ -1,8 +1,8 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional } from 'class-validator';
-import { TipoFonteDto } from '../../tipoFonte/dto/index';
-import { AssuntoDto } from '../../assunto/dto/index';
-import { DescritorDto } from '../../descritor/dto/index';
+import { TipoFonteDto } from '../../tipoFonte/dto';
+import { AssuntoDto } from '../../assunto/dto';
+import { DescritorDto } from '../../descritor/dto';
 
 export class CreateFonteDto {
   @ApiModelProperty({

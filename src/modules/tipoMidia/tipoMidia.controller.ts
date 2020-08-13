@@ -5,7 +5,7 @@ import {
   TipoMidiaDto,
   CreateTipoMidiaDto,
   UpdateTipoMidiaDto,
-} from './dto/index';
+} from './dto';
 import { TipoMidia } from '../../database/entities/tipoMidia.entity';
 import { TipoMidiaService } from './tipoMidia.service';
 

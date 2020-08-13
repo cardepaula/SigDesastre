@@ -7,7 +7,7 @@ import {
   MaxLength,
   IsNumber,
 } from 'class-validator';
-import { UpdateNoticiaDto } from 'src/modules/noticiax/dto';
+import { UpdateNoticiaDto } from '../../noticiax/dto';
 
 export class UpdateTweetInfoDto {
   @ApiModelProperty({

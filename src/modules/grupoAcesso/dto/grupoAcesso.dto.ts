@@ -1,7 +1,7 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { NoticiaDto } from '../../noticiax/dto/index';
+import { NoticiaDto } from '../../noticiax/dto';
 import { Noticia } from '../../../database/entities/noticia.entity';
-import { UsuarioDto } from '../../usuario/dto/index';
+import { UsuarioDto } from '../../usuario/dto';
 
 export class GrupoAcessoDto {
   @ApiModelProperty({

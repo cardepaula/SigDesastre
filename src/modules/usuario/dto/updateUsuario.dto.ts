@@ -1,6 +1,6 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
-import { InteresseDto } from '../../interesse/dto/index';
+import { GrupoAcessoDto } from '../../grupoAcesso/dto';
+import { InteresseDto } from '../../interesse/dto';
 import {
   IsInt,
   IsDefined,

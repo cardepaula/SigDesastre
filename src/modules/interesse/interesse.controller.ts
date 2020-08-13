@@ -5,7 +5,7 @@ import {
   CreateInteresseDto,
   InteresseDto,
   UpdateInteresseDto,
-} from './dto/index';
+} from './dto';
 import { ApiUseTags } from '@nestjs/swagger';
 import { InteresseService } from './interesse.service';
 

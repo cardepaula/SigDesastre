@@ -5,7 +5,7 @@ import {
   CreateTipoFonteDto,
   UpdateTipoFonteDto,
   TipoFonteDto,
-} from './dto/index';
+} from './dto';
 import { ApiUseTags } from '@nestjs/swagger';
 import { TipoFonteService } from './tipoFonte.service';
 

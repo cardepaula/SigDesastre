@@ -1,5 +1,5 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { FonteDto } from '../../fonte/dto/index';
+import { FonteDto } from '../../fonte/dto';
 
 export class TipoFonteDto {
   @ApiModelProperty({

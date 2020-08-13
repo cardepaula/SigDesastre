@@ -1,9 +1,8 @@
-import { IsInt, IsDefined } from 'class-validator';
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { TipoFonteDto } from '../../tipoFonte/dto/index';
-import { NoticiaDto } from '../../noticiax/dto/index';
-import { AssuntoDto } from '../../assunto/dto/index';
-import { DescritorDto } from 'src/modules/descritor/dto';
+import { TipoFonteDto } from '../../tipoFonte/dto';
+import { NoticiaDto } from '../../noticiax/dto';
+import { AssuntoDto } from '../../assunto/dto';
+import { DescritorDto } from '../../descritor/dto';
 
 export class FonteDto {
   @ApiModelProperty({

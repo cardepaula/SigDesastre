@@ -1,7 +1,7 @@
 import { ApiModelPropertyOptional, ApiModelProperty } from '@nestjs/swagger';
-import { AssuntoDto } from '../../assunto/dto/index';
-import { NoticiaDto } from '../../noticiax/dto/index';
-import { FonteDto } from '../../fonte/dto/index';
+import { AssuntoDto } from '../../assunto/dto';
+import { NoticiaDto } from '../../noticiax/dto';
+import { FonteDto } from '../../fonte/dto';
 import {
   IsInt,
   IsDefined,

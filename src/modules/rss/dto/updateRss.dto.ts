@@ -6,7 +6,7 @@ import {
   IsInt,
   IsOptional,
 } from 'class-validator';
-import { TipoFonteDto } from '../../tipoFonte/dto/index';
+import { TipoFonteDto } from '../../tipoFonte/dto';
 
 export class UpdateRSSDto {
   @ApiModelProperty({

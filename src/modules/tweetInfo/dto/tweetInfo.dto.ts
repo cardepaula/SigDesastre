@@ -1,4 +1,4 @@
-import { NoticiaDto } from '../../noticiax/dto/index';
+import { NoticiaDto } from '../../noticiax/dto';
 import { ApiModelPropertyOptional, ApiModelProperty } from '@nestjs/swagger';
 
 export class TweetInfoDto {

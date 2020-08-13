@@ -1,7 +1,7 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsDefined, IsOptional } from 'class-validator';
-import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
-import { InteresseDto } from '../../interesse/dto/index';
+import { GrupoAcessoDto } from '../../grupoAcesso/dto';
+import { InteresseDto } from '../../interesse/dto';
 
 export class CreateUsuarioDto {
   @ApiModelProperty({

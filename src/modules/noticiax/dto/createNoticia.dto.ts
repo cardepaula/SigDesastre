@@ -1,17 +1,16 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { FonteDto, CreateFonteDto } from '../../fonte/dto';
+import { CreateFonteDto } from '../../fonte/dto';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto';
 import {
   IsString,
-  IsDateString,
   IsDefined,
   IsNotEmpty,
   IsArray,
   IsOptional,
   ValidateNested,
 } from 'class-validator';
-import { MidiaDto } from '../../midia/dto/index';
-import { DescritorDto } from '../../descritor/dto/index';
+import { MidiaDto } from '../../midia/dto';
+import { DescritorDto } from '../../descritor/dto';
 
 export class CreateNoticiaDto {
   @ApiModelProperty({

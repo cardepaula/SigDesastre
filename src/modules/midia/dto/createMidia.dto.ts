@@ -1,5 +1,5 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { NoticiaDto } from '../../noticiax/dto/index';
+import { NoticiaDto } from '../../noticiax/dto';
 import { TipoMidiaDto } from '../../tipoMidia/dto/tipoMidia.dto';
 import { IsString, IsOptional, IsDefined } from 'class-validator';
 

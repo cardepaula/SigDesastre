@@ -1,4 +1,4 @@
-import { CreateNoticiaDto } from '../../noticiax/dto/index';
+import { CreateNoticiaDto } from '../../noticiax/dto';
 import {
   IsString,
   MaxLength,

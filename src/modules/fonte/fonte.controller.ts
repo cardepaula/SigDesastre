@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
-import { CreateFonteDto, FonteDto, UpdateFonteDto } from './dto/index';
+import { CreateFonteDto, FonteDto, UpdateFonteDto } from './dto';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Fonte } from '../../database/entities/fonte.entity';
 import { FonteService } from './fonte.service';

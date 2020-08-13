@@ -3,7 +3,7 @@ import {
   DescritorDto,
   CreateDescritorDto,
   UpdateDescritorDto,
-} from './dto/index';
+} from './dto';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Descritor } from '../../database/entities/descritor.entity';

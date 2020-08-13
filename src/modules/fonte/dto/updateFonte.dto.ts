@@ -1,7 +1,7 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { IsInt, IsDefined, IsString, IsIn, IsOptional } from 'class-validator';
-import { TipoFonteDto } from '../../tipoFonte/dto/index';
-import { DescritorDto } from 'src/modules/descritor/dto';
+import { TipoFonteDto } from '../../tipoFonte/dto';
+import { DescritorDto } from '../../descritor/dto';
 
 export class UpdateFonteDto {
   @ApiModelProperty({

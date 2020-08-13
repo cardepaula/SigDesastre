@@ -9,7 +9,7 @@ import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { repositoryConfig } from '../../common/config/repositories.config';
 import { Repository, DeepPartial } from 'typeorm';
 import { Noticia } from '../../database/entities/noticia.entity';
-import { CreateNoticiaDto } from './dto/index';
+import { CreateNoticiaDto } from './dto';
 import { CrudRequest } from '@nestjsx/crud';
 import { FonteService } from '../fonte/fonte.service';
 import { stopWord } from './stopwords';

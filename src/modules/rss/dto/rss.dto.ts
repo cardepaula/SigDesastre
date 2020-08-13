@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { TipoFonteDto } from '../../tipoFonte/dto/index';
+import { TipoFonteDto } from '../../tipoFonte/dto';
 
 export class RSSDto {
   @ApiModelProperty({

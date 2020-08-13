@@ -1,6 +1,6 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { FonteDto } from '../../fonte/dto/index';
-import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
+import { FonteDto } from '../../fonte/dto';
+import { GrupoAcessoDto } from '../../grupoAcesso/dto';
 import { Midia } from '../../../database/entities/midia.entity';
 import { Descritor } from '../../../database/entities/descritor.entity';
 import {
@@ -12,8 +12,8 @@ import {
   IsNotEmpty,
   IsOptional,
 } from 'class-validator';
-import { DescritorDto } from '../../descritor/dto/index';
-import { MidiaDto } from '../../midia/dto/index';
+import { DescritorDto } from '../../descritor/dto';
+import { MidiaDto } from '../../midia/dto';
 
 export class UpdateNoticiaDto {
   @ApiModelProperty({

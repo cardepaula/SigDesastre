@@ -1,8 +1,8 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto';
 import { FonteDto } from '../../fonte/dto';
-import { MidiaDto } from '../../midia/dto/index';
-import { DescritorDto } from '../../descritor/dto/index';
+import { MidiaDto } from '../../midia/dto';
+import { DescritorDto } from '../../descritor/dto';
 
 export class NoticiaDto {
   @ApiModelProperty({

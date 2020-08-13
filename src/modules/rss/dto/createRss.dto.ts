@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsString, IsNumber, MaxLength, IsDefined } from 'class-validator';
-import { TipoFonteDto } from '../../tipoFonte/dto/index';
+import { TipoFonteDto } from '../../tipoFonte/dto';
 
 export class CreateRSSDto {
   @ApiModelProperty({
