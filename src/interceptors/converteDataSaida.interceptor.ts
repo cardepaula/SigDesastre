@@ -18,28 +18,31 @@ export class ConverteDataSaidaInterceptor implements NestInterceptor {
     const now = Date.now();
     return next.handle().pipe(
       map(value => {
-        if (Array.isArray(value.data)) {
+        if (value.data && Array.isArray(value.data)) {
           value.data.map(v => {
             v = this.converteDataSaida(v);
-          })
+          });
         } else {
           value = this.converteDataSaida(value);
         }
-        
+
         return value;
       }),
     );
   }
 
   private converteDataSaida(objeto: any) {
-    if (objeto.dataPublicacao)
+    if (objeto.dataPublicacao) {
       objeto.dataPublicacao = this.converteData(objeto.dataPublicacao);
-    if (objeto.dataAtualizacao)
+    }
+    if (objeto.dataAtualizacao) {
       objeto.dataAtualizacao = this.converteData(objeto.dataAtualizacao);
-    if (objeto.dataCriacao)
+    }
+    if (objeto.dataCriacao) {
       objeto.dataCriacao = this.converteData(objeto.dataCriacao);
+    }
 
-    if (objeto.data) objeto.data = this.converteData(objeto.data);
+    if (objeto.data) { objeto.data = this.converteData(objeto.data); }
     return objeto;
   }
 

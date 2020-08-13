@@ -17,27 +17,31 @@ export class ConverteDataEntradaInterceptor implements NestInterceptor {
     if (method === 'POST') {
       const body: any = req.body;
 
-      if (body.dataPublicacao)
+      if (body.dataPublicacao) {
         body.dataPublicacao = this.converteDataEntrada(body.dataPublicacao);
+      }
 
-      if (body.dataAtualizacao)
+      if (body.dataAtualizacao) {
         body.dataAtualizacao = this.converteDataEntrada(body.dataAtualizacao);
+      }
 
-      if (body.dataCriacao)
+      if (body.dataCriacao) {
         body.dataCriacao = this.converteDataEntrada(body.dataCriacao);
+      }
 
-      if (body.data) body.data = this.converteDataEntrada(body.data);
+      if (body.data) { body.data = this.converteDataEntrada(body.data); }
     }
 
     return next.handle();
   }
 
   private converteDataEntrada(data: string) {
-    if (Moment(data, 'DD/MM/YYYY').isValid()) {
+    
+    if (Moment(data, 'DD/MM/YYYY', true).isValid()) {
       data = Moment(data, 'DD/MM/YYYY')
         .utc()
         .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-    } else if (Moment(data, 'DD-MM-YYYY').isValid()) {
+    } else if (Moment(data, 'DD-MM-YYYY', true).isValid()) {
       data = Moment(data, 'DD-MM-YYYY')
         .utc()
         .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
