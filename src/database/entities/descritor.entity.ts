@@ -32,10 +32,10 @@ export class Descritor {
   @JoinTable({ name: 'descritor_x_noticia' })
   noticias: Noticia[];
 
-  // @ManyToMany(() => Fonte, fontes => fontes.descritores, {
-  //   nullable: false,
-  //   eager: false,
-  // })
-  // @JoinTable({ name: 'descritor_x_fonte' })
-  // fontes: Fonte[];
+  @ManyToMany(() => Fonte, fontes => fontes.descritores, {
+    nullable: false,
+    eager: false,
+  })
+  @JoinTable({ name: 'descritor_x_fonte' })
+  fontes: Fonte[];
 }

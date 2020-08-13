@@ -55,8 +55,8 @@ export class Fonte {
   })
   assuntos: Assunto[];
 
-  // @ManyToMany(() => Descritor, descritores => descritores.fontes, {
-  //   eager: false,
-  // })
-  // descritores: Descritor[];
+  @ManyToMany(() => Descritor, descritores => descritores.fontes, {
+    eager: false,
+  })
+  descritores: Descritor[];
 }

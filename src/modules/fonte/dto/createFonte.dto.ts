@@ -37,4 +37,11 @@ export class CreateFonteDto {
   })
   @IsOptional()
   assuntos?: AssuntoDto[];
+
+  @ApiModelPropertyOptional({
+    description: 'Descritores relacionados a fonte.',
+    type: () => DescritorDto,
+    isArray: true,
+  })
+  descritores?: DescritorDto[];
 }

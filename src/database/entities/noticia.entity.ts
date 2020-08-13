@@ -48,19 +48,19 @@ export class Noticia {
   })
   descricao: string;
 
-  @Column('date', {
+  @Column('timestamp without time zone', {
     nullable: true,
     name: 'data_publicacao',
   })
   dataPublicacao: string;
 
-  @Column('date', {
+  @Column('timestamp without time zone', {
     nullable: true,
     name: 'data_criacao',
   })
   dataCriacao: string;
 
-  @Column('date', {
+  @Column('timestamp without time zone', {
     nullable: true,
     name: 'data_atualizacao',
   })
@@ -68,7 +68,7 @@ export class Noticia {
 
   @ManyToOne(() => Fonte, fonte => fonte.noticias, {
     nullable: false,
-    cascade: ['insert'], 
+    cascade: ['insert'],
   })
   fonte: Fonte;
 
@@ -84,7 +84,7 @@ export class Noticia {
   @ManyToMany(() => Descritor, descritor => descritor.noticias, { eager: true })
   descritores: Descritor[];
 
-  @OneToOne(() => TweetInfo, tweetInfo => tweetInfo.noticia, { 
+  @OneToOne(() => TweetInfo, tweetInfo => tweetInfo.noticia, {
     eager: false,
   })
   tweetInfo: TweetInfo;

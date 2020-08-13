@@ -35,6 +35,13 @@ export class UpdateDescritorDto {
   assuntos: AssuntoDto[];
 
   @ApiModelPropertyOptional({
+    description: 'Fontes relacionados ao descritor.',
+    type: () => FonteDto,
+    isArray: true,
+  })
+  fontes: FonteDto[];
+
+  @ApiModelPropertyOptional({
     description: 'Noticias relacionados ao descritor.',
     type: () => NoticiaDto,
     isArray: true,

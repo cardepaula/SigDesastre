@@ -3,6 +3,7 @@ import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { TipoFonteDto } from '../../tipoFonte/dto/index';
 import { NoticiaDto } from '../../noticiax/dto/index';
 import { AssuntoDto } from '../../assunto/dto/index';
+import { DescritorDto } from 'src/modules/descritor/dto';
 
 export class FonteDto {
   @ApiModelProperty({
@@ -44,4 +45,11 @@ export class FonteDto {
     type: () => AssuntoDto,
   })
   assuntos: AssuntoDto[];
+
+  @ApiModelPropertyOptional({
+    description: 'Descritores relacionados a fonte.',
+    type: () => DescritorDto,
+    isArray: true,
+  })
+  descritores?: DescritorDto[];
 }
