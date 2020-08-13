@@ -19,7 +19,7 @@ import { TweetInfoDto, CreateTweetInfoDto, UpdateTweetInfoDto } from './dto';
   },
   query: {
     join: {
-      noticia: {
+      'noticia': {
         eager: true,
       },
       'noticia.fonte': {

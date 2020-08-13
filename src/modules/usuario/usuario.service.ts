@@ -10,6 +10,6 @@ export class UsuarioService extends TypeOrmCrudService<Usuario> {
     @Inject(repositoryConfig.tipoFonte)
     private readonly usuarioRepository: Repository<Usuario>,
   ) {
-    super(usuarioRepository)
+    super(usuarioRepository);
   }
 }

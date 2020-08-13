@@ -37,7 +37,7 @@ export class FonteService extends TypeOrmCrudService<Fonte> {
 
     if (findFonte) {
       return findFonte;
-    }    
+    }
 
     const tipoFonte = await this.tipoFonteService.findOne({nome: fonte.tipoFonte.nome});
 
@@ -48,8 +48,8 @@ export class FonteService extends TypeOrmCrudService<Fonte> {
     fonte.tipoFonte = tipoFonte;
 
     try {
-      const fonteCreated = await this.fonteRepository.save(fonte); 
-      return fonteCreated
+      const fonteCreated = await this.fonteRepository.save(fonte);
+      return fonteCreated;
     } catch (error) {
       this.logger.error(error);
       throw new Error('Error ao criar fonte.');

@@ -13,13 +13,13 @@ import { MidiaService } from './midia.service';
     join: {
       tipoMidia: {
         eager: true,
-      }
-    }
+      },
+    },
   },
   dto: {
     create: CreateMidiaDto,
     update: UpdateMidiaDto,
-  }
+  },
 })
 @ApiUseTags('Midias')
 @Controller('midias')

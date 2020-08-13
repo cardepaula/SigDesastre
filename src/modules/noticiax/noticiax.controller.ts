@@ -23,24 +23,24 @@ import { NuvemPalavraDto } from './dto/nuvemPalavras.dto';
   query: {
     persist: ['dataPublicacao'],
     join: {
-      fonte: {
+      'fonte': {
         eager: true,
       },
       'fonte.tipoFonte': {
         alias: 'fonteTipoFonte',
         eager: false,
       },
-      grupoAcessoDto: {
+      'grupoAcessoDto': {
         eager: false,
       },
-      midias: {
+      'midias': {
         eager: false,
       },
       'midias.tipoMidia': {
         alias: 'midiasTipoMidia',
         eager: false,
       },
-      descritores: {
+      'descritores': {
         eager: false,
       },
       'descritores.assunto': {

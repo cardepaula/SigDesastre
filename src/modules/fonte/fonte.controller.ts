@@ -23,7 +23,7 @@ import { FonteService } from './fonte.service';
       descritores: {
         eager: false,
       },
-    }
+    },
   },
   dto: {
     create: CreateFonteDto,

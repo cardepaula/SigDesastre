@@ -23,6 +23,6 @@ export class TipoMidia {
   })
   nome: string;
 
-  @OneToMany(() => Midia, midia => midia.tipoMidia, { eager: false, })
+  @OneToMany(() => Midia, midia => midia.tipoMidia, { eager: false })
   midias: Midia[];
 }

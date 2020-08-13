@@ -1,9 +1,8 @@
 import {ConnectionOptions} from 'typeorm';
 import { dbConfig } from './src/common/config/database.config';
+import * as path from 'path';
 
-var path = require('path');
-
-const srcDir = path.relative(__dirname, 'src')
+const srcDir = path.relative(__dirname, 'src');
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -23,9 +22,7 @@ const config: ConnectionOptions = {
   },
   logging: dbConfig.logging || false,
   logger: 'simple-console',
-  ssl: dbConfig.ssl || false
+  ssl: dbConfig.ssl || false,
 };
-
-console.log(config);
 
 export = config;

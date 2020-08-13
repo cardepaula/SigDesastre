@@ -132,7 +132,7 @@ export class NoticiaService {
   }
   async DeleteNews(id: number) {
     try {
-      await this.noticiaRepository.delete({ id: id });
+      await this.noticiaRepository.delete({ id });
     } catch (error) {
       console.error('Erro ao deletar:', error);
       throw new HttpException(
@@ -247,13 +247,13 @@ export class NoticiaService {
     return this.searchNews(params);
   }
   async getTipoFonte() {
-    let tipoFonte = await this.tipoFonteRepository.find();
+    const tipoFonte = await this.tipoFonteRepository.find();
     return tipoFonte;
   }
   async getNumevemPalavras() {
-    let noticias = await this.noticiaRepository.find();
-    let nuvem = [];
-    let re = /[^a-zA-Z\u00C0-\u00FF]+/i;
+    const noticias = await this.noticiaRepository.find();
+    const nuvem = [];
+    const re = /[^a-zA-Z\u00C0-\u00FF]+/i;
     noticias.forEach(n => {
       let noticia;
       if (n.conteudo) {
@@ -271,7 +271,7 @@ export class NoticiaService {
     noticia.map(palavra => {
       possui = false;
       for (let i = 0; i < nuvem.length; i++) {
-        let item = nuvem[i];
+        const item = nuvem[i];
         if (item.chave === palavra) {
           item.quantidade++;
           possui = true;

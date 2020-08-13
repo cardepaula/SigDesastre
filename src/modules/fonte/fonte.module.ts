@@ -8,6 +8,6 @@ import { TipoFonteModule } from '../tipoFonte/tipoFonte.module';
   imports: [DatabaseModule, TipoFonteModule],
   controllers: [FonteController],
   providers: [FonteService],
-  exports: [FonteService]
+  exports: [FonteService],
 })
 export class FonteModule {}

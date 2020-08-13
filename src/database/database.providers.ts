@@ -1,19 +1,10 @@
-import {
-  dbConfig,
-  //dbTweetConfig,
-  // dbRSSConfig,
-} from '../common/config/database.config';
+import { dbConfig } from '../common/config/database.config';
 import { Noticia } from './entities/noticia.entity';
-import {
-  repositoryConfig,
-  //repositoryTweetConfig,
-  //repositoryRSSConfig,
-} from '../common/config/repositories.config';
+import { repositoryConfig } from '../common/config/repositories.config';
 import { Fonte } from './entities/fonte.entity';
 import { TipoFonte } from './entities/tipoFonte.entity';
 import { GrupoAcesso } from './entities/grupoAcesso.entity';
 import { Connection, createConnection } from 'typeorm';
-import { Tweets } from './entities/tweets.entity';
 import { RSS } from './entities/rss.entity';
 import { Descritor } from './entities/descritor.entity';
 import { Assunto } from './entities/assunto.entity';
@@ -21,7 +12,6 @@ import { Interesse } from './entities/interesse.entity';
 import { Midia } from './entities/midia.entity';
 import { TipoMidia } from './entities/tipoMidia.entity';
 import { Usuario } from './entities/usuario.entity';
-import { Logger } from '@nestjs/common';
 import { TweetInfo } from './entities/tweetInfo.entity';
 
 export const databaseProviders = [

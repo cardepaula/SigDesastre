@@ -11,21 +11,21 @@ import { AssuntoService } from './assunto.service';
   },
   query: {
     join: {
-      fontes: {
+      'fontes': {
         eager: false,
       },
       'fontes.tipoFonte': {
-        eager: true
+        eager: true,
       },
-      interesses: {
+      'interesses': {
         eager: false,
       },
-      descritores: {
+      'descritores': {
         eager: false,
       },
       'descritores.noticia': {
         eager: false,
-      }
+      },
     },
   },
   dto: {

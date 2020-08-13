@@ -37,7 +37,7 @@ export class TweetInfo extends BaseEntity {
   })
   geolocalizacao: string;
 
-  @OneToOne(() => Noticia, noticia => noticia.tweetInfo, { 
+  @OneToOne(() => Noticia, noticia => noticia.tweetInfo, {
     eager: true,
   })
   @JoinColumn({name: 'noticiaId'})

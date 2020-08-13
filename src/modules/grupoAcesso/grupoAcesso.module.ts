@@ -6,6 +6,6 @@ import { DatabaseModule } from '../../database/database.module';
 @Module({
   imports: [DatabaseModule],
   providers: [GrupoAcessoService],
-  controllers: [GrupoAcessoController]
+  controllers: [GrupoAcessoController],
 })
 export class GrupoAcessoModule {}

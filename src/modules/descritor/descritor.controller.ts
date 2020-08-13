@@ -15,13 +15,13 @@ import { DescritorService } from './descritor.service';
   },
   query: {
     join: {
-      assuntos: {
+      'assuntos': {
         eager: false,
       },
-      noticias: {
+      'noticias': {
         eager: false,
       },
-      fontes: {
+      'fontes': {
         eager: false,
       },
       'fontes.tipoFonte': {

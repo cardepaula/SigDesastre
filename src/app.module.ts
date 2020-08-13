@@ -55,6 +55,6 @@ import { TweetInfoModule } from './modules/tweetInfo/tweetInfo.module';
     TipoMidiaModule,
     UsuarioModule,
     TweetInfoModule,
-  ]
+  ],
 })
 export class AppModule {}
