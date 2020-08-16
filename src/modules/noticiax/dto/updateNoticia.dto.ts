@@ -1,12 +1,9 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { FonteDto } from '../../fonte/dto';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto';
-import { Midia } from '../../../database/entities/midia.entity';
-import { Descritor } from '../../../database/entities/descritor.entity';
 import {
   IsArray,
   IsDefined,
-  IsDateString,
   IsString,
   IsInt,
   IsNotEmpty,
@@ -20,6 +17,7 @@ export class UpdateNoticiaDto {
     description: 'Identificados da notícia.',
   })
   @IsDefined()
+  @IsNotEmpty()
   @IsInt()
   id: number;
 
@@ -34,6 +32,7 @@ export class UpdateNoticiaDto {
     description: 'Contúdo da notícia',
   })
   @IsOptional()
+  @IsNotEmpty()
   @IsString()
   conteudo: string;
 
@@ -56,7 +55,8 @@ export class UpdateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
-  @IsDateString()
+  @IsNotEmpty()
+  @IsString()
   dataPublicacao: string;
 
   @ApiModelPropertyOptional({
@@ -64,7 +64,7 @@ export class UpdateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
-  @IsDateString()
+  @IsString()
   dataCriacao: string;
 
   @ApiModelPropertyOptional({
@@ -72,7 +72,7 @@ export class UpdateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
-  @IsDateString()
+  @IsString()
   dataAtualizacao: string;
 
   @ApiModelPropertyOptional({

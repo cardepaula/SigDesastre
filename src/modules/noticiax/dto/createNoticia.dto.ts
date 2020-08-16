@@ -16,18 +16,24 @@ export class CreateNoticiaDto {
   @ApiModelProperty({
     description: 'Título da notícia',
   })
+  @IsDefined()
+  @IsNotEmpty()
   @IsString()
   titulo: string;
 
   @ApiModelProperty({
     description: 'Contúdo da notícia',
   })
+  @IsDefined()
+  @IsNotEmpty()
   @IsString()
   conteudo: string;
 
   @ApiModelProperty({
     description: 'URL da notícia.',
   })
+  @IsDefined()
+  @IsNotEmpty()
   @IsString()
   link: string;
 
@@ -35,6 +41,7 @@ export class CreateNoticiaDto {
     description: 'Descrição da notícia',
   })
   @IsOptional()
+  @IsNotEmpty()
   @IsString()
   descricao: string;
 
@@ -42,7 +49,9 @@ export class CreateNoticiaDto {
     description: 'Data de publicação.',
     format: 'date-time',
   })
-  @IsOptional()
+  @IsDefined()
+  @IsNotEmpty()
+  @IsString()
   dataPublicacao: string;
 
   @ApiModelPropertyOptional({
@@ -50,6 +59,8 @@ export class CreateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
+  @IsNotEmpty()
+  @IsString()
   dataCriacao: string;
 
   @ApiModelPropertyOptional({
@@ -57,6 +68,7 @@ export class CreateNoticiaDto {
     format: 'date-time',
   })
   @IsOptional()
+  @IsString()
   dataAtualizacao: string;
 
   @ApiModelProperty({
@@ -65,7 +77,6 @@ export class CreateNoticiaDto {
     required: true,
   })
   @IsDefined()
-  @IsNotEmpty()
   @ValidateNested()
   fonte: CreateFonteDto;
 
