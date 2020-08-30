@@ -18,19 +18,17 @@ export class Interesse {
 
   @Column('character varying', {
     nullable: true,
-    name: 'descritores',
+    name: 'descricao',
   })
-  descritores: string | null;
+  descricao: string | null;
 
   @ManyToOne(() => Assunto, assunto => assunto.interesses, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_assunto' })
-  assunto: Assunto | null;
+  assunto: Assunto;
 
   @ManyToOne(() => Usuario, usuario => usuario.interesses, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_usuario' })
-  usuario: Usuario | null;
+  usuario: Usuario;
 }

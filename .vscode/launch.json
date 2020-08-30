@@ -13,6 +13,26 @@
       "cwd": "${workspaceRoot}",
       "runtimeArgs": ["-r", "ts-node/register"],
       "internalConsoleOptions": "openOnSessionStart"
-    }
+    },
+    {
+      "type": "node",
+      "runtimeVersion": "12.16.3",
+      "name": "Depurar - Integrated Terminal",
+      "request": "launch",
+      "protocol": "inspector",
+      "args": [
+          "${workspaceFolder}/src/main.ts"
+      ],
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+          "-r",
+          "ts-node/register",
+          "-r",
+          "tsconfig-paths/register"
+      ],
+      "internalConsoleOptions": "openOnFirstSessionStart",
+      "sourceMaps": true,
+      "console": "integratedTerminal",
+  },
   ]
 }

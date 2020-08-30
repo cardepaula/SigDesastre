@@ -7,11 +7,13 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  OneToOne,
 } from 'typeorm';
 import { Fonte } from './fonte.entity';
 import { GrupoAcesso } from './grupoAcesso.entity';
 import { Midia } from './midia.entity';
 import { Descritor } from './descritor.entity';
+import { TweetInfo } from './tweetInfo.entity';
 
 @Entity('noticia', { schema: 'public' })
 @Index('noticia_link_key', ['link'], { unique: true })
@@ -26,59 +28,64 @@ export class Noticia {
     nullable: true,
     name: 'titulo',
   })
-  titulo: string | null;
+  titulo: string;
 
   @Column('character varying', {
     nullable: true,
     name: 'conteudo',
   })
-  conteudo: string | null;
+  conteudo: string;
 
   @Column('character varying', {
-    nullable: true,
     unique: true,
     name: 'link',
   })
-  link: string | null;
+  link: string;
 
   @Column('text', {
     nullable: true,
     name: 'descricao',
   })
-  descricao: string | null;
+  descricao: string;
 
-  @Column('date', {
+  @Column('timestamp without time zone', {
     nullable: true,
     name: 'data_publicacao',
   })
-  dataPublicacao: string | null;
+  dataPublicacao: string;
 
-  @Column('date', {
+  @Column('timestamp without time zone', {
     nullable: true,
     name: 'data_criacao',
   })
-  dataCriacao: string | null;
+  dataCriacao: string;
 
-  @Column('date', {
+  @Column('timestamp without time zone', {
     nullable: true,
     name: 'data_atualizacao',
   })
-  dataAtualizacao: string | null;
+  dataAtualizacao: string;
 
-  @ManyToOne(() => Fonte, fonte => fonte.noticias, { nullable: false })
-  @JoinColumn({ name: 'fk_fonte' })
-  fonte: Fonte | null;
+  @ManyToOne(() => Fonte, fonte => fonte.noticias, {
+    nullable: false,
+    cascade: ['insert'],
+  })
+  fonte: Fonte;
 
   @ManyToOne(() => GrupoAcesso, grupoAcesso => grupoAcesso.noticias, {
     nullable: false,
     eager: true,
   })
-  @JoinColumn({ name: 'fk_grupo_acesso' })
-  grupoAcesso: GrupoAcesso | null;
+  grupoAcesso: GrupoAcesso;
 
   @OneToMany(() => Midia, midia => midia.noticia, { eager: true })
   midias: Midia[];
 
   @ManyToMany(() => Descritor, descritor => descritor.noticias, { eager: true })
   descritores: Descritor[];
+
+  @OneToOne(() => TweetInfo, tweetInfo => tweetInfo.noticia, {
+    eager: false,
+  })
+  tweetInfo: TweetInfo;
 }

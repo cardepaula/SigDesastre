@@ -23,20 +23,18 @@ export class Midia {
   nome: string | null;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     name: 'link',
   })
-  link: string | null;
+  link: string;
 
   @ManyToOne(() => Noticia, noticia => noticia.midias, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_noticia' })
-  noticia: Noticia | null;
+  noticia: Noticia;
 
   @ManyToOne(() => TipoMidia, tipoMidia => tipoMidia.midias, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_tipo_midia' })
-  tipoMidia: TipoMidia | null;
+  tipoMidia: TipoMidia;
 }

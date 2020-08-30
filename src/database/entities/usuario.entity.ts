@@ -20,29 +20,27 @@ export class Usuario {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
   @Column('character varying', {
-    nullable: true,
-    unique: true,
+    unique: false,
     name: 'email',
   })
-  email: string | null;
+  email: string;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     name: 'senha',
   })
-  senha: string | null;
+  senha: string;
 
   @ManyToOne(() => GrupoAcesso, grupoAcesso => grupoAcesso.usuarios, {
     nullable: false,
   })
-  @JoinColumn({ name: 'fk_grupo_acesso' })
-  grupoAcesso: GrupoAcesso | null;
+  grupoAcesso: GrupoAcesso;
 
   @OneToMany(() => Interesse, interesse => interesse.usuario)
   interesses: Interesse[];

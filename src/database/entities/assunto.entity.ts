@@ -21,27 +21,33 @@ export class Assunto {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     unique: true,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
   @Column('character varying', {
     nullable: true,
     name: 'descricao',
   })
-  descricao: string | null;
+  descricao: string;
 
-  @OneToMany(() => Interesse, interesse => interesse.assunto)
+  @OneToMany(() => Interesse, interesses => interesses.assunto, {
+    eager: false,
+  })
   interesses: Interesse[];
 
-  @ManyToMany(() => Fonte, fonte => fonte.assuntos, { nullable: false })
+  @ManyToMany(() => Fonte, fontes => fontes.assuntos, {
+    nullable: false,
+    eager: false,
+  })
   @JoinTable({ name: 'assunto_x_fonte' })
   fontes: Fonte[];
 
-  @ManyToMany(() => Descritor, descritor => descritor.assuntos, {
+  @ManyToMany(() => Descritor, descritores => descritores.assuntos, {
     nullable: false,
+    eager: false,
   })
   @JoinTable({ name: 'assunto_x_descritor' })
   descritores: Descritor[];

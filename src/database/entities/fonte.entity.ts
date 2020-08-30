@@ -23,36 +23,40 @@ export class Fonte {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
   @Column('character varying', {
-    nullable: true,
     unique: true,
     name: 'link',
   })
-  link: string | null;
+  link: string;
 
   @Column('character varying', {
     nullable: true,
     name: 'descricao',
   })
-  descricao: string | null;
+  descricao: string;
 
   @ManyToOne(() => TipoFonte, tipoFonte => tipoFonte.fontes, {
     nullable: false,
+    eager: true,
   })
-  @JoinColumn({ name: 'fk_tipo_fonte' })
-  tipoFonte: TipoFonte | null;
+  tipoFonte: TipoFonte;
 
-  @OneToMany(() => Noticia, noticia => noticia.fonte)
+  @OneToMany(() => Noticia, noticias => noticias.fonte, {
+    eager: false,
+  })
   noticias: Noticia[];
 
-  @ManyToMany(() => Assunto, assunto => assunto.fontes)
+  @ManyToMany(() => Assunto, assuntos => assuntos.fontes, {
+    eager: false,
+  })
   assuntos: Assunto[];
 
-  @ManyToMany(() => Descritor, descritor => descritor.fontes)
+  @ManyToMany(() => Descritor, descritores => descritores.fontes, {
+    eager: false,
+  })
   descritores: Descritor[];
 }
