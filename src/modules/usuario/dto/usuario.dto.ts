@@ -1,6 +1,6 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
-import { InteresseDto } from '../../interesse/dto/index';
+import { GrupoAcessoDto } from '../../grupoAcesso/dto';
+import { InteresseDto } from '../../interesse/dto';
 
 export class UsuarioDto {
   @ApiModelProperty({
@@ -18,16 +18,18 @@ export class UsuarioDto {
   })
   email: string;
 
+  senha: string;
+
   @ApiModelProperty({
     description: 'Grupo de acesso que o usuario pertence',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelProperty({
     description: 'Interesses do usuario',
-    type: InteresseDto,
-    isArray: true
+    type: () => InteresseDto,
+    isArray: true,
   })
   interesses: InteresseDto[];
 }

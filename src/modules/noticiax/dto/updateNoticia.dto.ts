@@ -1,40 +1,52 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { FonteDto } from '../../fonte/dto/index';
-import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
-import { Midia } from '../../../database/entities/midia.entity';
-import { Descritor } from '../../../database/entities/descritor.entity';
-import { IsArray, IsDefined, IsDateString, IsString, IsInt, IsNotEmpty } from 'class-validator';
+import { FonteDto } from '../../fonte/dto';
+import { GrupoAcessoDto } from '../../grupoAcesso/dto';
+import {
+  IsArray,
+  IsDefined,
+  IsString,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
+import { DescritorDto } from '../../descritor/dto';
+import { MidiaDto } from '../../midia/dto';
 
 export class UpdateNoticiaDto {
   @ApiModelProperty({
     description: 'Identificados da notícia.',
-    required: true
   })
-  @IsInt()
   @IsDefined()
+  @IsNotEmpty()
+  @IsInt()
   id: number;
 
   @ApiModelPropertyOptional({
     description: 'Título da notícia',
   })
+  @IsOptional()
   @IsString()
   titulo: string;
 
   @ApiModelPropertyOptional({
     description: 'Contúdo da notícia',
   })
+  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   conteudo: string;
 
   @ApiModelPropertyOptional({
     description: 'URL da notícia.',
   })
+  @IsOptional()
   @IsString()
   link: string;
 
   @ApiModelPropertyOptional({
     description: 'Descrição da notícia',
   })
+  @IsOptional()
   @IsString()
   descricao: string;
 
@@ -42,53 +54,58 @@ export class UpdateNoticiaDto {
     description: 'Data de publicação.',
     format: 'date-time',
   })
-  @IsDateString()
+  @IsOptional()
+  @IsNotEmpty()
+  @IsString()
   dataPublicacao: string;
 
   @ApiModelPropertyOptional({
     description: 'Data de criação',
     format: 'date-time',
   })
-  @IsDateString()
+  @IsOptional()
+  @IsString()
   dataCriacao: string;
 
   @ApiModelPropertyOptional({
     description: 'Data de atualização',
     format: 'date-time',
   })
-  @IsDateString()
+  @IsOptional()
+  @IsString()
   dataAtualizacao: string;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Fonte da notícia',
-    type: FonteDto,
-    required: true
+    type: () => FonteDto,
   })
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   fonte: FonteDto;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Grupo de acesso',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelPropertyOptional({
     description: 'Mídias',
-    type: Midia,
+    type: () => MidiaDto,
     isArray: true,
   })
+  @IsOptional()
   @IsArray()
-  midias: Midia[];
+  midias: MidiaDto[];
 
   @ApiModelPropertyOptional({
     description: 'Descritores',
-    type: Descritor,
+    type: () => DescritorDto,
     isArray: true,
   })
+  @IsOptional()
   @IsArray()
-  descritores: Descritor[];
+  descritores: DescritorDto[];
 }

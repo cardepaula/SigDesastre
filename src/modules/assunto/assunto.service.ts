@@ -8,8 +8,8 @@ import { Repository } from 'typeorm';
 export class AssuntoService extends TypeOrmCrudService<Assunto> {
   constructor(
     @Inject(repositoryConfig.assunto)
-    private readonly assuntoRepository: Repository<Assunto>
+    private readonly assuntoRepository: Repository<Assunto>,
   ) {
-    super(assuntoRepository)
+    super(assuntoRepository);
   }
 }

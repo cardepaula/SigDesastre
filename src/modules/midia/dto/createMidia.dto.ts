@@ -1,13 +1,13 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { NoticiaDto } from '../../noticiax/dto/index';
+import { NoticiaDto } from '../../noticiax/dto';
 import { TipoMidiaDto } from '../../tipoMidia/dto/tipoMidia.dto';
 import { IsString, IsOptional, IsDefined } from 'class-validator';
 
 export class CreateMidiaDto {
-
   @ApiModelPropertyOptional({
     description: 'Nome da mídia',
   })
+  @IsOptional()
   @IsString()
   nome: string;
 
@@ -20,7 +20,7 @@ export class CreateMidiaDto {
 
   @ApiModelProperty({
     description: 'Noticia relacionada a mídia',
-    type: NoticiaDto,
+    type: () => NoticiaDto,
   })
   @IsDefined()
   noticia: NoticiaDto;

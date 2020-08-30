@@ -6,6 +6,6 @@ import { DatabaseModule } from '../../database/database.module';
 @Module({
   imports: [DatabaseModule],
   providers: [MidiaService],
-  controllers: [MidiaController]
+  controllers: [MidiaController],
 })
 export class MidiaModule {}

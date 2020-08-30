@@ -1,9 +1,9 @@
 import { ApiModelProperty } from '@nestjs/swagger';
+import { TipoFonteDto } from '../../tipoFonte/dto';
 
 export class RSSDto {
-
   @ApiModelProperty({
-    description:'Identificador do RSS',
+    description: 'Identificador do RSS',
   })
   id: number;
 
@@ -19,7 +19,7 @@ export class RSSDto {
 
   @ApiModelProperty({
     description: 'Tipo da Fonte',
+    type: () => TipoFonteDto,
   })
-  tipoFonteId: number;
-
+  tipoFonte: TipoFonteDto;
 }

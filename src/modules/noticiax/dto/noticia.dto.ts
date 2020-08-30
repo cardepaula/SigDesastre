@@ -1,13 +1,12 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { Midia } from '../../../database/entities/midia.entity';
-import { Descritor } from '../../../database/entities/descritor.entity';
 import { GrupoAcessoDto } from '../../grupoAcesso/dto';
 import { FonteDto } from '../../fonte/dto';
+import { MidiaDto } from '../../midia/dto';
+import { DescritorDto } from '../../descritor/dto';
 
 export class NoticiaDto {
   @ApiModelProperty({
     description: 'Identificados da notícia.',
-    required: true,
   })
   id: number;
 
@@ -51,28 +50,28 @@ export class NoticiaDto {
 
   @ApiModelProperty({
     description: 'Fonte da notícia',
-    type: FonteDto,
+    type: () => FonteDto,
     required: true,
   })
   fonte: FonteDto;
 
   @ApiModelProperty({
     description: 'Grupo de acesso',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelPropertyOptional({
     description: 'Mídias',
-    type: Midia,
+    type: () => MidiaDto,
     isArray: true,
   })
-  midias: Midia[];
+  midias: MidiaDto[];
 
   @ApiModelPropertyOptional({
     description: 'Descritores',
-    type: Descritor,
+    type: () => DescritorDto,
     isArray: true,
   })
-  descritores: Descritor[];
+  descritores: DescritorDto[];
 }

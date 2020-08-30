@@ -1,5 +1,12 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { IsString, MaxLength, IsNumber, IsDefined, IsInt } from 'class-validator';
+import {
+  IsString,
+  MaxLength,
+  IsDefined,
+  IsInt,
+  IsOptional,
+} from 'class-validator';
+import { TipoFonteDto } from '../../tipoFonte/dto';
 
 export class UpdateRSSDto {
   @ApiModelProperty({
@@ -13,6 +20,7 @@ export class UpdateRSSDto {
     description: 'Nome da fonte RSS',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(240)
   nome: string;
@@ -21,14 +29,15 @@ export class UpdateRSSDto {
     description: 'Url do RSS da fonte',
     type: 'string',
   })
+  @IsOptional()
   @IsString()
   @MaxLength(240)
   url: string;
 
-  @ApiModelPropertyOptional({
+  @ApiModelProperty({
     description: 'Tipo da Fonte',
-    type: 'number',
+    type: () => TipoFonteDto,
   })
-  @IsNumber()
-  tipoFonteId: number;
+  @IsOptional()
+  tipoFonte: TipoFonteDto;
 }

@@ -1,35 +1,38 @@
 import { ApiModelPropertyOptional } from '@nestjs/swagger';
-import { FonteDto, CreateFonteDto } from '../../fonte/dto/index';
-import { DescritorDto, CreateDescritorDto } from '../../descritor/dto/index';
-import { InteresseDto } from '../../interesse/dto/index';
-import { IsString, IsArray } from 'class-validator';
+import { FonteDto } from '../../fonte/dto';
+import { DescritorDto } from '../../descritor/dto';
+import { IsString, IsArray, IsOptional } from 'class-validator';
 
 export class CreateAssuntoDto {
   @ApiModelPropertyOptional({
     description: 'Nome do assunto',
   })
+  @IsOptional()
   @IsString()
   nome: string;
 
   @ApiModelPropertyOptional({
     description: 'Descrição do assunto',
   })
+  @IsOptional()
   @IsString()
   descricao: string;
 
   @ApiModelPropertyOptional({
     description: 'Fontes relacionados ao assunto',
-    type: CreateFonteDto,
-    isArray: true
+    type: () => FonteDto,
+    isArray: true,
   })
+  @IsOptional()
   @IsArray()
-  fontes: CreateFonteDto[];
+  fontes: FonteDto[];
 
   @ApiModelPropertyOptional({
     description: 'Descritores relacionado ao assunto',
-    type: CreateDescritorDto,
-    isArray: true
+    type: () => DescritorDto,
+    isArray: true,
   })
+  @IsOptional()
   @IsArray()
-  descritores: CreateDescritorDto[];
+  descritores: DescritorDto[];
 }

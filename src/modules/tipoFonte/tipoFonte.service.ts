@@ -10,6 +10,6 @@ export class TipoFonteService extends TypeOrmCrudService<TipoFonte> {
     @Inject(repositoryConfig.tipoFonte)
     private readonly tipoFonteRepository: Repository<TipoFonte>,
   ) {
-    super(tipoFonteRepository)
+    super(tipoFonteRepository);
   }
 }

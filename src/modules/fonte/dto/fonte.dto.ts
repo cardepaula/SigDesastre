@@ -1,9 +1,8 @@
-import { IsInt, IsDefined } from 'class-validator';
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { TipoFonteDto } from '../../tipoFonte/dto/index';
-import { NoticiaDto } from '../../noticiax/dto/index';
-import { Assunto } from '../../../database/entities/assunto.entity';
-import { Descritor } from '../../../database/entities/descritor.entity';
+import { TipoFonteDto } from '../../tipoFonte/dto';
+import { NoticiaDto } from '../../noticiax/dto';
+import { AssuntoDto } from '../../assunto/dto';
+import { DescritorDto } from '../../descritor/dto';
 
 export class FonteDto {
   @ApiModelProperty({
@@ -35,21 +34,21 @@ export class FonteDto {
   @ApiModelProperty({
     description: 'Noticias da fonte',
     isArray: true,
-    type: NoticiaDto,
+    type: () => NoticiaDto,
   })
   noticias: NoticiaDto[];
 
   @ApiModelProperty({
     description: 'Assutos relacionados a fonte',
     isArray: true,
-    type: Assunto,
+    type: () => AssuntoDto,
   })
-  assuntos: Assunto[];
+  assuntos: AssuntoDto[];
 
-  @ApiModelProperty({
-    description: 'Descritores relacionados a fonte',
+  @ApiModelPropertyOptional({
+    description: 'Descritores relacionados a fonte.',
+    type: () => DescritorDto,
     isArray: true,
-    type: Descritor,
   })
-  descritores: Descritor[];
+  descritores?: DescritorDto[];
 }

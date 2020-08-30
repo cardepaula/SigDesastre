@@ -18,15 +18,15 @@ export class GrupoAcesso {
   id: number;
 
   @Column('character varying', {
-    nullable: true,
+    nullable: false,
     unique: true,
     name: 'nome',
   })
-  nome: string | null;
+  nome: string;
 
-  @OneToMany(() => Noticia, noticia => noticia.grupoAcesso)
+  @OneToMany(() => Noticia, noticia => noticia.grupoAcesso, { eager: false })
   noticias: Noticia[];
 
-  @OneToMany(() => Usuario, usuario => usuario.grupoAcesso)
+  @OneToMany(() => Usuario, usuario => usuario.grupoAcesso, { eager: false })
   usuarios: Usuario[];
 }

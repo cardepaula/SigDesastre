@@ -10,4 +10,3 @@ export class CreateTipoFonteDto {
   @IsDefined()
   nome: string;
 }
-

@@ -1,7 +1,13 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { GrupoAcessoDto } from '../../grupoAcesso/dto/index';
-import { InteresseDto, UpdateInteresseDto } from '../../interesse/dto/index';
-import { IsInt, IsDefined, IsString, IsOptional, IsEmail, IsUrl } from 'class-validator';
+import { GrupoAcessoDto } from '../../grupoAcesso/dto';
+import { InteresseDto } from '../../interesse/dto';
+import {
+  IsInt,
+  IsDefined,
+  IsString,
+  IsOptional,
+  IsEmail,
+} from 'class-validator';
 
 export class UpdateUsuarioDto {
   @ApiModelProperty({
@@ -34,16 +40,16 @@ export class UpdateUsuarioDto {
 
   @ApiModelPropertyOptional({
     description: 'Grupo de acesso que o usuario pertence',
-    type: GrupoAcessoDto,
+    type: () => GrupoAcessoDto,
   })
   @IsOptional()
   grupoAcesso: GrupoAcessoDto;
 
   @ApiModelPropertyOptional({
     description: 'Interesses do usuario',
-    type: UpdateInteresseDto,
-    isArray: true
+    type: () => InteresseDto,
+    isArray: true,
   })
   @IsOptional()
-  interesses: UpdateInteresseDto[];
+  interesses: InteresseDto[];
 }

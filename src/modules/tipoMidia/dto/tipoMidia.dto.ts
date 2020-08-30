@@ -1,5 +1,4 @@
-import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { MidiaDto } from '../../midia/dto/index';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 export class TipoMidiaDto {
   @ApiModelProperty({
@@ -11,11 +10,4 @@ export class TipoMidiaDto {
     description: 'Nome do Tipo Mídia',
   })
   nome: string;
-
-  @ApiModelPropertyOptional({
-    description: 'Mídias relacionadas ao Tipo Mídia',
-    type: MidiaDto,
-    isArray: true,
-  })
-  midias: MidiaDto[];
 }

@@ -1,7 +1,7 @@
 import { IsInt, IsDefined, IsString, IsOptional } from 'class-validator';
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
-import { AssuntoDto } from '../../assunto/dto/index';
-import { UsuarioDto } from '../../usuario/dto/index';
+import { AssuntoDto } from '../../assunto/dto';
+import { UsuarioDto } from '../../usuario/dto';
 
 export class UpdateInteresseDto {
   @ApiModelProperty({
@@ -20,14 +20,14 @@ export class UpdateInteresseDto {
 
   @ApiModelPropertyOptional({
     description: 'Identificador do assunto.',
-    type: AssuntoDto
+    type: () => AssuntoDto,
   })
   @IsOptional()
   assunto: AssuntoDto;
 
   @ApiModelPropertyOptional({
     description: 'Identificador do interesse.',
-    type: UsuarioDto,
+    type: () => UsuarioDto,
   })
   @IsOptional()
   usuario: UsuarioDto;

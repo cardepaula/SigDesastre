@@ -9,13 +9,32 @@ import { AssuntoService } from './assunto.service';
   model: {
     type: AssuntoDto,
   },
+  query: {
+    join: {
+      'fontes': {
+        eager: false,
+      },
+      'fontes.tipoFonte': {
+        eager: true,
+      },
+      'interesses': {
+        eager: false,
+      },
+      'descritores': {
+        eager: false,
+      },
+      'descritores.noticia': {
+        eager: false,
+      },
+    },
+  },
   dto: {
     create: CreateAssuntoDto,
     update: UpdateAssuntoDto,
   },
 })
-@ApiUseTags('Assunto')
-@Controller('assunto')
+@ApiUseTags('Assuntos')
+@Controller('assuntos')
 export class AssuntoController implements CrudController<Assunto> {
   constructor(public service: AssuntoService) {}
 

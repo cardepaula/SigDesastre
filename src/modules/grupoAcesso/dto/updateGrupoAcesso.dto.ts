@@ -1,4 +1,4 @@
-import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
+import { ApiModelProperty } from '@nestjs/swagger';
 import { IsInt, IsDefined, IsString } from 'class-validator';
 
 export class UpdateGrupoAcessoDto {

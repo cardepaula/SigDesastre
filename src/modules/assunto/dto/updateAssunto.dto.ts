@@ -1,7 +1,7 @@
 import { ApiModelPropertyOptional, ApiModelProperty } from '@nestjs/swagger';
-import { IsInt, IsDefined, IsString, IsArray } from 'class-validator';
-import { UpdateFonteDto } from '../../fonte/dto/index';
-import { UpdateDescritorDto } from '../../descritor/dto/index';
+import { IsInt, IsDefined, IsString, IsArray, IsOptional } from 'class-validator';
+import { UpdateFonteDto } from '../../fonte/dto';
+import { UpdateDescritorDto } from '../../descritor/dto';
 
 export class UpdateAssuntoDto {
   @ApiModelProperty({
@@ -14,28 +14,14 @@ export class UpdateAssuntoDto {
   @ApiModelPropertyOptional({
     description: 'Nome do assunto',
   })
+  @IsOptional()
   @IsString()
   nome: string;
 
   @ApiModelPropertyOptional({
     description: 'Descrição do assunto',
   })
+  @IsOptional()
   @IsString()
   descricao: string;
-
-  @ApiModelPropertyOptional({
-    description: 'Fontes relacionados ao assunto',
-    type: UpdateFonteDto,
-    isArray: true
-  })
-  @IsArray()
-  fontes: UpdateFonteDto[];
-
-  @ApiModelPropertyOptional({
-    description: 'Descritores relacionado ao assunto',
-    type: UpdateDescritorDto,
-    isArray: true
-  })
-  @IsArray()
-  descritores: UpdateDescritorDto[];
 }

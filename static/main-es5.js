@@ -1198,7 +1198,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.nome = nome || '';
       this.url = url || '';
-      this.tipoFonteId = null;
+      this.tipoFonte = null;
     };
     /***/
 
@@ -1315,7 +1315,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.formRss = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
           nome: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(1)),
           url: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(1)),
-          tipoFonteId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
+          tipoFonte: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
         });
       }
 
@@ -1354,7 +1354,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       rss = new _models_rss_model__WEBPACK_IMPORTED_MODULE_3__["Rss"]();
                       rss.nome = this.formRss.value.nome;
                       rss.url = this.formRss.value.url;
-                      rss.tipoFonteId = this.formRss.value.tipoFonteId.id;
+                      rss.tipoFonte = this.formRss.value.tipoFonte;
                       console.log(rss);
                       this.rssService.postRss(rss).subscribe(function (n) {
                         console.log('resposta: ', n);
@@ -1382,7 +1382,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "validador",
         value: function validador() {
-          return !(this.formRss.value.nome.length >= 1 && this.formRss.value.url.length >= 1 && this.formRss.value.tipoFonteId && this.lockVar);
+          return !(this.formRss.value.nome.length >= 1 && this.formRss.value.url.length >= 1 && this.formRss.value.tipoFonte && this.lockVar);
         }
       }, {
         key: "callMensageErro",
@@ -1417,7 +1417,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵProvidersFeature"]([primeng_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownModule"]])],
       decls: 25,
       vars: 5,
-      consts: [[1, "base", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "conteudo"], [1, "divNome"], ["for", "nome"], ["required", "", "minlength", "1", "type", "text", "name", "name", "placeholder", "A gazeta", "formControlName", "nome", 1, "form-control", "validate"], ["data-error", "campo obrigat\xF3rio", "data-success", "Correto", 1, "helper-text"], [1, "divDrop"], ["placeholder", "Tipo de Fonte", "formControlName", "tipoFonteId", "name", "tipoFonteId", 1, "form-control", "validate", 3, "options"], ["for", "url"], ["required", "", "minlength", "1", "type", "text", "placeholder", "www.agazeta.com.br/rss", "name", "url", "formControlName", "url", 1, "form-control", "validate"], ["type", "submit", "value", "Salvar", 1, "btn", "btn-primary", "mt-4"], [1, "load"], [4, "ngIf"]],
+      consts: [[1, "base", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "conteudo"], [1, "divNome"], ["for", "nome"], ["required", "", "minlength", "1", "type", "text", "name", "name", "placeholder", "A gazeta", "formControlName", "nome", 1, "form-control", "validate"], ["data-error", "campo obrigat\xF3rio", "data-success", "Correto", 1, "helper-text"], [1, "divDrop"], ["placeholder", "Tipo de Fonte", "formControlName", "tipoFonte", "name", "tipoFonte", 1, "form-control", "validate", 3, "options"], ["for", "url"], ["required", "", "minlength", "1", "type", "text", "placeholder", "www.agazeta.com.br/rss", "name", "url", "formControlName", "url", 1, "form-control", "validate"], ["type", "submit", "value", "Salvar", 1, "btn", "btn-primary", "mt-4"], [1, "load"], [4, "ngIf"]],
       template: function RssFromComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);

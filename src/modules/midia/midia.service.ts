@@ -10,6 +10,6 @@ export class MidiaService extends TypeOrmCrudService<Midia> {
     @Inject(repositoryConfig.midia)
     private readonly midiaRepository: Repository<Midia>,
   ) {
-    super(midiaRepository)
+    super(midiaRepository);
   }
 }
