@@ -141,101 +141,101 @@ export class NoticiaService {
       );
     }
   }
-  async saveOrUpdateNews(noticia: Noticia) {
-    let fonte;
-    let tipoFonte;
-    let grupoAcesso;
-    let dbnoticia;
-    try {
-      dbnoticia = await this.noticiaRepository.findOne({
-        titulo: noticia.titulo,
-        dataPublicacao: noticia.dataPublicacao,
-        conteudo: noticia.conteudo,
-      });
-      if (dbnoticia != undefined) {
-        console.error('noticia já existe');
-        throw new HttpException('Noticia existente', HttpStatus.FORBIDDEN);
-      }
-    } catch (error) {
-      console.error(error);
-      throw new HttpException('Noticia existente.', HttpStatus.FORBIDDEN);
-    }
-    try {
-      fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
-    } catch (error) {
-      console.error(error);
-      throw new HttpException('Error ao encontrar Fonte', HttpStatus.FORBIDDEN);
-    }
-    try {
-      tipoFonte = await this.tipoFonteRepository.findOne({
-        nome: noticia.fonte.tipoFonte.nome,
-      });
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        'Error ao encontrar tipoFonte',
-        HttpStatus.FORBIDDEN,
-      );
-    }
+  // async saveOrUpdateNews(noticia: Noticia) {
+  //   let fonte;
+  //   let tipoFonte;
+  //   let grupoAcesso;
+  //   let dbnoticia;
+  //   try {
+  //     dbnoticia = await this.noticiaRepository.findOne({
+  //       titulo: noticia.titulo,
+  //       dataPublicacao: noticia.dataPublicacao,
+  //       conteudo: noticia.conteudo,
+  //     });
+  //     if (dbnoticia != undefined) {
+  //       console.error('noticia já existe');
+  //       throw new HttpException('Noticia existente', HttpStatus.FORBIDDEN);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw new HttpException('Noticia existente.', HttpStatus.FORBIDDEN);
+  //   }
+  //   try {
+  //     fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw new HttpException('Error ao encontrar Fonte', HttpStatus.FORBIDDEN);
+  //   }
+  //   try {
+  //     tipoFonte = await this.tipoFonteRepository.findOne({
+  //       nome: noticia.fonte.tipoFonte.nome,
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw new HttpException(
+  //       'Error ao encontrar tipoFonte',
+  //       HttpStatus.FORBIDDEN,
+  //     );
+  //   }
 
-    try {
-      grupoAcesso = await this.grupoAcessoRepository.findOne({
-        nome: noticia.grupoAcesso.nome,
-      });
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(
-        'Error ao encontrar grupoAcesso ',
-        HttpStatus.FORBIDDEN,
-      );
-    }
+  //   try {
+  //     grupoAcesso = await this.grupoAcessoRepository.findOne({
+  //       nome: noticia.grupoAcesso.nome,
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw new HttpException(
+  //       'Error ao encontrar grupoAcesso ',
+  //       HttpStatus.FORBIDDEN,
+  //     );
+  //   }
 
-    if (tipoFonte != undefined) {
-      noticia.fonte.tipoFonte = tipoFonte;
-    } else {
-      await this.tipoFonteRepository.save(noticia.fonte.tipoFonte);
-      tipoFonte = await this.tipoFonteRepository.findOne({
-        nome: noticia.fonte.tipoFonte.nome,
-      });
-      noticia.fonte.tipoFonte = tipoFonte;
-    }
+  //   if (tipoFonte != undefined) {
+  //     noticia.fonte.tipoFonte = tipoFonte;
+  //   } else {
+  //     await this.tipoFonteRepository.save(noticia.fonte.tipoFonte);
+  //     tipoFonte = await this.tipoFonteRepository.findOne({
+  //       nome: noticia.fonte.tipoFonte.nome,
+  //     });
+  //     noticia.fonte.tipoFonte = tipoFonte;
+  //   }
 
-    if (fonte != undefined) {
-      noticia.fonte = fonte;
-    } else {
-      noticia.fonte.tipoFonte = tipoFonte;
-      await this.fonteRepository.save(noticia.fonte);
-      fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
-      noticia.fonte = fonte;
-    }
+  //   if (fonte != undefined) {
+  //     noticia.fonte = fonte;
+  //   } else {
+  //     noticia.fonte.tipoFonte = tipoFonte;
+  //     await this.fonteRepository.save(noticia.fonte);
+  //     fonte = await this.fonteRepository.findOne({ nome: noticia.fonte.nome });
+  //     noticia.fonte = fonte;
+  //   }
 
-    if (grupoAcesso != undefined) {
-      noticia.grupoAcesso = grupoAcesso;
-    } else {
-      await this.grupoAcessoRepository.save(noticia.grupoAcesso);
-      grupoAcesso = await this.grupoAcessoRepository.findOne({
-        nome: noticia.grupoAcesso.nome,
-      });
-      noticia.grupoAcesso = grupoAcesso;
-    }
-    try {
-      noticia.dataPublicacao = this.converteDataEntrada(noticia.dataPublicacao);
-      noticia.dataAtualizacao = this.converteDataEntrada(
-        noticia.dataAtualizacao,
-      );
-      noticia.dataCriacao = this.converteDataEntrada(noticia.dataCriacao);
-    } catch (error) {
-      throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
-    }
+  //   if (grupoAcesso != undefined) {
+  //     noticia.grupoAcesso = grupoAcesso;
+  //   } else {
+  //     await this.grupoAcessoRepository.save(noticia.grupoAcesso);
+  //     grupoAcesso = await this.grupoAcessoRepository.findOne({
+  //       nome: noticia.grupoAcesso.nome,
+  //     });
+  //     noticia.grupoAcesso = grupoAcesso;
+  //   }
+  //   try {
+  //     noticia.dataPublicacao = this.converteDataEntrada(noticia.dataPublicacao);
+  //     noticia.dataAtualizacao = this.converteDataEntrada(
+  //       noticia.dataAtualizacao,
+  //     );
+  //     noticia.dataCriacao = this.converteDataEntrada(noticia.dataCriacao);
+  //   } catch (error) {
+  //     throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
+  //   }
 
-    try {
-      return await this.noticiaRepository.save(noticia);
-    } catch (error) {
-      console.error(error);
+  //   try {
+  //     return await this.noticiaRepository.save(noticia);
+  //   } catch (error) {
+  //     console.error(error);
 
-      throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
-    }
-  }
+  //     throw new HttpException('Noticia: ' + error, HttpStatus.FORBIDDEN);
+  //   }
+  // }
 
   async getLastWeeksNews() {
     const dataInicio = Moment()

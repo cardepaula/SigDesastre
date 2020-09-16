@@ -148,20 +148,20 @@ export class NoticiaController {
     return await this.noticiaService.getLastWeeksNews();
   }
 
-  @ApiResponse({
-    status: 201,
-    description: 'Noticia Created',
-  })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiImplicitBody({
-    name: 'NoticiaDto',
-    required: true,
-    type: NoticiaDto,
-  })
-  @Post()
-  public async postNews(@Body() body: Noticia) {
-    return await this.noticiaService.saveOrUpdateNews(body);
-  }
+  // @ApiResponse({
+  //   status: 201,
+  //   description: 'Noticia Created',
+  // })
+  // @ApiResponse({ status: 403, description: 'Forbidden.' })
+  // @ApiImplicitBody({
+  //   name: 'NoticiaDto',
+  //   required: true,
+  //   type: NoticiaDto,
+  // })
+  // @Post()
+  // public async postNews(@Body() body: Noticia) {
+  //   return await this.noticiaService.saveOrUpdateNews(body);
+  // }
 
   @ApiResponse({
     status: 201,
