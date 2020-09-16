@@ -29,14 +29,15 @@ export class ConverteDataEntradaInterceptor implements NestInterceptor {
         body.dataCriacao = this.converteDataEntrada(body.dataCriacao);
       }
 
-      if (body.data) { body.data = this.converteDataEntrada(body.data); }
+      if (body.data) {
+        body.data = this.converteDataEntrada(body.data);
+      }
     }
 
     return next.handle();
   }
 
   private converteDataEntrada(data: string) {
-    
     if (Moment(data, 'DD/MM/YYYY', true).isValid()) {
       data = Moment(data, 'DD/MM/YYYY')
         .utc()

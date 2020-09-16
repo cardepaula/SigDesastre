@@ -1,4 +1,5 @@
 import { Controller } from '@nestjs/common';
+import { ApiUseTags } from '@nestjs/swagger';
 import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
 import { TweetParametrosBusca } from '../../database/entities/tweetParametrosBusca.entity';
 import {
@@ -27,6 +28,7 @@ import { TweetParametrosBuscaService } from './tweetParametrosBusca.service';
     exclude: ['replaceOneBase', 'createManyBase'],
   },
 })
+@ApiUseTags('Tweet Parametros de Busca')
 @Controller('tweet-parametros-busca')
 export class TweetParametrosBuscaController
   implements CrudController<TweetParametrosBusca> {

@@ -1,7 +1,9 @@
 function normalizeBoolean(value: any) {
-  typeof value === 'string' ? (value = value.toLowerCase()) : value;
+  if (typeof value === 'string') {
+    value = value.toLowerCase();
+  }
   return value === 'true';
-};
+}
 
 export const dbConfig = {
   type: 'postgres',

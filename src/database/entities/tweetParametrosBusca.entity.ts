@@ -1,4 +1,12 @@
-import { Index, Entity, BaseEntity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Index,
+  Entity,
+  BaseEntity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Descritor } from './descritor.entity';
 
 @Entity('tweet_parametros_busca')
@@ -11,13 +19,13 @@ export class TweetParametrosBusca extends BaseEntity {
     name: 'data_inicio_busca',
   })
   dataInicioBusca: string;
-  
+
   @Column('timestamp without time zone', {
     nullable: false,
     name: 'data_ultima_busca',
   })
   dataUltimaBusca: string;
-  
+
   @Column('timestamp without time zone', {
     nullable: false,
     name: 'data_ultima_busca_total',
@@ -27,6 +35,6 @@ export class TweetParametrosBusca extends BaseEntity {
   @OneToOne(() => Descritor, descritor => descritor.tweetParametrosBusca, {
     eager: true,
   })
-  @JoinColumn({name: 'descritorId'})
+  @JoinColumn({ name: 'descritorId' })
   descritor: Descritor;
 }

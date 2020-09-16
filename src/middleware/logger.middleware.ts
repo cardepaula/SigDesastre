@@ -12,7 +12,6 @@ import * as bcrypt from 'bcrypt';
 export class LoggerMiddleware implements NestMiddleware {
   private readonly hashpassword: Hash;
   use() {
-    console.log('autenticacao');
     return async (req, next) => {
       const user = Auth(req);
 

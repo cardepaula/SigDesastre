@@ -35,12 +35,12 @@ export class DescritorService extends TypeOrmCrudService<Descritor> {
     }
 
     if (req) {
-      createFunction = async (descritor: CreateDescritorDto) => {
-        return await this.createOne(req, descritor);
+      createFunction = async (createDescritor: CreateDescritorDto) => {
+        return await this.createOne(req, createDescritor);
       };
     } else {
-      createFunction = async (descritor: CreateDescritorDto) => {
-        return await this.descritorRepository.save(descritor);
+      createFunction = async (createDescritor: CreateDescritorDto) => {
+        return await this.descritorRepository.save(createDescritor);
       };
     }
 

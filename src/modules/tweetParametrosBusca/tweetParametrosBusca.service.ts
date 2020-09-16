@@ -42,16 +42,16 @@ export class TweetParametrosBuscaService extends TypeOrmCrudService<
 
     if (req) {
       createFunction = async (
-        tweetParametrosBusca: CreateTweetParametrosBuscaDto,
+        createTweetParametrosBusca: CreateTweetParametrosBuscaDto,
       ) => {
-        return await this.createOne(req, tweetParametrosBusca);
+        return await this.createOne(req, createTweetParametrosBusca);
       };
     } else {
       createFunction = async (
-        tweetParametrosBusca: CreateTweetParametrosBuscaDto,
+        createTweetParametrosBusca: CreateTweetParametrosBuscaDto,
       ) => {
         return await this.tweetParametrosBuscaRepository.save(
-          tweetParametrosBusca,
+          createTweetParametrosBusca,
         );
       };
     }

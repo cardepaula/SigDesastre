@@ -10,7 +10,7 @@ export class CreateTweetParametrosBuscaDto {
   @IsNotEmpty()
   @IsString()
   dataInicioBusca: string;
-  
+
   @ApiModelProperty({
     description: 'Data da ultima busca parcial(diaria) do termo, feita, no Twitter, com sucesso.',
   })
@@ -18,7 +18,7 @@ export class CreateTweetParametrosBuscaDto {
   @IsNotEmpty()
   @IsString()
   dataUltimaBusca: string;
-  
+
   @ApiModelProperty({
     description: 'Data da ultima busca total(desde a dataInicial), feita, no Twitter, com sucesso.',
   })
@@ -29,7 +29,7 @@ export class CreateTweetParametrosBuscaDto {
 
   @ApiModelProperty({
     description: 'Termo a ser pesquisado no Twitter.',
-    type: () => DescritorDto
+    type: () => DescritorDto,
   })
   @IsDefined()
   @IsNotEmpty()

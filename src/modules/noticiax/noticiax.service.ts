@@ -44,12 +44,12 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
     }
 
     if (req) {
-      createFunction =  async (noticia: CreateNoticiaDto) => {
-        return await this.createOne(req, noticia);
+      createFunction =  async (createNoticia: CreateNoticiaDto) => {
+        return await this.createOne(req, createNoticia);
       };
     } else {
-      createFunction = async (noticia: CreateNoticiaDto) => {
-        return await this.noticiaRepository.save(noticia);
+      createFunction = async (createNoticia: CreateNoticiaDto) => {
+        return await this.noticiaRepository.save(createNoticia);
       };
     }
 
@@ -88,8 +88,7 @@ export class NoticiaxService extends TypeOrmCrudService<Noticia> {
     let possui: boolean;
     noticia.map(palavra => {
       possui = false;
-      for (let i = 0; i < nuvem.length; i++) {
-        const item = nuvem[i];
+      for (const item of nuvem) {
         if (item.chave === palavra) {
           item.quantidade++;
           possui = true;
