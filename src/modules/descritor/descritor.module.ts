@@ -7,5 +7,6 @@ import { DatabaseModule } from '../../database/database.module';
   imports: [DatabaseModule],
   controllers: [DescritorController],
   providers: [DescritorService],
+  exports: [DescritorService]
 })
 export class DescritorModule {}

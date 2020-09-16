@@ -16,6 +16,7 @@ import { MidiaModule } from './modules/midia/midia.module';
 import { TipoMidiaModule } from './modules/tipoMidia/tipoMidia.module';
 import { UsuarioModule } from './modules/usuario/usuario.module';
 import { TweetInfoModule } from './modules/tweetInfo/tweetInfo.module';
+import { TweetParametrosBuscaModule } from './modules/tweetParametrosBusca/tweetParametrosBusca.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -36,6 +37,7 @@ import { TweetInfoModule } from './modules/tweetInfo/tweetInfo.module';
     TipoMidiaModule,
     UsuarioModule,
     TweetInfoModule,
+    TweetParametrosBuscaModule,
   ],
   controllers: [],
   providers: [],

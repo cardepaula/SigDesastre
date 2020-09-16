@@ -13,6 +13,7 @@ import { Midia } from './entities/midia.entity';
 import { TipoMidia } from './entities/tipoMidia.entity';
 import { Usuario } from './entities/usuario.entity';
 import { TweetInfo } from './entities/tweetInfo.entity';
+import { TweetParametrosBusca } from './entities/tweetParametrosBusca.entity';
 
 export const databaseProviders = [
   {
@@ -99,6 +100,12 @@ export const databaseProviders = [
   {
     provide: repositoryConfig.tweetInfo,
     useFactory: (connection: Connection) => connection.getRepository(TweetInfo),
+    inject: [repositoryConfig.database],
+  },
+
+  {
+    provide: repositoryConfig.tweetParametrosBusca,
+    useFactory: (connection: Connection) => connection.getRepository(TweetParametrosBusca),
     inject: [repositoryConfig.database],
   },
 ];

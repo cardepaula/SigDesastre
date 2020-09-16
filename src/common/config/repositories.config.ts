@@ -12,4 +12,5 @@ export const repositoryConfig = {
   usuario: 'USUARIO_REPOSITORY',
   rss: 'RSS_REPOSITORY',
   tweetInfo: 'TWEET_INFO_REPOSITORY',
+  tweetParametrosBusca: 'TWEET_PARAMETROS_BUSCA_REPOSITORY'
 };

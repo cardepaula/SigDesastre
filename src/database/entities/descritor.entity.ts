@@ -3,11 +3,13 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Assunto } from './assunto.entity';
 import { Noticia } from './noticia.entity';
 import { Fonte } from './fonte.entity';
+import { TweetParametrosBusca } from './tweetParametrosBusca.entity';
 
 @Entity('descritor', { schema: 'public' })
 export class Descritor {
@@ -38,4 +40,9 @@ export class Descritor {
   })
   @JoinTable({ name: 'descritor_x_fonte' })
   fontes: Fonte[];
+
+  @OneToOne(() => TweetParametrosBusca, tweetDescritor => tweetDescritor.descritor, {
+    eager: false,
+  })
+  tweetParametrosBusca: TweetParametrosBusca;
 }

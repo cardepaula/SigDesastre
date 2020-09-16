@@ -4,7 +4,7 @@ import {
   CreateDescritorDto,
   UpdateDescritorDto,
 } from './dto';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Descritor } from '../../database/entities/descritor.entity';
 import { DescritorService } from './descritor.service';
@@ -42,5 +42,14 @@ export class DescritorController implements CrudController<Descritor> {
 
   get base(): CrudController<Descritor> {
     return this;
+  }
+
+  @Override()
+  public async createOne(
+    @ParsedRequest() req: CrudRequest,
+    @ParsedBody() dto: CreateDescritorDto,
+  ): Promise<Descritor> {
+    const response = await this.service.create(dto, req);
+    return response;
   }
 }
