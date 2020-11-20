@@ -27,6 +27,10 @@ export class TweetParametrosBuscaService extends TypeOrmCrudService<
   ): Promise<TweetParametrosBusca> {
     let createFunction: any;
 
+    tweetParametrosBusca.descritor = await this.descritorService.create(
+      tweetParametrosBusca.descritor,
+    );
+
     const findTweetParam = await this.findOne({
       descritor: tweetParametrosBusca.descritor,
     }).catch(error => {

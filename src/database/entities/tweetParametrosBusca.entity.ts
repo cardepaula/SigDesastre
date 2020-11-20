@@ -21,16 +21,16 @@ export class TweetParametrosBusca extends BaseEntity {
   dataInicioBusca: string;
 
   @Column('timestamp without time zone', {
-    nullable: false,
+    nullable: true,
     name: 'data_ultima_busca',
   })
   dataUltimaBusca: string;
 
   @Column('timestamp without time zone', {
-    nullable: false,
+    nullable: true,
     name: 'data_ultima_busca_total',
   })
-  dataUltimaBuscaTotoal: string;
+  dataUltimaBuscaTotal: string;
 
   @OneToOne(() => Descritor, descritor => descritor.tweetParametrosBusca, {
     eager: true,

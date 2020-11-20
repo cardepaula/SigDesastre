@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { IsDefined, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { DescritorDto } from '../../descritor/dto/index';
 
 export class CreateTweetParametrosBuscaDto {
@@ -10,22 +10,6 @@ export class CreateTweetParametrosBuscaDto {
   @IsNotEmpty()
   @IsString()
   dataInicioBusca: string;
-
-  @ApiModelProperty({
-    description: 'Data da ultima busca parcial(diaria) do termo, feita, no Twitter, com sucesso.',
-  })
-  @IsDefined()
-  @IsNotEmpty()
-  @IsString()
-  dataUltimaBusca: string;
-
-  @ApiModelProperty({
-    description: 'Data da ultima busca total(desde a dataInicial), feita, no Twitter, com sucesso.',
-  })
-  @IsDefined()
-  @IsNotEmpty()
-  @IsString()
-  dataUltimaBuscaTotoal: string;
 
   @ApiModelProperty({
     description: 'Termo a ser pesquisado no Twitter.',

@@ -1,4 +1,4 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { DescritorDto } from '../../descritor/dto/index';
 
 export class TweetParametrosBuscaDto {
@@ -12,15 +12,15 @@ export class TweetParametrosBuscaDto {
   })
   dataInicioBusca: string;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Data da ultima busca parcial(diaria) do termo, feita, no Twitter, com sucesso.',
   })
   dataUltimaBusca: string;
 
-  @ApiModelProperty({
+  @ApiModelPropertyOptional({
     description: 'Data da ultima busca total(desde a dataInicial), feita, no Twitter, com sucesso.',
   })
-  dataUltimaBuscaTotoal: string;
+  dataUltimaBuscaTotal: string;
 
   @ApiModelProperty({
     description: 'Termo a ser pesquisado no Twitter.',

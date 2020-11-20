@@ -32,7 +32,7 @@ export class UpdateTweetParametrosBuscaDto {
   @IsOptional()
   @IsNotEmpty()
   @IsString()
-  dataUltimaBuscaTotoal: string;
+  dataUltimaBuscaTotal: string;
 
   @ApiModelPropertyOptional({
     description: 'Termo a ser pesquisado no Twitter.',
